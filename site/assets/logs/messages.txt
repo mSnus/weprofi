@@ -1,0 +1,7 @@
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'filesize' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'created_users_id' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'modified_users_id' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'filedata' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'width' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'height' to DB schema for 'images' (FieldtypeImage)
+2021-05-05 18:56:40	guest	http://v620214.hosted-by-vdsina.ru/pw/	Added 'ratio' to DB schema for 'images' (FieldtypeImage)
