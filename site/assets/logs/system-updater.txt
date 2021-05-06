@@ -1,0 +1,34 @@
+2021-05-05 18:55:14	Update #8: Completed!
+2021-05-05 18:55:14	Update #9: Initializing update
+2021-05-05 18:55:14	Update #9: Added: Pages > Recent
+2021-05-05 18:55:14	Update #9: Completed!
+2021-05-05 18:56:40	Update #10: Initializing update
+2021-05-05 18:56:40	Update #10: Installed ProcessLogger and added: Setup > Logs
+2021-05-05 18:56:40	Update #10: Installed InputfieldIcon
+2021-05-05 18:56:40	Update #10: Completed!
+2021-05-05 18:56:57	Update #11: Initializing update
+2021-05-05 18:56:57	Update #11: Completed!
+2021-05-05 18:57:01	Update #12: Initializing update
+2021-05-05 18:57:01	Update #12: Added 'published' column to pages table
+2021-05-05 18:57:01	Update #12: Populated values to 'published' for 48 pages
+2021-05-05 18:57:01	Update #12: Completed!
+2021-05-05 18:57:01	Update #13: Initializing update
+2021-05-05 18:57:01	Update #13: Completed!
+2021-05-05 18:57:01	Update #14: Initializing update
+2021-05-05 18:57:01	Update #14: Completed!
+2021-05-05 18:57:01	Update #15: Initializing update
+2021-05-05 18:57:01	Update #15: Completed!
+2021-05-05 18:57:01	Update #16: Initializing update
+2021-05-05 18:57:01	Update #16: Completed!
+2021-05-05 18:57:02	Update #17: Initializing update
+2021-05-05 18:57:02	Update #17: Skipped: /pw/site/.htaccess (already exists)
+2021-05-05 18:57:02	Update #17: Created: /pw/site/assets/.htaccess
+2021-05-05 18:57:02	Update #17: Skipped: /pw/site/assets/cache/.htaccess (already exists)
+2021-05-05 18:57:02	Update #17: Skipped: /pw/site/assets/backups/.htaccess (already exists)
+2021-05-05 18:57:02	Update #17: Skipped: /pw/site/assets/logs/.htaccess (already exists)
+2021-05-05 18:57:02	Update #17: Created: /pw/site/templates/.htaccess
+2021-05-05 18:57:02	Update #17: Created: /pw/site/modules/.htaccess
+2021-05-05 18:57:02	Update #17: Details: <a href='https://processwire.com/blog/posts/pw-3.0.135/' target='_blank'>https://processwire.com/blog/posts/pw-3.0.135/</a>
+2021-05-05 18:57:02	Update #17: Completed!
+2021-05-05 18:57:18	Update #18: Initializing update
+2021-05-05 18:57:18	Update #18: Completed!
