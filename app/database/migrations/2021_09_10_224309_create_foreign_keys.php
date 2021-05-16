@@ -9,27 +9,27 @@ class CreateForeignKeys extends Migration {
 	public function up()
 	{
 		Schema::table('requests', function(Blueprint $table) {
-			$table->foreign('client_id')->references('id')->on('clients')
+			$table->foreign('client')->references('id')->on('clients')
 						->onDelete('set null')
 						->onUpdate('set null');
 		});
 		Schema::table('requests', function(Blueprint $table) {
-			$table->foreign('master_id')->references('id')->on('masters')
+			$table->foreign('master')->references('id')->on('masters')
 						->onDelete('set null')
 						->onUpdate('set null');
 		});
 		Schema::table('feedbacks', function(Blueprint $table) {
-			$table->foreign('request_id')->references('id')->on('requests')
+			$table->foreign('request')->references('id')->on('requests')
 						->onDelete('set null')
 						->onUpdate('set null');
 		});
 		Schema::table('feedbacks', function(Blueprint $table) {
-			$table->foreign('master_id')->references('id')->on('masters')
+			$table->foreign('master')->references('id')->on('masters')
 						->onDelete('set null')
 						->onUpdate('set null');
 		});
 		Schema::table('feedbacks', function(Blueprint $table) {
-			$table->foreign('client_id')->references('id')->on('clients')
+			$table->foreign('client')->references('id')->on('clients')
 						->onDelete('set null')
 						->onUpdate('set null');
 		});

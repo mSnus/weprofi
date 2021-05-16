@@ -1,27 +1,29 @@
-{!! Form::open(array('route' => 'route.name', 'method' => 'POST')) !!}
+<form action="" method="post" action="{{ route('moderator.store') }}">
+            <!-- CROSS Site Request Forgery Protection -->
+            @csrf
 	<ul>
-		<li>
-			{!! Form::label('username', 'Username:') !!}
-			{!! Form::text('username') !!}
-		</li>
-		<li>
-			{!! Form::label('pass', 'Pass:') !!}
-			{!! Form::text('pass') !!}
-		</li>
-		<li>
-			{!! Form::label('email', 'Email:') !!}
-			{!! Form::text('email') !!}
-		</li>
-		<li>
-			{!! Form::label('name', 'Name:') !!}
-			{!! Form::text('name') !!}
-		</li>
-		<li>
-			{!! Form::label('status', 'Status:') !!}
-			{!! Form::text('status') !!}
-		</li>
-		<li>
-			{!! Form::submit() !!}
-		</li>
+		<div class="form-group">
+			<label>Username</label>
+			<input type="text" class="form-control" name="username" id="username">
+		</div>
+		<div class="form-group">
+			<label>Pass</label>
+			<input type="text" class="form-control" name="pass" id="pass">
+		</div>
+		<div class="form-group">
+			<label>Email</label>
+			<input type="text" class="form-control" name="email" id="email">
+		</div>
+		<div class="form-group">
+			<label>Name</label>
+			<input type="text" class="form-control" name="name" id="name">
+		</div>
+		<div class="form-group">
+			<label>Status</label>
+			<input type="text" class="form-control" name="status" id="status">
+		</div>
+		<div class="form-group">
+			<input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
+		</div>
 	</ul>
-{!! Form::close() !!}
+</form>
