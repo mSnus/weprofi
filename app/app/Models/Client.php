@@ -1,13 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model 
+class Client extends Model
 {
 
     protected $table = 'clients';
+	 protected $fillable = ['username',	 'pass',	 'email',	 'name',	 'phone'];
     public $timestamps = true;
 
     public function feedbacks()
@@ -15,9 +16,9 @@ class Client extends Model
         return $this->hasMany('Feedback', 'client');
     }
 
-    public function requests()
+    public function offers()
     {
-        return $this->hasMany('Request', 'client');
+        return $this->hasMany('Offer', 'client');
     }
 
 }

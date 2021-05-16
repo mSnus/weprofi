@@ -1,35 +1,37 @@
-{!! Form::open(array('route' => 'route.name', 'method' => 'POST')) !!}
+<form action="" method="post" action="{{ route('feedback.store') }}">
+            <!-- CROSS Site Request Forgery Protection -->
+            @csrf
 	<ul>
-		<li>
-			{!! Form::label('descr', 'Descr:') !!}
-			{!! Form::textarea('descr') !!}
-		</li>
-		<li>
-			{!! Form::label('status', 'Status:') !!}
-			{!! Form::text('status') !!}
-		</li>
-		<li>
-			{!! Form::label('request', 'Request:') !!}
-			{!! Form::text('request') !!}
-		</li>
-		<li>
-			{!! Form::label('type', 'Type:') !!}
-			{!! Form::text('type') !!}
-		</li>
-		<li>
-			{!! Form::label('score', 'Score:') !!}
-			{!! Form::text('score') !!}
-		</li>
-		<li>
-			{!! Form::label('master', 'Master:') !!}
-			{!! Form::text('master') !!}
-		</li>
-		<li>
-			{!! Form::label('client', 'Client:') !!}
-			{!! Form::text('client') !!}
-		</li>
-		<li>
-			{!! Form::submit() !!}
-		</li>
+		<div class="form-group">
+			<label>Descr</label>
+			<textarea class="form-control" name="descr" id="descr" rows="4"></textarea>
+		</div>
+		<div class="form-group">
+			<label>Status</label>
+			<input type="text" class="form-control" name="status" id="status">
+		</div>
+		<div class="form-group">
+			<label>Request</label>
+			<input type="text" class="form-control" name="request" id="request">
+		</div>
+		<div class="form-group">
+			<label>Type</label>
+			<input type="text" class="form-control" name="type" id="type">
+		</div>
+		<div class="form-group">
+			<label>Score</label>
+			<input type="text" class="form-control" name="score" id="score">
+		</div>
+		<div class="form-group">
+			<label>Master</label>
+			<input type="text" class="form-control" name="master" id="master">
+		</div>
+		<div class="form-group">
+			<label>Client</label>
+			<input type="text" class="form-control" name="client" id="client">
+		</div>
+		<div class="form-group">
+			<input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
+		</div>
 	</ul>
-{!! Form::close() !!}
+</form>

@@ -1,16 +1,16 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Request;
+use App\Models\Offer;
 
-class RequestTableSeeder extends Seeder {
+class OfferTableSeeder extends Seeder {
 
 	public function run()
 	{
 		//DB::table('requests')->delete();
 
 		// request_sent
-		Request::create(array(
+		Offer::create(array(
 				'title' => 'Ремонт ЭБУ на Мазду',
 				'descr' => 'Нужно починить, потому что сломалось. Даю трёшку.',
 				'price' => 3000,
@@ -20,7 +20,7 @@ class RequestTableSeeder extends Seeder {
 			));
 
 		// request_accepted
-		Request::create(array(
+		Offer::create(array(
 				'title' => 'Тормоза на Газели',
 				'descr' => 'Заменить чугуний на люминь за пятак',
 				'price' => 5000,

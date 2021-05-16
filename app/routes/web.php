@@ -1,11 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\MasterController;
-use App\Http\Controllers\ModeratorController;
-use App\Http\Controllers\RequestController;
-use App\Http\Controllers\FeedbackController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +13,22 @@ use App\Http\Controllers\FeedbackController;
 |
 */
 
+use App\Http\Controllers\OfferController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('client',		ClientController::class);
-Route::resource('master',		MasterController::class);
-Route::resource('moderator',	ModeratorController::class);
-Route::resource('request',		RequestController::class);
-Route::resource('feedback',	FeedbackController::class);
+Route::redirect('/snusminer.php', '/snusminer.php');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::resource('client', 'ClientController');
+Route::resource('master', 'MasterController');
+Route::resource('moderator', 'ModeratorController');
+// Route::resource('offer', 'OfferController');
+Route::post('store-offer', [OfferController::class, 'store']);
+Route::resource('feedback', 'FeedbackController');
+
+require __DIR__.'/auth.php';
