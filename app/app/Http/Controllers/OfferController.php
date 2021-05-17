@@ -44,10 +44,7 @@ class OfferController extends Controller
 		'email' => $request->email,
 		'name' => $request->name,
 	]);
-	// $client->phone = $request->phone;
-	// $client->email = $request->email;
-	// $client->name = $request->name;
-	// $client->save();
+
 	$newClientId = $client->id;
 
 	$offer = new Offer;
