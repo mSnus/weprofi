@@ -8,8 +8,6 @@
     <title>Починим.Онлайн</title>
 
     <!-- Fonts -->
-
-    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <!-- Styles -->
 
@@ -31,7 +29,7 @@
 
                     </nav>
                     @if (Route::has('register'))
-                        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onclick="window.location.href='{{ route('register') }}';">Регистрация
+                        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base" onclick="window.location.href='{{ route('register') }}';">Регистрация
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
                             </svg>
@@ -51,7 +49,7 @@
         <!-- регистрация мастера -->
         <div class="mt-2 text-gray-600 text-sm px-8">
             <h2>Мастер? Вы нам нужны!</h2>
-            <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Присоединяйтесь!</button>
+            <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onclick="window.location.href='/master';">Присоединяйтесь!</button>
         </div>
     </div>
 
