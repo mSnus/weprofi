@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]);
 
 mix.postCss('resources/css/start.css', 'public/css');
+mix.postCss('resources/css/bootstrap.min.css', 'public/css');
 mix.copyDirectory('resources/img', 'public/img');

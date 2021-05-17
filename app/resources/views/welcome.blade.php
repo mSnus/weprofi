@@ -2,72 +2,93 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Починим.Онлайн</title>
+    <title>Починим.Онлайн</title>
 
-	<!-- Fonts -->
+    <!-- Fonts -->
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="{{ url('css/app.css') }}">
-	<!-- Styles -->
+    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/app.css') }}">
+    <!-- Styles -->
 
 </head>
 
 <body class="antialiased">
-	<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-		@if (Route::has('login'))
-		<div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-			@auth
-			<a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
-			@else
-			<a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-0 flex-col md:flex-row items-center">
+            <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img src="/img/logo1a-horiz.svg" width="200">
+            </a>
+            @if (Route::has('login'))
+                <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Профиль</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Вход</a>
 
-			@if (Route::has('register'))
-			<a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-			@endif
-			@endauth
-		</div>
-		@endif
 
-		<div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-			<div class="flex justify-center pt-8 sm:pt-0">
-				<img src="/img/logo1a.svg" width="300">
-			</div>
+                    </nav>
+                    @if (Route::has('register'))
+                        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" onclick="window.location.href='{{ route('register') }}';">Регистрация
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    @endif
+                @endauth
+            @endif
+        </div>
+    </header>
 
-			@if(session('status'))
-			<div class="alert alert-success">
-				{{ session('status') }}
-			</div>
-			@else
-			<div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-				<div class="flex">
-					<div class="p-6">
-						<div class="mt-2 text-gray-600 dark:text-gray-400 text-sm px-8">
-							<h1>Починим.Онлайн - сервис, который поможет вам быстро найти человека, способного починить ваш автомобиль.</h1>
-							<p>Вы заполняете заявку, вам приходят отклики мастеров, вы выбираете одного из них и принимаете предложение.</p>
-							<p>А дальше... дальше всё само собой завертится!</p>
-							<h3>Заполните заявку:</h3>
-						</div>
-					</div>
-				</div>
-				<div class="flex">
-					<div class="p-6">
-					@include('requests')
-					</div>
-				</div>
-			</div>
-			@endif
+    <div class="flex  justify-center mb-8">
+        <div class="mt-2 text-gray-600 text-sm px-8">
+            <h1>Поможем вам быстро найти мастера,<br> который поможет вам с ремонтом автомобиля</h1>
+            <p>Заполняете заявку, вам приходят отклики мастеров, вы выбираете одного из них и принимаете предложение.</p>
+            <p>А дальше... дальше всё само собой завертится!</p>
+        </div>
+        <!-- регистрация мастера -->
+        <div class="mt-2 text-gray-600 text-sm px-8">
+            <h2>Мастер? Вы нам нужны!</h2>
+            <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Присоединяйтесь!</button>
+        </div>
+    </div>
 
-			<div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-				<div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-					Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-				</div>
-			</div>
-		</div>
+    <div class="relative flex items-top justify-center bg-gray-100 sm:items-center py-4 sm:pt-0">
 
-	</div>
+        <div class="flex">
+            <!-- регистрация клиента и новая заявка -->
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @else
+                <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
+                    <div class="flex">
+                        <div class="p-6">
+                            <div class="mt-2 text-gray-600 text-sm px-8">
+                                <h3>В чём твоя проблема, человек? .[0_0].</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="p-6">
+                            @include('requests')
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
+        <img src="/img/icon1a.svg" width="60">
+        <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+            &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>
+        </div>
+    </div>
 </body>
 
 </html>

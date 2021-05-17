@@ -6,6 +6,10 @@ TODO:
 - сделать обязательным поле телефон
 - сделать, чтобы пароль автоматом отправлялся в Телеграм и на почту (если она указана)
 
+- завести бота
+-- https://www.digitalocean.com/community/tutorials/how-to-build-a-telegram-bot-with-laravel-and-botman
+-- https://github.com/php-telegram-bot/core#instructions
+
 - сделать админку:
 -- https://www.getcraftable.com/
 -- https://github.com/the-control-group/voyager
