@@ -1,37 +1,32 @@
-<form action="" method="post" action="{{ route('master.store') }}">
-            <!-- CROSS Site Request Forgery Protection -->
-            @csrf
-	<ul>
-		<div class="form-group">
-			<label>Username</label>
-			<input type="text" class="form-control" name="username" id="username">
-		</div>
-		<div class="form-group">
-			<label>Pass</label>
-			<input type="text" class="form-control" name="pass" id="pass">
-		</div>
-		<div class="form-group">
-			<label>Email</label>
-			<input type="text" class="form-control" name="email" id="email">
-		</div>
-		<div class="form-group">
-			<label>Name</label>
-			<input type="text" class="form-control" name="name" id="name">
-		</div>
-		<div class="form-group">
-			<label>Phone</label>
-			<input type="text" class="form-control" name="phone" id="phone">
-		</div>
-		<div class="form-group">
-			<label>Status</label>
-			<input type="text" class="form-control" name="status" id="status">
-		</div>
-		<div class="form-group">
-			<label>Score</label>
-			<input type="text" class="form-control" name="score" id="score">
-		</div>
-		<div class="form-group">
-			<input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
-		</div>
-	</ul>
-</form>
+@extends('layouts.app', ['header' => 'Регистрация мастера'])
+
+@section('title', 'Регистрация мастера')
+
+@section('content')
+	<!-- Validation Errors -->
+	<x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+    <form action="" method="post" action="{{ route('master.store') }}">
+        <!-- CROSS Site Request Forgery Protection -->
+        @csrf
+
+        @include('auth.register-fields')
+
+        <!-- Имя -->
+        <div class="mt-4">
+            <x-label for="title" :value="__('Как к вам обращаться?')" />
+
+            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                {{ __('Уже зарегистрированы?') }}
+            </a>
+
+            <x-button class="ml-4">
+                {{ __('Регистрация') }}
+            </x-button>
+        </div>
+    </form>
+@stop
