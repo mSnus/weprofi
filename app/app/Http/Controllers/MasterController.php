@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Master;
 
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -48,13 +47,10 @@ class MasterController extends Controller
 	 */
 	public function store(Request $request)
 	{
-
-
-
 		$request->validate([
-			'name' => 'required|string|max:255',
+			'name' => 'required|string|max:255|unique:users',
 			'email' => 'required|string|email|max:255|unique:users',
-			'password' => ['required', 'confirmed', Rules\Password::min(8)],
+			'password' => ['required', 'confirmed', Rules\Password::min(6)],
 		]);
 
 		$user = User::create([

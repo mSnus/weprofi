@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Offer;
 
-use App\Http\Controllers\ClientController;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class OfferController extends Controller
 {
@@ -18,7 +23,7 @@ class OfferController extends Controller
    */
   public function index()
   {
-
+	return view('offers');
   }
 
   /**
@@ -38,24 +43,45 @@ class OfferController extends Controller
    */
   public function store(Request $request)
   {
-	//TODO:check if logged in
-	$client = Client::updateOrCreate([
-		'phone' => $request->phone,
-		'email' => $request->email,
-		'name' => $request->name,
+
+
+	$request->validate([
+		'name' => 'required|string|max:255|unique:users',
+		'email' => 'required|string|email|max:255|unique:users',
+		'password' => ['required', 'confirmed', Rules\Password::min(6)],
 	]);
 
-	$newClientId = $client->id;
+	$user = User::create([
+		'name' => $request->name,
+		'email' => $request->email,
+		'password' => Hash::make($request->password),
+		'usertype' => User::typeClient,
+	]);
+
+	event(new Registered($user));
+
+	Auth::login($user);
+
+	$client = new Client;
+	$client->status = Client::statusRegistered;
+	$client->title = $request->fullname;
+	$client->userid = $user->id;
+	$client->save();
+
+	// return redirect(RouteServiceProvider::HOME);
+
+	//TODO:check if logged in
 
 	$offer = new Offer;
 	$offer->title = $request->title;
-	$offer->descr = $request->descr;
-	$offer->client = $newClientId;
+	$offer->descr = $request->descrshort." ".$request->descr;
+	$offer->location = $request->location;
+	$offer->client = $client->userid;
 	$offer->status = Offer::statusPending;
-	//TODO:add location
+
 	$offer->save();
 
-	return redirect('/')->with('status', 'Заявка отправлена!');
+	return redirect('/')->with('status', 'Заявка отправлена!'.' ('.$offer->id.')');
 
   }
 

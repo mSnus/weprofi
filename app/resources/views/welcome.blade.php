@@ -11,6 +11,19 @@
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <!-- Styles -->
 
+	 <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- MapBox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+    <!-- Promise polyfill script is required -->
+    <!-- to use Mapbox GL Geocoder in IE 11. -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 </head>
 
 <body class="antialiased">
@@ -81,7 +94,7 @@
     </div>
 
     <!-- footer -->
-    <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
+    <div class="flex justify-center mt-4">
         <img src="/img/icon1a.svg" width="60">
         <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
             &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>

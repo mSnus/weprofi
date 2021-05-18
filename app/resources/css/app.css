@@ -14,4 +14,7 @@
       @apply text-xl;
    }
 
+	body, div, p {
+		font-family: 'Lato', sans-serif;
+	}
 }

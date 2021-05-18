@@ -4,6 +4,8 @@ TODO:
 - сделать регистрацию мастера
 - сделать выбор локейшена
 - сделать обязательным поле телефон
+- сделать страницы редактирования профиля
+- в профиль добавить фото
 - сделать, чтобы пароль автоматом отправлялся в Телеграм и на почту (если она указана)
 
 - завести бота
@@ -13,5 +15,12 @@ TODO:
 - сделать админку:
 -- https://www.getcraftable.com/
 -- https://github.com/the-control-group/voyager
+
+
+- карты
+-- отображение фото или маркеров на карте: https://docs.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
+-- измерения дистанций: https://docs.mapbox.com/mapbox-gl-js/example/measure/
+-- события карты: https://docs.mapbox.com/mapbox-gl-js/api/map/#map.event:mouseup
+-- выбор в радиусе: https://labs.mapbox.com/education/proximity-analysis/selecting-within-a-distance/
 
 
