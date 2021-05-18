@@ -44,39 +44,47 @@ class OfferController extends Controller
   public function store(Request $request)
   {
 
+	if (Auth::check()) {
+		/**
+		 * Получаем имеющиеся данные о пользователе
+		 */
+		$user = Auth::user();
+	} else {
+		/**
+		 * Регистрируем нового пользователя и добавляем дополнительные поля в таблицу клиентов
+		 */
+		$request->validate([
+			'name' => 'required|string|max:255|unique:users',
+			'email' => 'required|string|email|max:255|unique:users',
+			'password' => ['required', 'confirmed', Rules\Password::min(6)],
+		]);
 
-	$request->validate([
-		'name' => 'required|string|max:255|unique:users',
-		'email' => 'required|string|email|max:255|unique:users',
-		'password' => ['required', 'confirmed', Rules\Password::min(6)],
-	]);
+		$user = User::create([
+			'name' => $request->name,
+			'email' => $request->email,
+			'password' => Hash::make($request->password),
+			'usertype' => User::typeClient,
+		]);
 
-	$user = User::create([
-		'name' => $request->name,
-		'email' => $request->email,
-		'password' => Hash::make($request->password),
-		'usertype' => User::typeClient,
-	]);
+		event(new Registered($user));
 
-	event(new Registered($user));
+		Auth::login($user);
 
-	Auth::login($user);
-
-	$client = new Client;
-	$client->status = Client::statusRegistered;
-	$client->title = $request->fullname;
-	$client->userid = $user->id;
-	$client->save();
+		$client = new Client;
+		$client->status = Client::statusRegistered;
+		$client->title = $request->fullname;
+		$client->userid = $user->id;
+		$client->save();
+	}
 
 	// return redirect(RouteServiceProvider::HOME);
 
-	//TODO:check if logged in
 
 	$offer = new Offer;
 	$offer->title = $request->title;
-	$offer->descr = $request->descrshort." ".$request->descr;
+	$offer->descr = $request->descr;
 	$offer->location = $request->location;
-	$offer->client = $client->userid;
+	$offer->client = $user->id;
 	$offer->status = Offer::statusPending;
 
 	$offer->save();
@@ -130,5 +138,3 @@ class OfferController extends Controller
   }
 
 }
-
-?>
