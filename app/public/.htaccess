@@ -1,3 +1,9 @@
+AuthUserFile /home/admin/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Under construction. Use your power, Autobot!"
+AuthType Basic
+require user autobot
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

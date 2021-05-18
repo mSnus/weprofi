@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <!-- Styles -->
 
-	 <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- MapBox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
@@ -36,11 +36,16 @@
                 <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Профиль</a>
-                    @else
+                        <a href="{{ route('logout') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Выход</a>
+                    @endauth
+
+                    @guest
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Вход</a>
+                    @endguest
 
 
-                    </nav>
+                </nav>
+                @guest
                     @if (Route::has('register'))
                         <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base" onclick="window.location.href='{{ route('register') }}';">Регистрация
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -48,7 +53,7 @@
                             </svg>
                         </button>
                     @endif
-                @endauth
+                @endguest
             @endif
         </div>
     </header>
@@ -94,7 +99,7 @@
     </div>
 
     <!-- footer -->
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center mt-4 items-center">
         <img src="/img/icon1a.svg" width="60">
         <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
             &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>

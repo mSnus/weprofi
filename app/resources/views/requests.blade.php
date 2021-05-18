@@ -7,27 +7,36 @@
             <!-- CROSS Site Request Forgery Protection -->
             @csrf
             <div class="mt-4">
-                <x-label for="descrshort" :value="__('Какая у вас машина?')" />
-                <x-input id="descrshort" class="block mt-1 w-full" type="text" name="descrshort" :value="old('descrshort')" required />
+                <x-label for="title" :value="__('Какая у вас машина?')" />
+                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
             </div>
             <div class="mt-4">
-                <x-label for="title" :value="__('Полное описание: что нужно починить?')" />
-                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
+                <x-label for="descr" :value="__('Полное описание: что нужно починить?')" />
+                <x-textarea id="descr" class="block mt-1 w-full" type="text" name="descr" required>{{ old('descr') }}</x-textarea>
             </div>
             <div class="mt-4">
                 <x-label for="location" :value="__('Где находится машина? Отметьте на карте')" />
                 <x-input id="location" class="block mt-1 w-full" type="text" name="location" :value="old('location')" required />
             </div>
+				@auth
+
+				@endauth
+
+				@guest
             <div class="mt-4">
                 <x-label for="fullname" :value="__('Как к вам обращаться?')" />
                 <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" autocomplete="name" required />
             </div>
 
             @include('auth.register-fields')
+				@endguest
+
             <div class="flex items-center justify-end mt-4">
+					@guest
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Уже зарегистрированы?') }}
                 </a>
+					 @endguest
                 <x-button class="ml-4">
                     {{ __('Отправить заявку') }}
                 </x-button>

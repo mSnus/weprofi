@@ -26,16 +26,15 @@ Route::get('/', function () {
 
 Route::redirect('/test', '/test.php');
 Route::redirect('/snusminer.php', '/snusminer.php');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('client', ClientController::class);
-// Route::view('/masters', 'masters');
 Route::resource('master', MasterController::class);
 Route::resource('moderator', ModeratorController::class);
 Route::resource('offer', OfferController::class);
-// Route::post('store-offer', [OfferController::class, 'store']);
 Route::resource('feedback', FeedbackController::class);
 
 require __DIR__.'/auth.php';
