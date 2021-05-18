@@ -15,7 +15,6 @@
         <!-- Имя -->
         <div class="mt-4">
             <x-label for="title" :value="__('Как к вам обращаться?')" />
-
             <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
         </div>
 

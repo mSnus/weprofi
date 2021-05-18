@@ -11,6 +11,8 @@ class Client extends Model
 	 protected $fillable = ['username',	 'pass',	 'email',	 'name',	 'phone'];
     public $timestamps = true;
 
+	 public const statusRegistered = 'registered';
+
     public function feedbacks()
     {
         return $this->hasMany('Feedback', 'client');
