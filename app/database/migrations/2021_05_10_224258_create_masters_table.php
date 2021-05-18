@@ -10,11 +10,9 @@ class CreateMastersTable extends Migration {
 		Schema::create('masters', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('username', 255);
-			$table->string('pass', 255);
-			$table->string('email', 255);
-			$table->string('name', 255);
-			$table->string('phone', 255);
+			$table->bigInteger('userid');
+			$table->string('title', 255);
+			$table->text('descr', 255);
 			$table->string('status', 255);
 			$table->integer('score');
 		});
