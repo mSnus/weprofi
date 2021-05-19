@@ -2,60 +2,40 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-
-/**
- * Добавил свойство usertype:
- *
- * ALTER TABLE `users`
- * ADD `usertype` int(11) unsigned NOT NULL DEFAULT '0' AFTER `id`;
- */
-
-class User extends Authenticatable
+class User extends Model
 {
-    use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
+        'usertype',
         'name',
         'email',
+        'email_verified_at',
         'password',
-		  'usertype',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+    
     ];
-
-	 /**
-     * The user types. Just some random numbers, no meaning intended.
-     */
-	 public const typeClient = '11';
-    public const typeMaster = '22';
-	 public const typeModerator = '55';
-	 public const typeAdmin = '999';
-
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    
     protected $hidden = [
         'password',
         'remember_token',
+    
     ];
+    
+    protected $dates = [
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+    
+    ];
+    
+    protected $appends = ['resource_url'];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    /* ************************ ACCESSOR ************************* */
+
+    public function getResourceUrlAttribute()
+    {
+        return url('/admin/users/'.$this->getKey());
+    }
 }
