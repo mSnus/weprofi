@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Moderator;
+use App\Moderator;
 
 class ModeratorTableSeeder extends Seeder {
 
@@ -14,8 +14,8 @@ class ModeratorTableSeeder extends Seeder {
 				'username' => 'sir_mike',
 				'pass' => 'pass',
 				'email' => 'snus@sitebuilding.ru',
-				'name' => 'Сэр Майк',
-				'status' => 'active'
+				'name' => Сэр Майк,
+				'status' => active
 			));
 
 		// mod2
@@ -23,7 +23,7 @@ class ModeratorTableSeeder extends Seeder {
 				'username' => 'sir_ivan',
 				'pass' => 'pass',
 				'email' => 'ivan@a-bot.online',
-				'name' => 'Сэр Иван',
+				'name' => Сэр Иван,
 				'status' => 'active'
 			));
 	}
