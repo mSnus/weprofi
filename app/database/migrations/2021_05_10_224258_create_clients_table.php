@@ -12,8 +12,11 @@ class CreateClientsTable extends Migration {
 		Schema::create('clients', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->bigInteger('userid');
-			$table->string('title', 255);
+			$table->string('username', 255)->default('');
+			$table->string('pass', 255)->default('');
+			$table->string('email', 255);
+			$table->string('name', 255);
+			$table->string('phone', 255);
 			$table->string('status', 255)->default('');
 			$table->integer('score')->default(0);
 		});
