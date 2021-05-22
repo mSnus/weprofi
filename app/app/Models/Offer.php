@@ -6,10 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+    protected $fillable = [
+        'title',
+        'descr',
+        'price',
+        'client',
+        'master',
+        'status',
+        'location',
+        'accepted',
+        'finished',
+    
+    ];
+    
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'accepted',
+        'finished',
+    
+    ];
+    
+    protected $appends = ['resource_url'];
 
-    protected $table = 'offers';
-    public $timestamps = true;
+    /* ************************ ACCESSOR ************************* */
 
-	 public const statusPending = 'pending';
-
+    public function getResourceUrlAttribute()
+    {
+        return url('/admin/offers/'.$this->getKey());
+    }
 }

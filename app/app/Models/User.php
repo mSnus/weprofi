@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-=======
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
->>>>>>> parent of 4bf94f1 (creaftable installed and working)
 
 
 /**
@@ -33,27 +28,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-<<<<<<< HEAD
-        'two_factor_secret',
-        'two_factor_recovery_codes',
-
-    ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-
-    ];
-
-    protected $dates = [
-        'email_verified_at',
-        'created_at',
-        'updated_at',
-
-    ];
-
-    protected $appends = ['resource_url'];
-=======
 		  'usertype',
     ];
 
@@ -75,7 +49,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
->>>>>>> parent of 4bf94f1 (creaftable installed and working)
 
     /**
      * The attributes that should be cast to native types.
