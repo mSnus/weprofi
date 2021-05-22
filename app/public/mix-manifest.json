@@ -1,10 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/admin.js": "/js/admin.js",
-    "/css/app.css": "/css/app.css",
-    "/css/admin.css": "/css/admin.css",
-    "/css/start.css": "/css/start.css",
-    "/img/icon1a.svg": "/img/icon1a.svg",
-    "/img/logo1a-horiz.svg": "/img/logo1a-horiz.svg",
-    "/img/logo1a.svg": "/img/logo1a.svg"
+    "/css/app.css": "/css/app.css"
 }

@@ -15,7 +15,6 @@ TODO:
 - сделать админку:
 -- https://www.getcraftable.com/
 -- https://github.com/the-control-group/voyager
--- https://backpackforlaravel.com/docs/4.1/installation
 
 
 - карты

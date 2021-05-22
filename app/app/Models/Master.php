@@ -6,28 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Master extends Model
 {
-    protected $fillable = [
-        'userid',
-        'title',
-        'descr',
-        'status',
-        'score',
-    
-    ];
-    
-    
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    
-    ];
-    
-    protected $appends = ['resource_url'];
 
-    /* ************************ ACCESSOR ************************* */
+    protected $table = 'masters';
+    public $timestamps = true;
 
-    public function getResourceUrlAttribute()
+	 public const statusRegistered = 'registered';
+
+    public function feedbacks()
     {
-        return url('/admin/masters/'.$this->getKey());
+        return $this->hasMany('Feedback', 'master');
     }
+
+    public function requests()
+    {
+        return $this->hasMany('Request', 'master');
+    }
+
 }
