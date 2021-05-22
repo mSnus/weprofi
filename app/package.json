@@ -27,12 +27,16 @@
         "sass-loader": "^11.0.1",
         "tailwindcss": "^2.0.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "vue-loader": "15.9.5",
         "webpack-bundle-analyzer": "^4.4.2"
     },
     "dependencies": {
         "node-sass": "^4.14.1",
         "vue-quill-editor": "^3.0.6"
+=======
+        "webpack-bundle-analyzer": "^4.4.2"
+>>>>>>> parent of e334c0f (brefore Brackets Craftable)
 =======
         "webpack-bundle-analyzer": "^4.4.2"
 >>>>>>> parent of e334c0f (brefore Brackets Craftable)
