@@ -2,17 +2,38 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+=======
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+>>>>>>> parent of 4bf94f1 (creaftable installed and working)
 
-class User extends Model
+
+/**
+ * Добавил свойство usertype:
+ *
+ * ALTER TABLE `users`
+ * ADD `usertype` int(11) unsigned NOT NULL DEFAULT '0' AFTER `id`;
+ */
+
+class User extends Authenticatable
 {
+    use HasFactory, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'usertype',
         'name',
         'email',
-        'email_verified_at',
         'password',
+<<<<<<< HEAD
         'two_factor_secret',
         'two_factor_recovery_codes',
 
@@ -32,11 +53,36 @@ class User extends Model
     ];
 
     protected $appends = ['resource_url'];
+=======
+		  'usertype',
+    ];
 
-    /* ************************ ACCESSOR ************************* */
+	 /**
+     * The user types. Just some random numbers, no meaning intended.
+     */
+	 public const typeClient = '11';
+    public const typeMaster = '22';
+	 public const typeModerator = '55';
+	 public const typeAdmin = '999';
 
-    public function getResourceUrlAttribute()
-    {
-        return url('/admin/users/'.$this->getKey());
-    }
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+>>>>>>> parent of 4bf94f1 (creaftable installed and working)
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
