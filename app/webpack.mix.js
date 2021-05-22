@@ -29,3 +29,13 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 
 mix.postCss('resources/css/start.css', 'public/css');
 mix.copyDirectory('resources/img', 'public/img');
+
+
+mix
+  .js(["resources/js/admin/admin.js"], "public/js")
+  .sass("resources/sass/admin/admin.scss", "public/css")
+  .vue();
+
+if (mix.inProduction()) {
+  mix.version();
+}

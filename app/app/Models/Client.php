@@ -6,21 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    protected $fillable = [
+        'userid',
+        'title',
+        'status',
+        'score',
+    
+    ];
+    
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    
+    ];
+    
+    protected $appends = ['resource_url'];
 
-    protected $table = 'clients';
-	 protected $fillable = ['username',	 'pass',	 'email',	 'name',	 'phone'];
-    public $timestamps = true;
+    /* ************************ ACCESSOR ************************* */
 
-	 public const statusRegistered = 'registered';
-
-    public function feedbacks()
+    public function getResourceUrlAttribute()
     {
-        return $this->hasMany('Feedback', 'client');
+        return url('/admin/clients/'.$this->getKey());
     }
-
-    public function offers()
-    {
-        return $this->hasMany('Offer', 'client');
-    }
-
 }

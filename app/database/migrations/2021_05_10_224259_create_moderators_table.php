@@ -10,10 +10,8 @@ class CreateModeratorsTable extends Migration {
 		Schema::create('moderators', function(Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('username', 255);
-			$table->string('pass', 255);
-			$table->string('email', 255);
-			$table->string('name', 255);
+			$table->bigInteger('userid');
+			$table->string('title', 255);
 			$table->string('status', 255);
 		});
 	}

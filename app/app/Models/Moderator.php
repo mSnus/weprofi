@@ -6,8 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moderator extends Model
 {
+    protected $fillable = [
+        'username',
+        'pass',
+        'email',
+        'name',
+        'status',
+    
+    ];
+    
+    
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    
+    ];
+    
+    protected $appends = ['resource_url'];
 
-    protected $table = 'moderators';
-    public $timestamps = true;
+    /* ************************ ACCESSOR ************************* */
 
+    public function getResourceUrlAttribute()
+    {
+        return url('/admin/moderators/'.$this->getKey());
+    }
 }
