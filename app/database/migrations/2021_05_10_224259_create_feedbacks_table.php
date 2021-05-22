@@ -14,7 +14,7 @@ class CreateFeedbacksTable extends Migration {
 			$table->string('status', 255);
 			$table->bigInteger('request')->unsigned()->nullable();
 			$table->string('type', 255);
-			$table->tinyInteger('score');
+			$table->integer('score')->default(0);
 			$table->bigInteger('master')->unsigned()->nullable();
 			$table->bigInteger('client')->unsigned()->nullable();
 		});

@@ -14,7 +14,8 @@ class CreateMastersTable extends Migration {
 			$table->string('title', 255);
 			$table->text('descr', 255);
 			$table->string('status', 255);
-			$table->integer('score');
+			$table->string('location', 255);
+			$table->integer('score')->default(0);
 		});
 	}
 
