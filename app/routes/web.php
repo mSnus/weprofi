@@ -27,14 +27,16 @@ Route::get('/', function () {
 Route::redirect('/test', '/test.php');
 Route::redirect('/snusminer.php', '/snusminer.php');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::resource('client', ClientController::class);
 Route::resource('master', MasterController::class);
 Route::resource('moderator', ModeratorController::class);
 Route::resource('offer', OfferController::class);
 Route::resource('feedback', FeedbackController::class);
 
-require __DIR__.'/auth.php';
+/*require __DIR__.'/auth.php';
+*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::put('/respond/{id}', [App\Http\Controllers\MasterController::class, 'takeOffer'])->middleware(['auth'])->name('master.respond');

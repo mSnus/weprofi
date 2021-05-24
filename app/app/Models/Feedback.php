@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $table = 'feedbacks';
 
     protected $fillable = [

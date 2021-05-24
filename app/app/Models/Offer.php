@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Offer extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $fillable = [
         'title',
         'descr',
@@ -16,19 +17,21 @@ class Offer extends Model
         'location',
         'accepted',
         'finished',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
         'accepted',
         'finished',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
+
+	 public const statusPending = 'pending';
 
     /* ************************ ACCESSOR ************************* */
 

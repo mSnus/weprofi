@@ -1,67 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    @hasSection('title')
+        <title>@yield('title')</title>
+    @else
+        <title>Pochinim.online</title>
+    @endif
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    @hasSection('head')
+        @yield('head')
+    @endif
 
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="font-sans antialiased">
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+							<img src="/img/logo1a-horiz.svg" width="200">
+					  </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <div class="min-h-screen bg-gray-100">
-        <!--@ include('layouts.navigation')-->
-		  <header class="text-gray-600 body-font">
-			<div class="container mx-auto flex flex-wrap p-0 flex-col md:flex-row items-center">
-				 <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-					  <img src="/img/logo1a-horiz.svg" width="200">
-				 </a>
-				 @if (Route::has('login'))
-					  <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-							@auth
-								 <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Профиль</a>
-							@else
-								 <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-indigo-600 mr-5 underline">Вход</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
 
+                    </ul>
 
-							</nav>
-							@if (Route::has('register'))
-								 <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base" onclick="window.location.href='{{ route('register') }}';">Регистрация
-									  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-											<path d="M5 12h14M12 5l7 7-7 7"></path>
-									  </svg>
-								 </button>
-							@endif
-					  @endauth
-				 @endif
-			</div>
-	  </header>
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-        <!-- Page Heading -->
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->title() }}
+                                </a>
 
-		  @hasSection ('header')
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-					@yield('header')
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </header>
-		  @endif
+        </nav>
 
-        <!-- Page Content -->
-        <main>
-			<div class="container mx-auto flex flex-wrap p-0 flex-col md:flex-row items-center">
+        @hasSection('header')
+            <header class="">
+                <div class="container">
+                    @yield('header')
+                </div>
+            </header>
+        @endif
+
+        <main class="py-4">
             @yield('content')
-			</div>
         </main>
+
+        <footer class="flex justify-center">
+            <img src="/img/icon1a.svg" width="60">
+            <div class="">
+                &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>
+            </div>
+        </footer>
     </div>
 </body>
 

@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+		@section('title', 'Починим.Онлайн')
 
-    <title>Починим.Онлайн</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{{ url('css/app.css') }}">
-    <!-- Styles -->
-
-    <script src="{{ asset('js/app.js') }}"></script>
-
+		@section('head')
     <!-- MapBox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
@@ -24,9 +15,14 @@
     <!-- to use Mapbox GL Geocoder in IE 11. -->
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+		@endsection
+
 </head>
 
-<body class="antialiased">
+
+	@section('head')
+
+
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-0 flex-col md:flex-row items-center">
             <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -57,39 +53,52 @@
             @endif
         </div>
     </header>
+	 @endsection
 
-    <div class="flex  justify-center mb-8">
-        <div class="mt-2 text-gray-600 text-sm px-8">
+
+	 @section('content')
+    <div class="d-flex justify-content-center bg-light-blue">
+        <div class="mr-4">
             <h1>Поможем вам быстро найти мастера,<br> который поможет вам с ремонтом автомобиля</h1>
             <p>Заполняете заявку, вам приходят отклики мастеров, вы выбираете одного из них и принимаете предложение.</p>
             <p>А дальше... дальше всё само собой завертится!</p>
         </div>
         <!-- регистрация мастера -->
-        <div class="mt-2 text-gray-600 text-sm px-8">
+        <div class="">
             <h2>Мастер? Вы нам нужны!</h2>
-            <button class="bg-indigo-500 text-white active:bg-indigo-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onclick="window.location.href='/master';">Присоединяйтесь!</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/master';">Присоединяйтесь!</button>
         </div>
     </div>
 
-    <div class="relative flex items-top justify-center bg-gray-100 sm:items-center py-4 sm:pt-0">
+    <div class="container d-flex justify-content-center">
 
-        <div class="flex">
-            <!-- регистрация клиента и новая заявка -->
+        <div class="flex shadow p-3 mb-5 bg-white rounded">
+			@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+			@endif
+			<!-- регистрация клиента и новая заявка -->
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
             @else
-                <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
-                    <div class="flex">
-                        <div class="p-6">
-                            <div class="mt-2 text-gray-600 text-sm px-8">
-                                <h3>В чём твоя проблема, человек? .[0_0].</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <div class="p-6">
+						<div class="d-flex justify-content-center">
+							<div class="mr-4">
+								<div class="mt-2 text-gray-600 text-sm px-8">
+									<h3>В чём твоя проблема, человек? .[0_0].</h3>
+								</div>
+							</div>
+					</div>
+                <div class="d-flex justify-content-center">
+
+                    <div class="d-flex justify-content-center">
+                        <div class="">
                             @include('requests')
                         </div>
                     </div>
@@ -97,14 +106,4 @@
             @endif
         </div>
     </div>
-
-    <!-- footer -->
-    <div class="flex justify-center mt-4 items-center">
-        <img src="/img/icon1a.svg" width="60">
-        <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-            &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>
-        </div>
-    </div>
-</body>
-
-</html>
+	 @endsection

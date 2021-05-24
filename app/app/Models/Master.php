@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Offer;
 
 class Master extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $fillable = [
         'userid',
         'title',
@@ -13,22 +15,34 @@ class Master extends Model
         'location',
         'status',
         'score',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
+
+	 public const statusRegistered = 'registered';
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
         return url('/admin/masters/'.$this->getKey());
+    }
+
+	 public function feedbacks()
+    {
+        return $this->hasMany('Feedback', 'master');
+    }
+
+	 public function offers()
+    {
+        return $this->hasMany('App\Models\Offer', 'master');
     }
 }

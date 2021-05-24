@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Master;
 
 use App\Models\User;
+use App\Models\Offer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -112,5 +113,19 @@ class MasterController extends Controller
 	 */
 	public function destroy($id)
 	{
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function takeOffer($offer_id)
+	{
+		$offer = \App\Models\Offer::find($offer_id);
+		$offer->update(['id' => $offer_id, 'master' => Auth::user()->master->userid]);
+
+		return view('home')->with('status', 'Заявка отправлена');
 	}
 }

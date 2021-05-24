@@ -1,9 +1,0 @@
-import './admin-user';
-import './profile-edit-profile';
-import './profile-edit-password';
-import './master';
-import './offer';
-import './client';
-import './user';
-import './moderator';
-import './feedback';

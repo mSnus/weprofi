@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moderator extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     protected $fillable = [
         'username',
         'pass',
