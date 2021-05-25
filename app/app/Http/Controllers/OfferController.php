@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+
 class OfferController extends Controller
 {
 
@@ -53,8 +54,14 @@ class OfferController extends Controller
 		/**
 		 * Регистрируем нового пользователя и добавляем дополнительные поля в таблицу клиентов
 		 */
+		$phone = $request->name;
+		$phone = preg_replace("~[^0-9\+]~", "", $phone);
+		if (substr($phone, 0, 1) == "8") $phone = "+7".substr($phone,1); // 8925xxxx => +7925xxxx
+		if (substr($phone, 0, 1) == "9") $phone = "+7".$phone; // 925xxxx => +7925xxxx
+
+		$request->name =  $phone;
 		$request->validate([
-			'name' => 'required|string|max:255|unique:users',
+			'name' => 'required|string|max:255|unique:users|regex:~[\+0-9]{7,15}~',
 			'email' => 'required|string|email|max:255|unique:users',
 			'password' => ['required', 'confirmed', Rules\Password::min(6)],
 		]);
@@ -75,6 +82,13 @@ class OfferController extends Controller
 		$client->title = $request->fullname;
 		$client->userid = $user->id;
 		$client->save();
+
+		$response = Telegram::sendMessage([
+			'chat_id' => 'CHAT_ID',
+			'text' => 'Hello World'
+		 ]);
+
+		 $messageId = $response->getMessageId();
 	}
 
 	// return redirect(RouteServiceProvider::HOME);
@@ -89,7 +103,7 @@ class OfferController extends Controller
 
 	$offer->save();
 
-	return redirect('/')->with('status', 'Заявка отправлена!'.' ('.$offer->id.')');
+	return redirect('/home')->with('status', 'Заявка отправлена!'.' ('.$offer->id.')');
 
   }
 
