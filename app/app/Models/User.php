@@ -61,41 +61,82 @@ class User extends Authenticatable
 		'email_verified_at' => 'datetime',
 	];
 
+
 	public function title()
 	{
-		switch ($this->usertype) {
-			case SELF::typeClient:
-				return $this->client->title;
-
-			case SELF::typeMaster:
-				return  $this->master->title;
-
-			default:
-				return "(тип $this->usertype) " . $this->name;
-		}
+		return $this->user_role->title;
 	}
 
 	public function offers()
 	{
 		switch ($this->usertype) {
 			case SELF::typeClient:
-				return $this->client->offers;
+				return \App\Models\Offer::where('client', $this->id)->get();
 
 			case SELF::typeMaster:
-				return  $this->master->offers;
+				return \App\Models\Offer::where('master', $this->id)->get();
 
 			default:
-				throw new \Exception('This user type ($this->usertype) could not have any offers.');
+				return "(тип $this->usertype) " . $this->name;
 		}
+
+	}
+
+	public function getUserRoleAttribute(){
+		switch ($this->usertype) {
+			case SELF::typeClient:
+				return $this->client();
+
+			case SELF::typeMaster:
+				return $this->master();
+
+			case SELF::typeModerator:
+				return $this->moderator();
+
+			default:
+				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
+		}
+	}
+
+	public function isModerator()
+	{
+		return ($this->usertype == SELF::typeModerator);
+	}
+
+	public function isMaster()
+	{
+		return ($this->usertype == SELF::typeMaster);
+	}
+
+	public function isClient()
+	{
+		return ($this->usertype == SELF::typeClient);
+	}
+
+	public function moderator()
+	{
+		return Moderator::where('userid', $this->id)->first();
 	}
 
 	public function master()
 	{
-		return $this->hasOne('App\Models\Master', 'userid');
+		return Master::where('userid', $this->id)->first();
 	}
 
 	public function client()
 	{
-		return $this->hasOne('App\Models\Client', 'userid');
+		return Client::where('userid', $this->id)->first();
 	}
+
+	/**
+     * Get the user's type.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getUsertypeAttribute($value)
+    {
+		// $usertype = SELF::with('user.usertype')->get();
+        return $value;
+    }
 }

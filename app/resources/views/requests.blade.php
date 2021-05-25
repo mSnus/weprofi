@@ -1,4 +1,8 @@
 <div class="d-flex justify-content-center">
+			  <h3>Проблема с машиной?  Заполните заявку:</h3>
+</div>
+
+<div class="d-flex justify-content-center">
     <div class="newoffer-form mr-4">
         <!-- Validation Errors -->
         @if ($errors->any())
@@ -23,9 +27,6 @@
             <div class="mt-4">
                 <x-form-input id="location" label="Где находится машина? Отметьте на карте" class="block mt-1 w-full" type="text" name="location" :value="old('location')" required />
             </div>
-				@auth
-
-				@endauth
 
 				@guest
             <div class="mt-4">
@@ -33,6 +34,10 @@
             </div>
 
             @include('auth.register-fields')
+
+				<p>Для работы через Telegram, добавьте нашего бота:</p>
+				<p><a href="https://telegram.me/PochinimOnline_bot?start=welcome"><img src="/img/tg.svg" width="150"></a></p>
+
 				@endguest
 
             <div class="d-flex items-center justify-end mt-4">
@@ -49,3 +54,4 @@
     </div>
     @include('mapbox')
 </div>
+

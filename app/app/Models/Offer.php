@@ -39,4 +39,10 @@ class Offer extends Model
     {
         return url('/admin/offers/'.$this->getKey());
     }
+
+	 public function getOwnerTitleAttribute(){
+		 $client = \App\Models\Client::where('userid', $this->client)->value('title');
+		return $client;
+	 }
+
 }

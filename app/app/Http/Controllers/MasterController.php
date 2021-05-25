@@ -126,6 +126,10 @@ class MasterController extends Controller
 		$offer = \App\Models\Offer::find($offer_id);
 		$offer->update(['id' => $offer_id, 'master' => Auth::user()->master->userid]);
 
-		return view('home')->with('status', 'Заявка отправлена');
+		return redirect('home')->with('status', 'Заявка отправлена');
+	}
+
+	public static function offers(){
+		return \App\Models\Offer::all();//where('master', Auth::user()->master->userid)->get();
 	}
 }

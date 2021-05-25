@@ -53,13 +53,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">Вход</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
                                 </li>
                             @endif
                         @else
@@ -71,7 +71,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                              document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Выход
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -97,10 +97,10 @@
             @yield('content')
         </main>
 
-        <footer class="flex justify-center">
-            <img src="/img/icon1a.svg" width="60">
+        <footer class="d-flex justify-content-center w-100 align-items-center">
+            <img src="/img/icon1a.svg" width="60" class="mr-4">
             <div class="">
-                &copy; 2021, <span class="text-blue-900">pochinim</span><span class="text-yellow-700">.online</span>
+                &copy; 2021, <span style="color:steelblue;">pochinim</span><span style="color:sandybrown;">.online</span>
             </div>
         </footer>
     </div>

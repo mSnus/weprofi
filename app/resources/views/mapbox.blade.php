@@ -1,20 +1,36 @@
-<div class="mapbox-container">
-	<style>
-		 .coordinates {
-			  background: rgba(0, 0, 0, 0.5);
-			  color: #fff;
-			  position: absolute;
-			  bottom: 40px;
-			  left: 10px;
-			  padding: 5px 10px;
-			  margin: 0;
-			  font-size: 11px;
-			  line-height: 18px;
-			  border-radius: 3px;
-			  display: none;
-		 }
+@section('head')
+    <!-- MapBox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
 
-	</style>
+    <!-- Promise polyfill script is required -->
+    <!-- to use Mapbox GL Geocoder in IE 11. -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+	 <style>
+		.coordinates {
+			 background: rgba(0, 0, 0, 0.5);
+			 color: #fff;
+			 position: absolute;
+			 bottom: 40px;
+			 left: 10px;
+			 padding: 5px 10px;
+			 margin: 0;
+			 font-size: 11px;
+			 line-height: 18px;
+			 border-radius: 3px;
+			 display: none;
+		}
+
+  </style>
+@endsection
+
+
+<div class="mapbox-container">
+
 	<div id='map' style='width: 660px; height: 660px; margin-top: 20px;'></div>
 	<pre id="coordinates" class="coordinates"></pre>
 

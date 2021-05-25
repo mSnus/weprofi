@@ -1,0 +1,28 @@
+/**
+Список офферов для мастеров
+*/
+
+.offers-container {
+	padding: 4px;
+}
+.offer {
+	display: flex;
+	flex-wrap: nowrap;
+	border-bottom: solid 1px #eee;
+	margin-bottom: 20px;
+}
+
+.offer:last-child {
+	border-bottom: none;
+	margin-bottom: 0px;
+}
+
+.offer-title {
+	flex: 10;
+}
+.offer-location {
+	flex: 1;
+}
+.offer-actions {
+	flex: 1;
+}
