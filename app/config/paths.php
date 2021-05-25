@@ -1,0 +1,2 @@
+<?php
+define('TELEGRAM_BOT_TOKEN', env('TELEGRAM_BOT_TOKEN'));

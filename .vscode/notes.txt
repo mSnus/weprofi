@@ -16,3 +16,5 @@ TODO:
 -- выбор в радиусе: https://labs.mapbox.com/education/proximity-analysis/selecting-within-a-distance/
 
 
+смайлики в unicode:
+-- https://apps.timwhitlock.info/emoji/tables/unicode
