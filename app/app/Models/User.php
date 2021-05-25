@@ -88,15 +88,32 @@ class User extends Authenticatable
 				return $this->client();
 
 			case SELF::typeMaster:
-				return $this->master();
+				return  $this->master();
 
 			case SELF::typeModerator:
-				return $this->moderator();
+				return  $this->moderator();
 
 			default:
 				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
 		}
 	}
+
+	public function getUserRoleStringAttribute(){
+		switch ($this->usertype) {
+			case SELF::typeClient:
+				return 'client';
+
+			case SELF::typeMaster:
+				return 'master';
+
+			case SELF::typeModerator:
+				return 'moderator';
+
+			default:
+				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
+		}
+	}
+
 
 	public function isModerator()
 	{

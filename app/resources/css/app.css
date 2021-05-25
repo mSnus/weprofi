@@ -26,3 +26,10 @@
 .offer-actions {
 	flex: 1;
 }
+
+
+/* Форма профиля пользователя */
+
+.form-profile>div {
+	flex-basis: 100%;
+}

@@ -18,6 +18,7 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\TelegramController;
 
 
 Route::get('/', function () {
@@ -33,6 +34,8 @@ Route::resource('moderator', ModeratorController::class);
 Route::resource('offer', OfferController::class);
 Route::resource('feedback', FeedbackController::class);
 
+Route::view('/profile', 'profile');
+
 /*require __DIR__.'/auth.php';
 */
 
@@ -40,3 +43,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::put('/respond/{id}', [App\Http\Controllers\MasterController::class, 'takeOffer'])->middleware(['auth'])->name('master.respond');
+
+//Set Telegram webhook
+//NOTE: do it only once!
+//if installed, https://api.telegram.org/bot1841517749:AAGnU-etBblB5m3jmjg0ZVnw2edJX1vlIzY/getUpdates
+//will return the error: Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+//Telegram::setWebhook(['url' => 'https://pochinim.online/'.env('TELEGRAM_BOT_TOKEN').'/webhook']);
+
+Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhook', [TelegramController::class, 'webhook']);
