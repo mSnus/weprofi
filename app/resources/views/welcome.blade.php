@@ -48,7 +48,7 @@
                         {{ session('status') }}
                     </div>
                 @else
-					 	@include('requests')
+					 	@include('requests', ['password_required' => true])
                 @endif
             @else
 						@include('/home');

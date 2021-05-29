@@ -51,7 +51,7 @@ class MasterController extends Controller
 		$request->validate([
 			'name' => 'required|string|max:255|unique:users',
 			'email' => 'required|string|email|max:255|unique:users',
-			'password' => ['required', 'confirmed', Rules\Password::min(6)],
+			'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
 		]);
 
 		$user = User::create([
@@ -70,6 +70,9 @@ class MasterController extends Controller
 		$master->status = Master::statusRegistered;
 		$master->userid = $user->id;
 		$master->save();
+
+
+		$user->update(['linked_id' => $master->id]);
 
 		return redirect(RouteServiceProvider::HOME);
 	}
@@ -101,8 +104,23 @@ class MasterController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id)
 	{
+			$master =  Master::find($id);
+			$user = User::find($master->userid);
+
+			$user->linked_id = $master->userid;
+			$user->name = $request->name;
+			$user->email= $request->email;
+			$user->update();
+
+
+			$master->title = $request->title;
+			$master->location = $request->location;
+			$master->descr = $request->descr ?? '';
+			$master->update();
+
+			return redirect('profile')->with('status', 'Профиль сохранён');
 	}
 
 	/**

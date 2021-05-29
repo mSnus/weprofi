@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 
 class OfferController extends Controller
@@ -83,12 +84,12 @@ class OfferController extends Controller
 		$client->userid = $user->id;
 		$client->save();
 
-		$response = Telegram::sendMessage([
-			'chat_id' => 'CHAT_ID',
-			'text' => 'Hello World'
-		 ]);
+		// $response = Telegram::sendMessage([
+		// 	'chat_id' => 'CHAT_ID',
+		// 	'text' => 'Hello World'
+		//  ]);
 
-		 $messageId = $response->getMessageId();
+		//  $messageId = $response->getMessageId();
 	}
 
 	// return redirect(RouteServiceProvider::HOME);

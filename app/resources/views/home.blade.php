@@ -80,10 +80,9 @@
 
                 @if (Auth::user()->isClient())
                     <div class="d-flex justify-content-center">
-
                         <div class="d-flex justify-content-center">
                             <div class="">
-                                @include('requests')
+                                @include('requests', ['password_required' => false])
                             </div>
                         </div>
                     </div>

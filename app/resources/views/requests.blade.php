@@ -33,7 +33,7 @@
                 <x-form-input id="fullname" label="Как к вам обращаться" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" autocomplete="name" required />
             </div>
 
-            @include('auth.register-fields')
+            @include('auth.register-fields', ['password_required' => true])
 
 				<p>Для работы через Telegram, добавьте нашего бота:</p>
 				<p><a href="https://telegram.me/PochinimOnline_bot?start=welcome"><img src="/img/tg.svg" width="150"></a></p>
