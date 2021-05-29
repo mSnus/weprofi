@@ -31,7 +31,7 @@
 
 <div class="mapbox-container">
 
-	<div id='map' style='width: 660px; height: 660px; margin-top: 20px;'></div>
+	<div id='map' style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '660px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '660px' }}; margin-top: 20px;'></div>
 	<pre id="coordinates" class="coordinates"></pre>
 
 
@@ -41,6 +41,9 @@
 
 		 var moscowLng = 37.613067626953125;
 		 var moscowLat = 55.750303644490394;
+		 var startLng = {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'moscowLng' }};
+		 var startLat = {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'moscowLat' }};
+		 var noAutocenter = {{ (isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true) ? "true" : "false" }};
 
 		 function updateLocation(coords) {
 			  let location = $('.form-with-map #location');
@@ -57,15 +60,17 @@
 
 			  function geolSuccess(pos) {
 					crd = pos.coords;
-					map = loadMap(crd.longitude, crd.latitude);
+					map.setCenter({lng: crd.longitude, lat: crd.latitude});
+					// map = loadMap(crd.longitude, crd.latitude);
 			  };
 
 			  function geolError(err) {
 					console.log(`ERROR(${err.code}): ${err.message}`);
-					map = loadMap(moscowLng, moscowLat);
+					map.setCenter({lng: startLng, lat: startLat});
+					// map = loadMap(startLng, startLat);
 			  };
 
-			  if ("geolocation" in navigator) {
+			  if ("geolocation" in navigator && !noAutocenter) {
 					navigator.geolocation.getCurrentPosition(geolSuccess, geolError, geolOptions);
 			  }
 
@@ -79,7 +84,8 @@
 
 			  }
 
-			  var map = loadMap(moscowLng, moscowLat);
+
+			  var map = loadMap(startLng, startLat);
 
 			  map.on('mouseup', function() {
 					console.log('A mouseup event has occurred.');
@@ -104,7 +110,7 @@
 						 'name_ru'
 					]);
 
-					var coordinates = document.getElementById('coordinates');
+					// var coordinates = document.getElementById('coordinates');
 
 					const newcenter = map.getCenter();
 
