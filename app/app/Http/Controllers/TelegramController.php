@@ -15,9 +15,13 @@ class TelegramController extends Controller
 		if ($updates->message && $updates->message->text && substr($updates->message->text, 0, strlen($command)) == $command) {
 			$chat_id = intval($updates->message->chat->id);
 			$user_id = intval(substr($updates->message->text, strlen($command)));
+			$chat_name = $updates->message->chat->username;
+
+			// file_put_contents(__DIR__."/tg_debug.txt", date("Y-m-d i:s :")."\n\n".var_export($updates->message, true), FILE_APPEND);
 
 			$user = User::find($user_id);
 			$user->telegram_id = $chat_id;
+			$user->telegram_name = $chat_name;
 			$user->update();
 			// file_put_contents(__DIR__."/tg_authorized.txt", date("Y-m-d i:s :")."\n\nCHAT_ID: {$chat_id}, USER: {$user_id}\n\n", FILE_APPEND);
 

@@ -130,14 +130,20 @@ class OfferController extends Controller
 
   }
 
-  /**
-   * Update the specified resource in storage.
+/**
+   * Update offer
    *
-   * @param  int  $id
    * @return Response
    */
-  public function update($id)
+  public function update(Request $request, $id)
   {
+	$offer = Offer::find($id);
+	$offer->title = $request->title;
+	$offer->descr = $request->descr;
+	$offer->location = $request->location;
+	$offer->update();
+
+	return redirect('/home')->with('status', 'Заявка обновлена.');
 
   }
 

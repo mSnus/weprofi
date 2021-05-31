@@ -15,14 +15,18 @@
 				</div>
 			@endif
 
-        <form method="post" action="{{ route('offer.store') }}" id="formNewOffer" class="form-with-map">
+        <form method="post" action="{{ (isset($mode) && $mode == 'edit') ? route('offer.update', $offer_id) : route('offer.store') }}" id="formNewOffer" class="form-with-map">
             <!-- CROSS Site Request Forgery Protection -->
             @csrf
+				@if (isset($mode) && $mode == 'edit')
+					@method('PUT')
+				@endif
+
             <div class="mt-4">
-                <x-form-input id="title" label="Какая у вас машина" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
+                <x-form-input id="title" label="Какая у вас машина" class="block mt-1 w-full" type="text" name="title" :value="(isset($mode) && $mode == 'edit') ? $offer_title : old('title')" required />
             </div>
             <div class="mt-4">
-                <x-form-textarea id="descr" label="Полное описание: что нужно починить" class="block mt-1 w-full" type="text" name="descr" required>{{ old('descr') }}</x-form-textarea>
+                <x-form-textarea id="descr" label="Полное описание: что нужно починить" class="block mt-1 w-full" type="text" name="descr" required>{{ (isset($mode) && $mode == 'edit') ? $offer_descr : old('descr') }}</x-form-textarea>
             </div>
             <div class="mt-4">
                 <x-form-input id="location" label="Где находится машина? Отметьте на карте" class="block mt-1 w-full" type="text" name="location" :value="old('location')" required />
@@ -47,7 +51,11 @@
                 </a>
 					 @endguest
                 <x-form-submit class="ml-4">
-                    Отправить заявку
+						 @if (isset($mode) && $mode == 'edit')
+                     Сохранить
+						 @else
+						 	Отправить заявку
+						 @endif
                 </x-form-submit>
             </div>
         </form>

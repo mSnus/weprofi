@@ -33,3 +33,36 @@
 .form-profile>div {
 	flex-basis: 100%;
 }
+
+/* Большие цифры и интро на главной */
+
+.introtext p {
+	font-size: 16px;
+	line-height: 1.2;
+	display: flex;
+	align-items: center;
+}
+
+.big-digit {
+	background-color: #f6993f;
+	padding: 4px 16px;
+	border-radius: 35px;
+	color: #ffffff;
+	font-size: 34px;
+	font-weight: bold;
+	float: left;
+	margin-right: 10px;
+	line-height: 45px
+}
+
+/* Список мастеров в заявке клиента */
+
+.master-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+
+.master-name {
+	font-weight: bold;
+}

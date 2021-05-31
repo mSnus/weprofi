@@ -18,7 +18,7 @@
 
                             <div class="card-body">
                                 <div class="offers-container">
-                                    @foreach (App\Models\Offer::all() as $offer)
+                                    @foreach (App\Models\Offer::listAll() as $offer)
                                         <div class="offer">
                                             <x-form :action="route('master.respond', $offer->id)" class=" d-flex flex-nowrap w-100 mb-4">
                                                 @method('PUT')

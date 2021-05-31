@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Offer;
 
 class Master extends Model
 {
@@ -41,8 +40,8 @@ class Master extends Model
         return $this->hasMany('Feedback', 'master');
     }
 
-	 public function offers()
+	 public function counteroffers()
     {
-        return $this->hasMany('App\Models\Offer', 'master');
+		return $this->belongsToMany(Offer::class, 'offer_to_masters', 'master', 'offer', 'userid', 'offers.id');
     }
 }
