@@ -8,12 +8,14 @@ use App\Models\Master;
 
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\OfferToMaster;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class MasterController extends Controller
 {
@@ -48,6 +50,11 @@ class MasterController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		$phone = $request->name;
+		$phone = preg_replace("~[^0-9\+]~", "", $phone);
+		if (substr($phone, 0, 1) == "8") $phone = "+7".substr($phone,1); // 8925xxxx => +7925xxxx
+		if (substr($phone, 0, 1) == "9") $phone = "+7".$phone; // 925xxxx => +7925xxxx
+
 		$request->validate([
 			'name' => 'required|string|max:255|unique:users',
 			'email' => 'required|string|email|max:255|unique:users',
@@ -55,7 +62,7 @@ class MasterController extends Controller
 		]);
 
 		$user = User::create([
-			'name' => $request->name,
+			'name' => $phone,
 			'email' => $request->email,
 			'password' => Hash::make($request->password),
 			'usertype' => User::typeMaster,
@@ -109,7 +116,11 @@ class MasterController extends Controller
 			$master =  Master::find($id);
 			$user = User::find($master->userid);
 
-			$user->linked_id = $master->userid;
+			if ($master->userid != Auth::user()->user_role->userid) {
+				return redirect('profile')->with('error', 'Профиль не сохранён, ошибка авторизации.');
+			}
+
+			$user->linked_id = $master->id;
 			$user->name = $request->name;
 			$user->email= $request->email;
 			$user->update();
@@ -134,20 +145,27 @@ class MasterController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Отправляет отклик на выбранную заявку
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function takeOffer($offer_id)
 	{
-		$offer = \App\Models\Offer::find($offer_id);
-		$offer->update(['id' => $offer_id, 'master' => Auth::user()->master->userid]);
+			$o2m = new \App\Models\OfferToMaster;
+			$o2m->storeSuggestion($offer_id);
 
-		return redirect('home')->with('status', 'Заявка отправлена');
+			$offer = \App\Models\Offer::find($offer_id);
+			$client = \App\Models\User::find($offer->client);
+
+			if ($client->telegram_id) {
+				$response = Telegram::sendMessage([
+					'chat_id' => $client->telegram_id,
+					'text' => 'На вашу заявку поступил новый отклик! https://pochinim.online/home'
+				]);
+			}
+
+			return redirect('home')->with('status', 'Ваше предложение отправлено!');
 	}
 
-	public static function offers(){
-		return \App\Models\Offer::all();//where('master', Auth::user()->master->userid)->get();
-	}
 }

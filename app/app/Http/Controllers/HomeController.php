@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+		 $role = Auth::user()->usertype;
+			switch($role) {
+				case User::typeClient:
+        			return view('clients_home');
+				case User::typeMaster:
+					return view('masters_home');
+				default:
+					throw new \Exception("No home for usertype ".$role." exists", 1);
+			}
     }
 }

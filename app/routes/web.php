@@ -20,6 +20,8 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\TelegramController;
 
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +45,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::put('/respond/{id}', [App\Http\Controllers\MasterController::class, 'takeOffer'])->middleware(['auth'])->name('master.respond');
+Route::put('/accept/{id}/{userid}', [App\Http\Controllers\ClientController::class, 'acceptOffer'])->middleware(['auth'])->name('client.accept');
+Route::get('/edit-offer/{id}', [App\Http\Controllers\ClientController::class, 'editOffer'])->middleware(['auth'])->name('client.edit-offer');
 
 //Set Telegram webhook
 //NOTE: do it only once!

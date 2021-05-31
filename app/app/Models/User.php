@@ -74,12 +74,11 @@ class User extends Authenticatable
 				return \App\Models\Offer::where('client', $this->id)->get();
 
 			case SELF::typeMaster:
-				return \App\Models\Offer::where('master', $this->id)->get();
+				return $this->user_role->counteroffers($this->id);
 
 			default:
-				return "(тип $this->usertype) " . $this->name;
+				throw new \Exception("No offers for usertype ".$this->user_role." exists", 1);
 		}
-
 	}
 
 	public function getUserRoleAttribute(){

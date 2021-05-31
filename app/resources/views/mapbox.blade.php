@@ -84,15 +84,9 @@
 
 			  }
 
-
 			  var map = loadMap(startLng, startLat);
 
-			  map.on('mouseup', function() {
-					console.log('A mouseup event has occurred.');
-			  });
-
 			  map.on('load', function() {
-
 					var geocoder = map.addControl(
 						 new MapboxGeocoder({
 							  accessToken: mapboxgl.accessToken,
