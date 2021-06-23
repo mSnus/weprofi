@@ -8,6 +8,47 @@
         </div>
     @endif
 
+	 @php
+	 	function shortenLocation($location){
+				$lng = substr($location, 0, strpos($location, ','));
+				$lat = substr($location, strpos($location, ',') + 1);
+				$precision = 4;
+				$lng = trim(substr($lng, 0, strpos($lng, '.')+$precision));
+				$lat = trim(substr($lat, 0, strpos($lat, '.')+$precision));
+
+				return $lng.",".$lat;
+			}
+
+								function mapboxDurations($location){
+				$allmasters = App\Models\Master::all();
+			$mapboxAccessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
+			$master_coords = [];
+			$master_coords['src'] = '--fill-it-later-with-source-coords--';
+
+
+
+			foreach($allmasters as $master) {
+				$master_coords[$master->userid] = shortenLocation($master->location);
+			}
+
+									$master_coords['src'] = shortenLocation($location);
+
+									$mapboxMatrixRequest = "https://api.mapbox.com/directions-matrix/v1/mapbox/driving/"
+									.join(';', $master_coords).
+									"?sources=0&annotations=duration&access_token=".$mapboxAccessToken;
+
+
+									$result = file_get_contents($mapboxMatrixRequest);
+									$durations = json_decode($result)->durations[0];
+
+									for ($i = 0; $i < count($durations); $i++){
+										$durations[$i] = intval(floor(floatval($durations[$i]) / 60));
+									}
+
+									return $durations;
+								}
+	@endphp
+
     <div class="container">
         <div class="row justify-content-center">
 
@@ -63,6 +104,10 @@
                                                 <br><br>
 
                                                 @php
+																	if ($offer->location) {
+																	 $durations = mapboxDurations($offer->location);
+																	}
+
                                                     $mapbox = ['no_autocenter' => true, 'height' => '100%'];
 
                                                     $location = $offer->location;
@@ -75,6 +120,7 @@
                                                         $mapbox['id'] = 'map_' . $offer->id;
                                                     }
 
+																	$cnt = 0;
                                                 @endphp
 
                                                 @if ($offer->location != '')
@@ -86,15 +132,25 @@
                                                     <div class="master-list">
                                                         Получены предложения от:
                                                         @foreach ($masters as $master)
+																	 			@php
+																	 				$cnt++;
+																				@endphp
                                                             <div class="master-item @if ($offer->master == $master->userid) alert alert-success @endif">
-                                                                <div class="master-name">{{ $master->title }}</div>
-                                                                <div class="master-descr">{{ $master->descr }}</div>
-                                                                <div class="master-score">
+
+                                                                <div class="master-details">
+																						 <div class="master-name">{{ $master->title }}</div>
+																						 <div class="master-descr">{{ $master->descr }}</div>
+																						 @if ($offer->location)
+																						 <div class="master-descr">Доедет за {{ $durations[$cnt] }} минут</div>
+																						 @endif
+																						 <div class="master-score">
 																						 @for ($i = 0; $i < $master->score; $i++)
 																							  <img src="/img/star.svg" width="15" alt="star">
 																						 @endfor
 
+																						 </div>
 																					 </div>
+
 
 																					 @if ($offer->master != $master->userid)
                                                                 <div class="master-form">

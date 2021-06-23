@@ -57,8 +57,8 @@ class MasterController extends Controller
 
 		$request->validate([
 			'name' => 'required|string|max:255|unique:users',
-			'email' => 'required|string|email|max:255|unique:users',
-			'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
+			// 'email' => 'required|string|email|max:255|unique:users',
+			// 'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
 		]);
 
 		$user = User::create([
@@ -120,7 +120,7 @@ class MasterController extends Controller
 				return redirect('profile')->with('error', 'Профиль не сохранён, ошибка авторизации.');
 			}
 
-			$user->linked_id = $master->id;
+			$user->linked_id = $master->userid;
 			$user->name = $request->name;
 			$user->email= $request->email;
 			$user->update();

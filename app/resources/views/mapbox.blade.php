@@ -31,7 +31,7 @@
 
 <div class="mapbox-container">
 
-	<div id='map' style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '660px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '660px' }}; margin-top: 20px;'></div>
+	<div id='map_id' style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '660px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '660px' }}; margin-top: 20px;'></div>
 	<pre id="coordinates" class="coordinates"></pre>
 
 
@@ -60,13 +60,13 @@
 
 			  function geolSuccess(pos) {
 					crd = pos.coords;
-					map.setCenter({lng: crd.longitude, lat: crd.latitude});
+					map_id.setCenter({lng: crd.longitude, lat: crd.latitude});
 					// map = loadMap(crd.longitude, crd.latitude);
 			  };
 
 			  function geolError(err) {
 					console.log(`ERROR(${err.code}): ${err.message}`);
-					map.setCenter({lng: startLng, lat: startLat});
+					map_id.setCenter({lng: startLng, lat: startLat});
 					// map = loadMap(startLng, startLat);
 			  };
 
@@ -76,7 +76,7 @@
 
 			  function loadMap(lng, lat) {
 					return new mapboxgl.Map({
-						 container: 'map',
+						 container: 'map_id',
 						 style: 'mapbox://styles/mapbox/streets-v11',
 						 center: [lng, lat],
 						 zoom: 13
@@ -84,10 +84,21 @@
 
 			  }
 
-			  var map = loadMap(startLng, startLat);
+			  @php
+			  echo('/*mapid is '.($mapbox['id'] ?? '').' */' );
+			  @endphp
 
-			  map.on('load', function() {
-					var geocoder = map.addControl(
+
+			  var {{ isset($mapbox['id']) ? $mapbox['id'] : 'map' }} = loadMap(startLng, startLat);
+			  var map_id = eval({!! isset($mapbox['id']) ? "'".$mapbox['id']."'" : "'map'" !!});
+
+			  map_id.on('mouseup', function() {
+					console.log('A mouseup event has occurred.');
+			  });
+
+			  map_id.on('load', function() {
+
+					var geocoder = map_id.addControl(
 						 new MapboxGeocoder({
 							  accessToken: mapboxgl.accessToken,
 							  mapboxgl: mapboxgl,
@@ -98,15 +109,15 @@
 						 })
 					);
 
-					map.addControl(new mapboxgl.NavigationControl());
-					map.setLayoutProperty('country-label', 'text-field', [
+					map_id.addControl(new mapboxgl.NavigationControl());
+					map_id.setLayoutProperty('country-label', 'text-field', [
 						 'get',
 						 'name_ru'
 					]);
 
 					// var coordinates = document.getElementById('coordinates');
 
-					const newcenter = map.getCenter();
+					const newcenter = map_id.getCenter();
 
 					window.selfPositionMarker = new mapboxgl.Marker({
 							  draggable: true,
@@ -114,7 +125,7 @@
 							  scale: 1.5,
 						 })
 						 .setLngLat(newcenter)
-						 .addTo(map);
+						 .addTo(map_id);
 					updateLocation(newcenter);
 
 					function onDragEnd() {
@@ -127,14 +138,14 @@
 
 					window.selfPositionMarker.on('dragend', onDragEnd);
 
-					map.on('click', function(e) {
+					map_id.on('click', function(e) {
 						 window.selfPositionMarker.setLngLat(e.lngLat);
 						 updateLocation(e.lngLat);
 					});
 
-					map.on('moveend', async () => {
-						 window.selfPositionMarker.setLngLat(map.getCenter());
-						 updateLocation(map.getCenter());
+					map_id.on('moveend', async () => {
+						 window.selfPositionMarker.setLngLat(map_id.getCenter());
+						 updateLocation(map_id.getCenter());
 					});
 
 			  });

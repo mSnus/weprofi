@@ -52,8 +52,8 @@ class ClientController extends Controller
 
 		$request->validate([
 			'name' => 'required|string|max:255|unique:users',
-			'email' => 'required|string|email|max:255|unique:users',
-			'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
+			// 'email' => 'required|string|email|max:255|unique:users',
+			// 'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
 		]);
 
 		$user = User::create([

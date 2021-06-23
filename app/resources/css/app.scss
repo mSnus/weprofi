@@ -1,3 +1,6 @@
+/* переменные */
+$hint-hover: #b6df48;
+
 /* шрифты */
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;600;800&family=Roboto:wght@100;300;700&display=swap');
@@ -47,10 +50,6 @@ body {
    padding: 20px;
 }
 
-.section-welcome textarea {
-	padding: 8px;
-}
-
 /*  на главной */
 .section-welcome h1,
 .section-welcome h2,
@@ -70,16 +69,6 @@ body {
 	line-height: 1;
 }
 
-.section-welcome .suggestions-list {
-	margin-bottom: 16px;
-	margin-top: -16px;
-}
-.section-welcome .suggestions-hint {
-	color: #777777;
-	font-size: 12px;
-	text-align: center;
-}
-
 .section-welcome .suggestion {
 	font-size: 16px;
 	color: #1e384d;
@@ -90,12 +79,6 @@ body {
 	display: inline-block;
 	margin-right: 16px;
 	border-radius: 8px;
-	cursor: pointer;
-}
-
-.section-welcome .suggestion:hover {
-	color: #b6df48;
-	border: dotted 1px #b6df48;
 }
 
 .section-welcome .hint {
@@ -110,8 +93,8 @@ body {
 }
 
 .section-welcome .hint:hover {
-	color: #b6df48;
-	border-bottom: dotted 1px #b6df48;
+	color: $hint-hover;
+	border-bottom: dotted 1px $hint-hover;
 }
 
 .section-welcome .hints {
