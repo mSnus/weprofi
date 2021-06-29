@@ -20,4 +20,5 @@ Route::group([
     Route::crud('moderator', 'ModeratorCrudController');
     Route::crud('user', 'UserCrudController');
     Route::crud('client', 'ClientCrudController');
+    Route::crud('offer_to_master', 'Offer_to_masterCrudController');
 }); // this should be the absolute last line of this file

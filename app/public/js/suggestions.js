@@ -48,59 +48,13 @@ var TextSuggestions = /*#__PURE__*/function () {
   _createClass(TextSuggestions, [{
     key: "loadKeywords",
     value: function loadKeywords(target) {
-      if (target == 'title') this.loadForTitle();else if (target == 'descr') this.loadForDescr();else console.error('Suggestions.load("' + target + '"): unknown target! ');
-    }
-  }, {
-    key: "loadForDescr",
-    value: function loadForDescr() {
-      this.keywords = [{
-        src: 'грм',
-        trg: 'заменить ремень ГРМ'
-      }, {
-        src: 'торм',
-        trg: 'заменить тормозные колодки'
-      }, {
-        src: 'торм',
-        trg: 'отрегулировать тормоза'
-      }, {
-        src: 'торм',
-        trg: 'заменить тормозные диски'
-      }, {
-        src: 'шин',
-        trg: 'шиномонтаж'
-      }, {
-        src: 'кол',
-        trg: 'колеса'
-      }, {
-        src: 'кол',
-        trg: 'ремонт колеса'
-      }, {
-        src: 'сро',
-        trg: 'СРОЧНО!'
-      }, {
-        src: 'све',
-        trg: 'заменить свечи'
-      }, {
-        src: 'свет',
-        trg: 'заменить лампочки'
-      }, {
-        src: 'даль',
-        trg: 'дальнего света'
-      }, {
-        src: 'ближ',
-        trg: 'ближнего света'
-      }];
+      if (target == 'title') this.loadFromJson('models');else if (target == 'descr') this.loadFromJson('tasks');else console.error('Suggestions.load("' + target + '"): unknown target! ');
     }
   }, {
     key: "loadFromJson",
-    value: function loadFromJson(data) {
-      console.log(data);
-    }
-  }, {
-    key: "loadForTitle",
-    value: function loadForTitle() {
+    value: function loadFromJson(file) {
       var obj = this;
-      $.getJSON("/ajax/models.json").done(function (data) {
+      $.getJSON("/ajax/" + file + ".json").done(function (data) {
         obj.keywords = data;
       });
     }
@@ -108,9 +62,10 @@ var TextSuggestions = /*#__PURE__*/function () {
     key: "suggest",
     value: function suggest(searchTerm) {
       if (searchTerm.length < 2) return [];
+      searchTerm = searchTerm.toLowerCase();
       var res = this.keywords.filter(function (obj) {
         return Object.values(obj).some(function (val) {
-          return val.includes(searchTerm.toLowerCase());
+          return val.startsWith(searchTerm);
         });
       }).slice(0, 3);
       this.count = res.length; //  console.log('suggest(): found '+this.count+' suggestions');
