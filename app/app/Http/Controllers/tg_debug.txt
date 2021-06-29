@@ -1,0 +1,106 @@
+2021-05-31 30:36 :
+
+Telegram\Bot\Objects\Message::__set_state(array(
+   'items' => 
+  array (
+    'message_id' => 24,
+    'from' => 
+    array (
+      'id' => 50372987,
+      'is_bot' => false,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'language_code' => 'ru',
+    ),
+    'chat' => 
+    array (
+      'id' => 50372987,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'type' => 'private',
+    ),
+    'date' => 1622449289,
+    'text' => '/start welcome_6',
+    'entities' => 
+    array (
+      0 => 
+      array (
+        'offset' => 0,
+        'length' => 6,
+        'type' => 'bot_command',
+      ),
+    ),
+  ),
+))2021-05-31 30:37 :
+
+Telegram\Bot\Objects\Message::__set_state(array(
+   'items' => 
+  array (
+    'message_id' => 25,
+    'from' => 
+    array (
+      'id' => 50372987,
+      'is_bot' => false,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'language_code' => 'ru',
+    ),
+    'chat' => 
+    array (
+      'id' => 50372987,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'type' => 'private',
+    ),
+    'date' => 1622449705,
+    'text' => '/start welcome_6',
+    'entities' => 
+    array (
+      0 => 
+      array (
+        'offset' => 0,
+        'length' => 6,
+        'type' => 'bot_command',
+      ),
+    ),
+  ),
+))2021-05-31 31:26 :
+
+Telegram\Bot\Objects\Message::__set_state(array(
+   'items' => 
+  array (
+    'message_id' => 28,
+    'from' => 
+    array (
+      'id' => 50372987,
+      'is_bot' => false,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'language_code' => 'ru',
+    ),
+    'chat' => 
+    array (
+      'id' => 50372987,
+      'first_name' => 'Mike',
+      'last_name' => 'Snus',
+      'username' => 'mSnus',
+      'type' => 'private',
+    ),
+    'date' => 1622449886,
+    'text' => '/start welcome_6',
+    'entities' => 
+    array (
+      0 => 
+      array (
+        'offset' => 0,
+        'length' => 6,
+        'type' => 'bot_command',
+      ),
+    ),
+  ),
+))
