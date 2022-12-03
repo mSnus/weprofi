@@ -1,0 +1,25 @@
+@media (max-width: 991px) {
+   .section-requests {
+      flex-wrap: wrap;
+   }
+
+   .head-descr img {
+      max-width: 100%;
+   }
+
+   .head-texts img {
+      height: 30px;
+   }
+
+	.head-texts {
+		flex-wrap: wrap;
+		font-size: 16px;
+	}
+
+	#map_id {
+		max-width: 95vw;
+		max-height: 95vw;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
