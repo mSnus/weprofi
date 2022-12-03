@@ -1,0 +1,263 @@
+/* шрифты */
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;600;800&family=Roboto:wght@100;300;700&display=swap');
+
+/* Шапка на главной */
+
+body {
+   background-color: #fff !important;
+	background-image: url(/img/text_bg.jpg);
+	background-repeat: repeat-x;
+	background-position-y: 602px;
+	font-display: swap;
+}
+
+.head-wrapper {
+   background-image: url(/img/head_bg.jpg);
+   background-position-x: center;
+   min-height: 602px;
+	background-repeat: no-repeat;
+
+}
+
+@media (min-width: 1920px) {
+	.head-wrapper {
+		background-size: cover;
+	}
+}
+
+
+
+/* иконки хелперы на главной */
+#icons-slider .help-icons {
+	margin-bottom: 20px;
+}
+
+#icons-slider2 .help-block {
+	display: inline-flex !important;
+	justify-content: center;
+	align-items: center;
+}
+
+#icons-slider2 .help-icon {
+	height: 70px;
+	padding-right: 20px;
+}
+#icons-slider2 .help-text {
+	font-size: 21px;
+	line-height: 1.2;
+	color: #4b87bd;
+}
+
+/* цифры и тексты в шапке сайта */
+.head-texts {
+	display: flex;
+	margin-top: 43px;
+	color: #ffffff;
+}
+
+.head-text-block .head-text1,
+.head-text-block .head-text2 {
+	padding-right: 40px;
+}
+
+.head-text-block {
+	display: flex;
+	align-items: flex-start;
+}
+
+.head-text-icon {
+	padding-right: 20px;
+}
+
+.head-text {
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	line-height: 1.3;
+}
+
+.head-texts img {
+   height: 70px;
+}
+
+/* поля ввода */
+
+.section-welcome .input-group>.form-control,
+.section-welcome .input-group>.form-control-plaintext,
+.section-welcome .input-group>.custom-select,
+.section-welcome .input-group>.custom-file,
+.section-welcome textarea {
+   border-radius: 4px;
+   background-color: #dde3e8;
+   -webkit-box-shadow: inset 4px 4px 6px -1px rgba(137, 151, 163, 0.24);
+   box-shadow: inset 4px 4px 6px -1px rgba(137, 151, 163, 0.24);
+   font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+   color: #1e384d;
+   padding: 20px;
+}
+
+.section-welcome textarea {
+	padding: 8px;
+}
+
+/*  на главной */
+.section-welcome h1,
+.section-welcome h2,
+.section-welcome h3 {
+	color: #277fe5;
+	font-weight: 800;
+	font-size: 36px;
+	font-family: 'Raleway', sans-serif;
+	line-height: 0.9;
+}
+
+.section-welcome .subhead {
+	font-size: 18px;
+	color: #1e384d;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	line-height: 1;
+}
+
+.section-welcome .suggestions-list {
+	margin-bottom: 16px;
+	margin-top: -16px;
+}
+.section-welcome .suggestions-hint {
+	color: #777777;
+	font-size: 12px;
+	text-align: center;
+}
+
+.section-welcome .suggestion {
+	font-size: 16px;
+	color: #1e384d;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	border: dotted 1px #2c4e6b;
+	padding: 4px 12px;
+	display: inline-block;
+	margin-right: 16px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.section-welcome .suggestion:hover {
+	color: #b6df48;
+	border: dotted 1px #b6df48;
+}
+
+.section-welcome .hint {
+	font-size: 16px;
+	color: #2493c8;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	display: inline-block;
+	margin-right: 16px;
+	border-bottom: dotted 1px #2493c8;
+	cursor: pointer;
+}
+
+.section-welcome .hint:hover {
+	color: #b6df48;
+	border-bottom: dotted 1px #b6df48;
+}
+
+.section-welcome .hints {
+	margin-bottom: 40px;
+}
+
+
+/* Список офферов для мастеров */
+
+.offers-container {
+   padding: 4px;
+}
+
+.offer {
+   display: flex;
+   flex-wrap: nowrap;
+   border-bottom: solid 1px #eee;
+   margin-bottom: 20px;
+}
+
+.offer:last-child {
+   border-bottom: none;
+   margin-bottom: 0px;
+}
+
+.offer-title {
+   flex: 10;
+}
+
+.offer-location {
+   flex: 1;
+}
+
+.offer-actions {
+   flex: 1;
+}
+
+
+/* Форма профиля пользователя */
+
+.form-profile>div {
+   flex-basis: 100%;
+}
+
+/* Большие цифры и интро на главной */
+
+.introtext p {
+   font-size: 16px;
+   line-height: 1.2;
+   display: flex;
+   align-items: center;
+}
+
+.big-digit {
+   background-color: #f6993f;
+   padding: 4px 16px;
+   border-radius: 35px;
+   color: #ffffff;
+   font-size: 34px;
+   font-weight: bold;
+   float: left;
+   margin-right: 10px;
+   line-height: 45px
+}
+
+/* Список мастеров в заявке клиента */
+
+.master-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.master-name {
+   font-weight: bold;
+}
+
+/* карта в mapbox.blade */
+
+div#map_id {
+	background-color: #f8f3d4;
+	margin-right: 40px;
+}
+
+.mapboxgl-canvas {
+	padding: 10px;
+	border-radius: 8px;
+}
+
+/* Футер */
+
+.footer {
+	background-color: #3380b7;
+	padding: 20px;
+	color: #ffffff;
+	font-size: 24px;
+	font-weight: 100;
+	font-family: 'Roboto', sans-serif;
+}
