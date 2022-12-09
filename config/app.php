@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://pochinim.online'),
+    'url' => env('APP_URL', 'http://weprofi.co.il'),
 
     'asset_url' => env('ASSET_URL', null),
 

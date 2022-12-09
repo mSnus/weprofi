@@ -161,7 +161,7 @@ class MasterController extends Controller
 			if ($client->telegram_id) {
 				$response = Telegram::sendMessage([
 					'chat_id' => $client->telegram_id,
-					'text' => 'На вашу заявку поступил новый отклик! https://pochinim.online/home'
+					'text' => 'На вашу заявку поступил новый отклик! https://weprofi.co.il/home'
 				]);
 			}
 

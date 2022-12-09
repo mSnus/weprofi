@@ -24,7 +24,7 @@ return [
     // ----
 
     // Project name. Shown in the window title.
-    'project_name' => 'Управление Pochinim.online',
+    'project_name' => 'Управление weprofi.co.il',
 
     // When clicking on the admin panel's top-left logo/name,
     // where should the user be redirected?

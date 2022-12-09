@@ -3,40 +3,27 @@ var __webpack_exports__ = {};
 /*!*************************************!*\
   !*** ./resources/js/suggestions.js ***!
   \*************************************/
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var TextSuggestions = /*#__PURE__*/function () {
   function TextSuggestions(target) {
     var baseForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "formNewOffer";
-
     _classCallCheck(this, TextSuggestions);
-
     _defineProperty(this, "keywords", []);
-
     _defineProperty(this, "target", "");
-
     _defineProperty(this, "baseForm", "");
-
     _defineProperty(this, "input", []);
-
     _defineProperty(this, "listDiv", []);
-
     _defineProperty(this, "suggestions", []);
-
     _defineProperty(this, "count", 0);
-
     _defineProperty(this, "current", -1);
-
     _defineProperty(this, "oldText", "");
-
     _defineProperty(this, "hintText", "кнопка &#8595; вставит догадку");
-
     this.target = target;
     this.baseForm = baseForm;
     this.input = $('#' + baseForm + ' #' + target);
@@ -44,7 +31,6 @@ var TextSuggestions = /*#__PURE__*/function () {
     this.listDiv = $('#' + baseForm + ' #suggestions-' + target);
     this.saveOldText();
   }
-
   _createClass(TextSuggestions, [{
     key: "loadKeywords",
     value: function loadKeywords(target) {
@@ -68,7 +54,8 @@ var TextSuggestions = /*#__PURE__*/function () {
           return val.startsWith(searchTerm);
         });
       }).slice(0, 3);
-      this.count = res.length; //  console.log('suggest(): found '+this.count+' suggestions');
+      this.count = res.length;
+      //  console.log('suggest(): found '+this.count+' suggestions');
 
       this.suggestions = res;
     }
@@ -81,7 +68,6 @@ var TextSuggestions = /*#__PURE__*/function () {
         } else {
           this.current = 0;
         }
-
         suggestion = this.suggestions[this.current].trg;
         this.insertSuggestion(suggestion);
       }
@@ -103,15 +89,12 @@ var TextSuggestions = /*#__PURE__*/function () {
     key: "buildList",
     value: function buildList(searchTerm) {
       var _this = this;
-
       this.clear();
       this.suggest(searchTerm);
-
       if (this.count > 0) {
         for (var item in this.suggestions) {
           this.listDiv.append('<div class="suggestion" data-realtarget="' + this.target + '">' + this.suggestions[item].trg + '</div>');
         }
-
         this.listDiv.children().on('click', function (e) {
           _this.insertSuggestion(e.target.innerText);
         });
@@ -133,10 +116,8 @@ var TextSuggestions = /*#__PURE__*/function () {
       this.listDiv.empty();
     }
   }]);
-
   return TextSuggestions;
 }();
-
 jQuery(function () {
   $('.predictable').each(function (i, obj) {
     //  this.prototype.suggestions = new TextSuggestions(this.id);
@@ -145,7 +126,6 @@ jQuery(function () {
   });
   $('.predictable').on('keyup', function (event) {
     var suggestions = $(this).data('suggestions');
-
     if (event.key == "ArrowDown" && suggestions.count > 0) {
       /** вставляем подсказку вместо последнего слова */
       suggestions.insertNextSuggestion();
