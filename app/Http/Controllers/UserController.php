@@ -15,6 +15,8 @@ class UserController extends Controller
     {
         $user = null;
         $gallery = null;
+        $skills = null;
+        $skills_list = "";        
 
         if ($request->user_id) {
             $user_id = intval($request->user_id);
@@ -56,12 +58,33 @@ class UserController extends Controller
                          })
                 ->where('users.id', $user_id)
                 ->get();
+
+            $skills = DB::table('users')
+                ->select('users.id as user_id', 'specs.title as spec_title', 'subspecs.title as subspec_title')
+                ->leftJoin('user_spec', function($join) {
+                             $join->on('user_spec.user_id', '=', 'users.id');
+                         })
+                ->leftJoin('specs', function($join) {
+                            $join->on('user_spec.spec_id', '=', 'specs.id');
+                        })
+                ->leftJoin('subspecs', function($join) {
+                            $join->on('user_spec.subspec_id', '=', 'subspecs.id');
+                        })                        
+                ->where('users.id', $user_id)
+                ->get();    
+            
+            foreach ($skills as $skill) {
+                $skills_list .= $skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').', ';
+            }
+
+            $skills_list = mb_substr($skills_list, 0, mb_strlen($skills_list) - 2);
         }
 
         return view('user_page', [
             'user_id' => $user_id,
             'user' => $user,
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'skills' => $skills_list
         ]);
     }
 }

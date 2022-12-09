@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "jquery": "^3.6.0",
+        "lightbox2": "^2.11.3",
         "lightslider": "^1.1.6",
         "node-sass": "^6.0.0",
         "slick-carousel": "^1.8.1"

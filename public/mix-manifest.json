@@ -3,6 +3,7 @@
     "/js/suggestions.js": "/js/suggestions.js",
     "/css/app.css": "/css/app.css",
     "/css/app-mobile.css": "/css/app-mobile.css",
+    "/img/avatar.png": "/img/avatar.png",
     "/img/big_request.png": "/img/big_request.png",
     "/img/description.png": "/img/description.png",
     "/img/go.svg": "/img/go.svg",
@@ -38,6 +39,5 @@
     "/fonts/slick.eot": "/fonts/slick.eot",
     "/fonts/slick.svg": "/fonts/slick.svg",
     "/fonts/slick.ttf": "/fonts/slick.ttf",
-    "/fonts/slick.woff": "/fonts/slick.woff",
-    "/img/avatar.png": "/img/avatar.png"
+    "/fonts/slick.woff": "/fonts/slick.woff"
 }

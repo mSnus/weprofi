@@ -197,7 +197,7 @@ h1, .h1 {
     margin-top: 2rem;
     font-weight: 400;
     font-size: 1.5rem;
-    line-height: 150%;
+    line-height: 125%;
     color: #858282;
 }
 
@@ -211,7 +211,7 @@ h1, .h1 {
     flex-wrap: wrap;
 
     min-width: 400px;
-    max-width: calc(min(80%, 600px));
+    max-width: calc(min(80vw, 600px));
     margin-left: auto;
     margin-right: auto;
 }
@@ -242,10 +242,30 @@ h1, .h1 {
     font-weight: 300;
 }
 
+.user .skills {
+    margin-top: 2rem;
+    font-weight: 300;
+    font-size: 0.9rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .empty-result {
     margin-top: 2rem;
     font-size: 1.5rem;
     color: #858282;
+}
+
+/* Галерея */
+
+.gallery {
+    margin-top: 2rem;
+}
+
+.gallery img {
+    max-width: 250px;
+    max-height: 140px;
 }
 
 /* Список офферов для мастеров */

@@ -11,7 +11,7 @@
     @hasSection('title')
         <title>@yield('title')</title>
     @else
-        <title>weprofi.co.il</title>
+        <title>WeProfi</title>
     @endif
 
     <!-- Scripts -->
@@ -23,6 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
 
     @hasSection('head')
         @yield('head')
@@ -43,7 +44,7 @@
                 <img src="/img/logo-simple.svg">
             </a>
         </div>
-{{--         
+        {{--         
         <div class="head-wrapper">
             <nav class="navbar navbar-expand-md navbar-dark">
                 <div class="container">
@@ -108,7 +109,7 @@
         <main class="py-4">
             <div class="container d-block text-center">
                 @yield('content')
-        
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -118,19 +119,19 @@
                         </ul>
                     </div>
                 @endif
-        
-        
-        
+
+
+
             </div>
-        
+
             @if (!Auth::user())
                 <div class="container p-4 pt-5">
                     <div class="d-flex justify-content-center bg-light-blue align-items-center">
                         Регистрация
                     </div>
                 </div>
-            @endif            
-            
+            @endif
+
         </main>
 
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
