@@ -38,13 +38,15 @@
 
 <body>
     <div id="app">
-        <div class="head-wrapper">
+        <div class="top-logo">
             <a href="{{ url('/') }}">
                 <img src="/img/logo-simple.svg">
             </a>
+        </div>
+{{--         
+        <div class="head-wrapper">
             <nav class="navbar navbar-expand-md navbar-dark">
                 <div class="container">
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -93,7 +95,7 @@
                     </div>
                 </div>
             </nav>
-        </div>
+        </div> --}}
 
         @hasSection('header')
             <header class="">
@@ -104,7 +106,7 @@
         @endif
 
         <main class="py-4">
-            <div class="container d-flex justify-content-center section-welcome">
+            <div class="container d-block text-center">
                 @yield('content')
         
                 @if ($errors->any())

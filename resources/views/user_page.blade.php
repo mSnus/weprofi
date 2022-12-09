@@ -4,49 +4,34 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-center section-requests">
+    <div class="d-block text-center">
+            <div class="user">
+                <h1>{{ $user->title }}</h1>
 
-        <div class="newoffer-form mr-0">
-            <!-- Validation Errors -->
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-
-
-            @php
-                $spec = App\Models\Spec::where('id', $spec_id)->first();
-            @endphp
-
-            <div class="specs">
-                <h1>{{ $spec->title }}</h1>
-
-                <div class="search">
-                    <input type="text" name="spec_search" id="specSearch">
-                    <img src="/img/go.svg" alt="Search" width="32" height="32">
+                <div class="user">
+                    <div class="avatar"><img src="{{ $user->avatar ?? '/img/avatar.png' }}" alt="User avatar"></div>
+                    <div class="rating page">
+                        @for ($i = 1; $i <= $user->rating; $i++)
+                            <img src="/img/star.svg" alt="star">
+                        @endfor
+                    </div>                    
+                    <div class="tagline page">{{ $user->tagline ?? 'профи' }}</div>
+                    <div class="joindate">с нами с {{ $user->join_date }}</div>
+                    <div class="description">{!! $user->content !!}</div>
+                    <div class="pricelist">{!! $user->pricelist !!}</div>
                 </div>
 
-                @if (!is_null($persons))
-                    <div class="users">
-
-                        @foreach ($persons as $person)
-                            <div class="user" onclick="window.location.href='/user/{{ $person->user_id }}'">
-                                {{ $person->title}}
+                @if (!is_null($gallery))
+                    <div class="gallery">
+                        @foreach ($gallery as $image)
+                            <div class="gallery-image">
+                                <img src="{{ $image->src }}" alt="gallery image" />
                             </div>
                         @endforeach
                     </div>
-                @else
-                    <div class="empty-result">Тут пока никого нет</div>
                 @endif
-
             </div>
-
-        </div>
     </div>
+
+    @include('components.register')
 @endsection

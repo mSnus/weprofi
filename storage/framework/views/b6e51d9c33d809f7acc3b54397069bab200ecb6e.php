@@ -57,10 +57,10 @@
 						 this.map.addControl(this.navcon);
 
 						 this.map.on('styledata', function() {
-								// this.setLayoutProperty('country-label', 'text-field', [
-								// 	'get',
-								// 	'name_ru'
-								// ]);
+								this.setLayoutProperty('country-label', 'text-field', [
+									'get',
+									'name_ru'
+								]);
 
 								console.log("Map obj_<?php echo e($mapbox['id']); ?> loaded.");
 

@@ -4,4 +4,5 @@
 
 @section('content')
     @include('specs')
+    @include('components.register')
 @endsection

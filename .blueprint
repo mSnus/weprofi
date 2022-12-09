@@ -1,20 +1,12 @@
 created:
-    - app/Http/Controllers/SpecController.php
-    - app/Http/Controllers/SubspecController.php
-    - database/factories/SpecFactory.php
-    - database/factories/SubspecFactory.php
-    - database/migrations/2022_12_08_221612_create_specs_table.php
-    - database/migrations/2022_12_08_221613_create_subspecs_table.php
-    - database/migrations/2022_12_08_221614_create_spec_subspec_table.php
-    - app/Models/Spec.php
-    - app/Models/Subspec.php
-    - tests/Feature/Http/Controllers/SpecControllerTest.php
-    - tests/Feature/Http/Controllers/SubspecControllerTest.php
-updated:
-    - routes/web.php
-skipped:
-    - resources/views/spec/index.blade.php
-    - resources/views/subspec/index.blade.php
+    - database/factories/UserinfoFactory.php
+    - database/factories/ImageFactory.php
+    - database/migrations/2022_12_09_142516_create_userinfos_table.php
+    - database/migrations/2022_12_09_142517_create_images_table.php
+    - app/Models/Userinfo.php
+    - app/Models/Image.php
 models:
     Spec: { id: id, title: 'string:200', content: text, timestamps: timestamps, relationships: { hasMany: Subspec } }
     Subspec: { id: id, title: 'string:200', content: text, spec_id: id, timestamps: timestamps, relationships: { belongsToMany: Spec } }
+    Userinfo: { id: id, content: text, pricelist: text, rating: integer, avatar: bigInteger, timestamps: timestamps, relationships: { belongsTo: Users, hasMany: Images } }
+    Image: { id: id, path: 'string:200', thumb: 'string:200', type: integer, parent_id: bigInteger, timestamps: timestamps }
