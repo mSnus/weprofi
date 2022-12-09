@@ -11,7 +11,7 @@
     @hasSection('title')
         <title>@yield('title')</title>
     @else
-        <title>Pochinim.online</title>
+        <title>weprofi.co.il</title>
     @endif
 
     <!-- Scripts -->
@@ -20,36 +20,34 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
     @hasSection('head')
         @yield('head')
     @endif
 
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app-boot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	 <link href="{{ asset('css/app-mobile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app-mobile.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
         <div class="head-wrapper">
+            <a href="{{ url('/') }}">
+                <img src="/img/logo-simple.svg">
+            </a>
             <nav class="navbar navbar-expand-md navbar-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        @php
-                            if (isset($_REQUEST['rand'])) {
-                                $rand = $_REQUEST['rand'];
-                            } else {
-                                $rand = rand(1, 3);
-                            }
 
-                            $logo = $rand == 1 ? 'src="/img/logo1.png" style="margin-left: -85px;"' : 'src="/img/logo' . $rand . '.png" style="margin-top: 20px;margin-left: -18px;"';
-
-                        @endphp
-                        <img {!! $logo !!}>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -72,17 +70,20 @@
                                 @endif
                             @else
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->title() }}
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="/profile">
                                             Профиль
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Выход
                                         </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
                                             @csrf
                                         </form>
                                     </div>
@@ -92,30 +93,6 @@
                     </div>
                 </div>
             </nav>
-            <div class="container">
-                <div class="head-descr text-left" style="margin-top: 27px">
-                    <img src="/img/description.png">
-                </div>
-                <div class="head-texts">
-                    <div class="head-text-block head-text1">
-                        <div class="head-text-icon"><img src="/img/icon-1.png"></div>
-                        <div class="head-text">Указываете марку и модель машины, своими словами описываете неисправность, ставите точку на карте.</div>
-                    </div>
-                    <div class="head-text-block head-text2">
-                        <div class="head-text-icon"><img src="/img/icon-2.png"></div>
-                        <div class="head-text">Получаете отклики от Мастеров, выбираете подходящего по дальности, рейтингу и озывам</div>
-                    </div>
-                    <div class="head-text-block head-text3">
-                        <div class="head-text-icon"><img src="/img/icon-3.png"></div>
-                        <div class="head-text">Выбранный Мастер согласует с Вами время, детали, приезжает и проводит ремонт на месте. На типовые работы цены фиксированы по <a href="#price"> прайс-листу</a></div>
-                    </div>
-                </div>
-                @if ($rand == 0)
-                    <div class="text-center" style="margin-top: 14px">
-                        <img src="/img/robot2.png">
-                    </div>
-                @endif
-            </div>
         </div>
 
         @hasSection('header')
@@ -127,13 +104,37 @@
         @endif
 
         <main class="py-4">
-            @yield('content')
+            <div class="container d-flex justify-content-center section-welcome">
+                @yield('content')
+        
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+        
+        
+        
+            </div>
+        
+            @if (!Auth::user())
+                <div class="container p-4 pt-5">
+                    <div class="d-flex justify-content-center bg-light-blue align-items-center">
+                        Регистрация
+                    </div>
+                </div>
+            @endif            
+            
         </main>
 
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
-            <img {!! $logo !!} width="220" class="mr-4 mb-2">
+
             <div class="">
-                &copy; 2021, <span style="color:white;">pochinim</span><span style="color:sandybrown;">.online</span>
+                &copy; 2022 <img src="/img/logo.svg" width="220" class="mr-4 mb-2">
             </div>
         </footer>
     </div>

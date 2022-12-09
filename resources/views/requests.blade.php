@@ -10,12 +10,6 @@
 
 <div class="d-flex justify-content-center section-requests">
 
-    <div class="map-container">
-		<h3>Где находится машина?</h3>
-		<div class="subhead">поставьте точку на карте</div>
-		 @include('mapbox')
-	</div>
-
 	 <div class="newoffer-form mr-0">
 		<!-- Validation Errors -->
 		@if ($errors->any())
@@ -35,35 +29,17 @@
 				 @method('PUT')
 			 @endif
 
-			 <h3>Какая у вас машина?</h3>
-			 <div class="subhead">начните вводить марку и модель</div>
 
-			 <div class="mt-4">
-				  <x-form-input id="title" placeholder="Марка и модель"  class="block mt-1 w-full predictable" type="text" name="title" :value="(isset($mode) && $mode == 'edit') ? $offer_title : old('title')" required autocomplete="off"/>
-			 </div>
-
-			 <div class="suggestions-list" id="suggestions-title">
-			 </div>
-
-			 <div class="hints" data-realtarget="title">
-				<div class="hint"data-realvalue="легковая">легковая</div>
-				<div class="hint"data-realvalue="грузовая">грузовая</div>
-				<div class="hint"data-realvalue="кран">кран</div>
-				<div class="hint"data-realvalue="автобус">автобус</div>
-				<div class="hint"data-realvalue="минивэн">минивэн</div>
-				<div class="hint"data-realvalue="Hyundai Solaris">Hyundai Solaris</div>
-				<div class="hint"data-realvalue="Volkswagen Polo">VW Polo</div>
-				<div class="hint"data-realvalue="Kia">Kia Magentis</div>
-				<div class="hint"data-realvalue="Ford Focus">Ford Focus</div>
-				<div class="hint"data-realvalue="Газель тентованная">Газель</div>
-				<div class="hint"data-realvalue="Mitsubishi Canter">Mitsu Canter</div>
-				<div class="hint"data-realvalue="Mercedes-Benz Sprinter">MB Sprinter</div>
-				<div class="hint"data-realvalue="Автобус  Икарус">Икарус</div>
-				<div class="hint"data-realvalue="Автобус Neoplan">Neoplan</div>
-			 </div>
-
-			 <h3>Что надо починить?</h3>
+			 <div class="h1">Мы - профи. Кто вам нужен?</div>
 			 <div class="subhead">начните печатать, а мы попробуем угадать и подсказать</div>
+
+			 @php
+				$specs = App\Models\Spec::get()->all(); 
+			 @endphp
+			 @foreach ($specs as $spec)
+				 <div class="spec">{{ $spec->title}} </div>
+			 @endforeach
+
 
 			 <div class="mt-4">
 				  <x-form-textarea id="descr"  class="block mt-1 w-full predictable" type="text" name="descr" required>{{ (isset($mode) && $mode == 'edit') ? $offer_descr : old('descr') }}</x-form-textarea>
@@ -73,13 +49,19 @@
 			</div>
 
 			 <div class="hints" data-realtarget="descr">
-				<div class="hint" data-realvalue="ремень ГРМ">ремень ГРМ</div>
-				<div class="hint" data-realvalue="заменить колодки">заменить колодки</div>
-				<div class="hint" data-realvalue="прокачать тормоза">прокачать тормоза</div>
-				<div class="hint" data-realvalue="починить пробитое колесо">пробитое колесо</div>
-				<div class="hint" data-realvalue="грузовой шиномонтаж">грузовой шиномонтаж</div>
-				<div class="hint" data-realvalue="нужен эвакуатор">нужен эвакуатор</div>
-				<div class="hint" data-realvalue="заменить свечи">заменить свечи</div>
+				<div class="hint" data-realvalue="Домашний ремонт / сантехника">Домашний ремонт / сантехника</div>
+				<div class="hint" data-realvalue="Ремонт авто">Ремонт авто</div>
+				<div class="hint" data-realvalue="Красота и здоровье">Красота и здоровье</div>
+				<div class="hint" data-realvalue="Перевод">Перевод</div>
+				<div class="hint" data-realvalue="Няни / сиделки">Няни / сиделки</div>
+				<div class="hint" data-realvalue="Репетитор">Репетитор</div>
+				<div class="hint" data-realvalue="Нотариус">Нотариус</div>
+				<div class="hint" data-realvalue="Маклер">Маклер</div>
+				<div class="hint" data-realvalue="Страховка">Страховка</div>
+				<div class="hint" data-realvalue="Ремонт компьютеров и телефонов">Ремонт компьютеров и телефонов</div>
+				<div class="hint" data-realvalue="Уборка">Уборка</div>
+				<div class="hint" data-realvalue="Доставка">Доставка</div>
+				<div class="hint" data-realvalue="Разнорабочие">Разнорабочие</div>
 			</div>
 
 
@@ -121,6 +103,12 @@
 					 @endif
 
 			 </div>
+
+			 <div class="map-container">
+				<h3>Где вы находитесь?</h3>
+				<div class="subhead">поставьте точку на карте</div>
+				 @include('mapbox')
+			</div>
 		</form>
   </div>
 </div>

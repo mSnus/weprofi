@@ -1,10 +1,10 @@
 @section('head')
     <!-- MapBox -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
     <!-- Load the `mapbox-gl-geocoder` plugin. -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
     <!-- Promise polyfill script is required -->
     <!-- to use Mapbox GL Geocoder in IE 11. -->
@@ -39,8 +39,8 @@
 		 mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
 
 
-		 var moscowLng = 37.613067626953125;
-		 var moscowLat = 55.750303644490394;
+		 var moscowLng = 35.074002;
+		 var moscowLat = 32.930288;
 		 var startLng = {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'moscowLng' }};
 		 var startLat = {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'moscowLat' }};
 		 var noAutocenter = {{ (isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true) ? "true" : "false" }};
@@ -77,7 +77,7 @@
 			  function loadMap(lng, lat) {
 					return new mapboxgl.Map({
 						 container: 'map_id',
-						 style: 'mapbox://styles/mapbox/streets-v11',
+						 style: 'mapbox://styles/mapbox/streets-v12',
 						 center: [lng, lat],
 						 zoom: 13
 					});

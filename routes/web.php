@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SpecController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,10 @@ Route::get('/edit-offer/{id}', [App\Http\Controllers\ClientController::class, 'e
 //NOTE: do it only once!
 //if installed, https://api.telegram.org/bot1841517749:AAGnU-etBblB5m3jmjg0ZVnw2edJX1vlIzY/getUpdates
 //will return the error: Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
-//Telegram::setWebhook(['url' => 'https://pochinim.online/'.env('TELEGRAM_BOT_TOKEN').'/webhook']);
+//Telegram::setWebhook(['url' => 'https://weprofi.co.il/'.env('TELEGRAM_BOT_TOKEN').'/webhook']);
 
 Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhook', [TelegramController::class, 'webhook']);
+
+Route::get('/spec/{spec_id}/{subspec_id?}', [SpecController::class, 'index'])->name('spec');
+Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
+

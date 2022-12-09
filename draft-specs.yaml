@@ -1,0 +1,26 @@
+models:
+  Spec:
+    id
+    title: string:200
+    content: text
+    timestamps
+    relationships:
+      hasMany: Subspec
+  Subspec:
+    id
+    title: string:200
+    content: text
+    spec_id: id
+    timestamps
+    relationships:
+      belongsToMany: Spec
+
+controllers:
+  Spec:
+    index:
+      query: all
+      render: spec.index with:specs
+  Subspec:
+    index:
+      query: all
+      render: subspec.index with:subspecs

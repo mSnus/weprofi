@@ -1,84 +1,68 @@
-@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@300;600;800&family=Roboto:wght@100;300;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap);
 /* шрифты */
 
 /* Шапка на главной */
 
 body {
-   background-color: #fff !important;
-	background-image: url(/img/text_bg.jpg);
-	background-repeat: repeat-x;
-	background-position-y: 602px;
+	background-color: #fff !important;
 	font-display: swap;
 }
 
+.container {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
 .head-wrapper {
-   background-image: url(/img/head_bg.jpg);
-   background-position-x: center;
-   min-height: 602px;
-	background-repeat: no-repeat;
-
-}
-
-@media (min-width: 1920px) {
-	.head-wrapper {
-		background-size: cover;
-	}
-}
-
-
-
-/* иконки хелперы на главной */
-#icons-slider .help-icons {
-	margin-bottom: 20px;
-}
-
-#icons-slider2 .help-block {
-	display: inline-flex !important;
+	min-height: 100px;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-#icons-slider2 .help-icon {
-	height: 70px;
-	padding-right: 20px;
-}
-#icons-slider2 .help-text {
-	font-size: 21px;
-	line-height: 1.2;
-	color: #4b87bd;
+/* каталог на главной */
+.specs .h1 {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.5rem;
+	line-height: 2.5rem;
+	color: #959E93;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
 }
 
-/* цифры и тексты в шапке сайта */
-.head-texts {
+.specs .search {
+	background: #EBECEB;
+	border-radius: 40px;
+	padding: 12px 20px;
+	margin-bottom: 32px;
 	display: flex;
-	margin-top: 43px;
-	color: #ffffff;
+	justify-content: space-between;
 }
 
-.head-text-block .head-text1,
-.head-text-block .head-text2 {
-	padding-right: 40px;
+.specs .search input[type="text"] {
+	background: #EBECEB;
+	border:none;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	color: #858282;	
+	outline: none;
+	padding: .5rem;
 }
 
-.head-text-block {
-	display: flex;
-	align-items: flex-start;
+.specs .spec {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 200%;
+	color: #0E5168;
 }
 
-.head-text-icon {
-	padding-right: 20px;
+.specs .subspec {
+	margin-left: 1rem;
 }
-
-.head-text {
-	font-family: 'Raleway', sans-serif;
-	font-size: 20px;
-	line-height: 1.3;
-}
-
-.head-texts img {
-   height: 70px;
-}
-
 /* поля ввода */
 
 .section-welcome .input-group>.form-control,
@@ -86,13 +70,12 @@ body {
 .section-welcome .input-group>.custom-select,
 .section-welcome .input-group>.custom-file,
 .section-welcome textarea {
-   border-radius: 4px;
-   background-color: #dde3e8;
-   box-shadow: inset 4px 4px 6px -1px rgba(137, 151, 163, 0.24);
-   font-family: 'Roboto', sans-serif;
+	background: #EBECEB;
+	border-radius: 40px;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-   color: #1e384d;
-   padding: 20px;
+	color: #1e384d;
+	padding: 20px;
 }
 
 .section-welcome textarea {
@@ -101,19 +84,25 @@ body {
 
 /*  на главной */
 .section-welcome h1,
+.section-welcome .h1,
 .section-welcome h2,
 .section-welcome h3 {
-	color: #277fe5;
-	font-weight: 800;
-	font-size: 36px;
-	font-family: 'Raleway', sans-serif;
-	line-height: 0.9;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 33px;
+
+	/* identical to box height */
+	letter-spacing: -0.02em;
+
+	color: #959E93;
 }
 
 .section-welcome .subhead {
 	font-size: 18px;
 	color: #1e384d;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 100;
 	line-height: 1;
 }
@@ -122,6 +111,7 @@ body {
 	margin-bottom: 16px;
 	margin-top: -16px;
 }
+
 .section-welcome .suggestions-hint {
 	color: #777777;
 	font-size: 12px;
@@ -131,7 +121,7 @@ body {
 .section-welcome .suggestion {
 	font-size: 16px;
 	color: #1e384d;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 100;
 	border: dotted 1px #2c4e6b;
 	padding: 4px 12px;
@@ -149,7 +139,7 @@ body {
 .section-welcome .hint {
 	font-size: 16px;
 	color: #2493c8;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 100;
 	display: inline-block;
 	margin-right: 16px;
@@ -166,75 +156,95 @@ body {
 	margin-bottom: 40px;
 }
 
+/* Список пользователей */
+
+.users {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	row-gap: 1rem;
+}
+
+.users .user {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	cursor: pointer;
+}
+
+.empty-list {
+	font-size: 2rem;
+}
 
 /* Список офферов для мастеров */
 
 .offers-container {
-   padding: 4px;
+	padding: 4px;
 }
 
 .offer {
-   display: flex;
-   flex-wrap: nowrap;
-   border-bottom: solid 1px #eee;
-   margin-bottom: 20px;
+	display: flex;
+	flex-wrap: nowrap;
+	border-bottom: solid 1px #eee;
+	margin-bottom: 20px;
 }
 
 .offer:last-child {
-   border-bottom: none;
-   margin-bottom: 0px;
+	border-bottom: none;
+	margin-bottom: 0px;
 }
 
 .offer-title {
-   flex: 10;
+	flex: 10;
 }
 
 .offer-location {
-   flex: 1;
+	flex: 1;
 }
 
 .offer-actions {
-   flex: 1;
+	flex: 1;
 }
 
 
 /* Форма профиля пользователя */
 
 .form-profile>div {
-   flex-basis: 100%;
+	flex-basis: 100%;
 }
 
 /* Большие цифры и интро на главной */
 
 .introtext p {
-   font-size: 16px;
-   line-height: 1.2;
-   display: flex;
-   align-items: center;
+	font-size: 16px;
+	line-height: 1.2;
+	display: flex;
+	align-items: center;
 }
 
 .big-digit {
-   background-color: #f6993f;
-   padding: 4px 16px;
-   border-radius: 35px;
-   color: #ffffff;
-   font-size: 34px;
-   font-weight: bold;
-   float: left;
-   margin-right: 10px;
-   line-height: 45px
+	background-color: #f6993f;
+	padding: 4px 16px;
+	border-radius: 35px;
+	color: #ffffff;
+	font-size: 34px;
+	font-weight: bold;
+	float: left;
+	margin-right: 10px;
+	line-height: 45px
 }
 
 /* Список мастеров в заявке клиента */
 
 .master-item {
-   display: flex;
-   justify-content: space-between;
-   align-items: baseline;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
 }
 
 .master-name {
-   font-weight: bold;
+	font-weight: bold;
 }
 
 /* карта в mapbox.blade */
@@ -252,10 +262,9 @@ div#map_id {
 /* Футер */
 
 .footer {
-	background-color: #3380b7;
 	padding: 20px;
-	color: #ffffff;
+	color: #555;
 	font-size: 24px;
 	font-weight: 100;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
