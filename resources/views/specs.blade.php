@@ -18,6 +18,7 @@
         <div class="search">
             <input type="text" name="spec_search" id="specSearch">
             <img src="/img/go.svg" alt="Search" width="32" height="32">
+            git
         </div>
 
         <div class="specs">
