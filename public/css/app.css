@@ -8,7 +8,8 @@ body {
     font-display: swap;
 }
 
-a:link {
+a:link,
+a:visited {
     color: #0E5168;
 }
 
@@ -63,11 +64,32 @@ button.primary {
 	border: 0;
 }
 
-.already-registered {
+/* регистрация и логин */
+.already-registered,
+.need-registration {
 	margin-top: 1rem;
 	color: #9AAEB6;
 	text-align: center;
     cursor: pointer;
+}
+
+.already-registered a,
+.need-registration a {
+	margin-top: 1rem;
+	color: #518fa8;
+	text-align: center;
+    cursor: pointer;
+}
+
+.register-block button {
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.already-registered a:link,
+.need-registration a:link {
+    text-decoration: underline ;
 }
 
 /* каталог на главной */
@@ -162,6 +184,10 @@ h1, .h1 {
     margin-top: 1rem;
     
     color: #858282;        
+}
+
+.user.page {
+    cursor: default;
 }
 
 .user .tagline {

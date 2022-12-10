@@ -124,14 +124,6 @@
 
             </div>
 
-            @if (!Auth::user())
-                <div class="container p-4 pt-5">
-                    <div class="d-flex justify-content-center bg-light-blue align-items-center">
-                        Регистрация
-                    </div>
-                </div>
-            @endif
-
         </main>
 
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
