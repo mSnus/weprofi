@@ -44,6 +44,13 @@ Route::view('/profile', 'profile');
 */
 
 Auth::routes();
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::put('/respond/{id}', [App\Http\Controllers\MasterController::class, 'takeOffer'])->middleware(['auth'])->name('master.respond');
