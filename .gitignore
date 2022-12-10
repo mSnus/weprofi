@@ -39,3 +39,4 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 storage/logs/laravel.log
+storage/debugbar/*
