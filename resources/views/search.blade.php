@@ -20,27 +20,13 @@
 
             {{-- поиск --}}
 
-            <h1 onclick="window.location.href='/'">{{ $spec->title }}</h1>
+            <h1 onclick="window.location.href='/'">{!! $result !!}</h1>
 
-            @include('components.search')
+            @include('components.search', ['term' => $term])
 
 
-            {{-- список категорий --}}
+            {{-- результаты поиска --}}
 
-            @php
-                $subspec_count = count($spec->subspecs);
-            @endphp
-            
-            <div class="specs{{ ($subspec_count < 4 ? ' single-column' : '') }}">
-
-                @if ($subspec_count > 0)
-                    @foreach ($spec->subspecs as $subspec)
-                        <div class="spec"><a
-                                href="/spec/{{ $spec->id }}/{{ $subspec->id }}">{{ $subspec->title }}</a></div>
-                    @endforeach
-                @endif
-
-            </div>
 
             @if (!is_null($persons) && count($persons))
                 <div class="users">
@@ -59,8 +45,6 @@
                         </div>
                     @endforeach
                 </div>
-            @else
-                <div class="empty-result">Тут пока никого нет</div>
             @endif
 
         </div>

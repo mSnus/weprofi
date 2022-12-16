@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,7 @@ class HomeController extends Controller
 		 $role = Auth::user()->usertype;
 			switch($role) {
 				case User::typeClient:
-        			return view('clients_home');
+        			return Redirect::to('/');
 				case User::typeMaster:
 					return view('masters_home');
 				default:

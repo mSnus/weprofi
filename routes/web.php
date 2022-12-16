@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpecController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -67,4 +68,5 @@ Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhook', [TelegramController::class
 
 Route::get('/spec/{spec_id}/{subspec_id?}', [SpecController::class, 'index'])->name('spec');
 Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
+Route::get('/search/{term}', [SearchController::class, 'search'])->name('search');
 

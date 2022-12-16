@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/specs', function (Request $request) {
+    return ;
+});
+
+Route::get('/specs', [App\Http\Controllers\SpecController::class, 'getSpecList']);
+Route::get('/subspecs', [App\Http\Controllers\SpecController::class, 'getSubspecList']);

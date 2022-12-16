@@ -21,7 +21,7 @@ class UserController extends Controller
         if ($request->user_id) {
             $user_id = intval($request->user_id);
             $user = DB::table('users')
-                ->select('users.title', 'users.id as user_id', 'images.path as avatar', 'users.created_at', 
+                ->select('users.title', 'users.phone', 'users.id as user_id', 'images.path as avatar', 'users.created_at', 
                         'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist', 'userinfos.rating')
                 ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
                 ->leftJoin('images', function($join) {

@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use App\Models\User;
+use App\Models\Client;
+
+class SearchController extends Controller
+{
+
+  /**
+   * Display a listing of the resource.
+   *
+   * @return Response
+   */
+  public function search(Request $request)
+  {
+    $persons = null;
+
+    $term = preg_replace('~[0-9\\\/;_\'\"]~', '', $request->term);
+
+    if ($term) {
+        $persons = DB::table('users')
+            ->select('users.title', 'users.id as user_id', 'images.path as avatar', 'userinfos.content')
+            ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
+            ->leftJoin('images', function ($join) {
+                $join->on('userinfos.avatar', '=', 'images.id');
+                $join->on('images.type', '=', DB::raw("1"));
+            })
+            ->whereRaw('userinfos.content LIKE \'%'.$term.'%\'')
+            ->distinct()
+            ->get();
+    }
+
+        $count = count($persons);
+
+    return view('search', [
+        'term' => $term,
+        'persons' => $persons,
+        'count' => $count,
+        'result' => $count > 0 ? 'Результаты поиска ('.$count.')' : 'Ничего не найдено (<i>'.$term.'</i>)'
+    ]);
+  }
+
+}
+
+?>

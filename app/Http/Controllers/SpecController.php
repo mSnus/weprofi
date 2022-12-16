@@ -54,4 +54,16 @@ class SpecController extends Controller
             'subspecs' => $subspecs
         ]);
     }
+
+    public function getSpecList(Request $request)
+    {
+        $specs = Spec::get(); 
+        return $specs->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getSubspecList(Request $request)
+    {
+        $subspecs = Subspec::get(); 
+        return $subspecs->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
 }

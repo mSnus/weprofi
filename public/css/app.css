@@ -8,6 +8,11 @@ body {
     font-display: swap;
 }
 
+#app {
+    max-width: calc(min(80vw, 540px));
+    margin: 0 auto;
+  }
+
 a:link,
 a:visited {
     color: #0E5168;
@@ -38,6 +43,33 @@ a:hover {
     width: 80vw;
     max-width: 300px;
 }
+
+.topbar {
+    width: 530px;
+    margin: 20px auto;
+    text-align: right;
+    max-width: 50vw;
+    font-size: 1rem;
+  }
+
+  .topbar .cabinet {
+    display: flex;
+    background-color: #f5f0e4;
+    padding: 8px 16px;
+    border-radius: 32px;
+    fill: #b79e6d;
+    width: -moz-fit-content;
+    width: fit-content;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .topbar .cabinet a {
+    color: #b79e6d;
+    margin-left: 0.5rem;
+  }
+
+
 /* регистрация */
 
 .register-block {
@@ -49,7 +81,7 @@ a:hover {
     width: fit-content;
 }
 
-button.primary {
+button.primary, .button-primary {
     min-width: 13rem;
     height: 3rem;
     background: #EBD2A2;
@@ -62,7 +94,41 @@ button.primary {
 	align-items: center;
 	justify-content: center;
 	border: 0;
+    cursor: pointer;
 }
+
+button.secondary, .button-secondary {
+    min-width: 13rem;
+    height: 3rem;
+    background: #EFEEEB;
+	padding: 14px 55px;
+    border-radius: 40px;
+	color: #C5B8B3;
+	font-size: 1rem;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+    cursor: pointer;
+}
+
+button.tertiary, .button-tertiary {
+    min-width: 13rem;
+    height: 3rem;
+    background: #A58D87;
+	padding: 14px 55px;
+    border-radius: 40px;
+	color: #ECD2C6;
+	font-size: 1rem;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+    cursor: pointer;
+}
+
 
 /* регистрация и логин */
 .already-registered,
@@ -91,6 +157,24 @@ button.primary {
 .need-registration a:link {
     text-decoration: underline ;
 }
+
+.form-register .input[type="text"],
+.form-register .input[type="phone"],
+.form-register .input[type="password"],
+.form-register select {
+    min-width: 300px;
+}
+
+.col-form-label {
+    font-size: 1.1rem;
+    color: #959e93;
+    text-align: center;
+    display: flex;
+    justify-content: right;
+    line-height: 0.9;
+    padding-right: 0px;
+  }
+
 
 /* каталог на главной */
 .specs {
@@ -124,6 +208,17 @@ h1, .h1 {
     margin-bottom: 1rem;
 }
 
+h2, .h2 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    color: #6C5B52;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+
 .search {
     background: #EBECEB;
     border-radius: 40px;
@@ -133,7 +228,7 @@ h1, .h1 {
     justify-content: space-between;
 }
 
-.search input[type="text"] {
+.search input[type="text"]  {
     background: #EBECEB;
     border: none;
     font-weight: 400;
@@ -142,6 +237,21 @@ h1, .h1 {
     color: #858282;
     outline: none;
     padding: .5rem;
+}
+
+input[type="text"].form-control,
+input[type="phone"].form-control,
+input[type="password"].form-control {
+    background: #EBECEB;
+    border: none;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: #858282;
+    outline: none;
+    border-radius: 40px;
+    padding: 12px 20px;
+    margin-left: 8px;
 }
 
 .specs .spec {
@@ -287,12 +397,47 @@ h1, .h1 {
 
 .gallery {
     margin-top: 2rem;
+    -webkit-mask-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 85%, rgba(255,255,255,0) 100%);
+            mask-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 85%, rgba(255,255,255,0) 100%);
 }
 
 .gallery img {
     max-width: 250px;
-    max-height: 140px;
+    max-height: 140px;}
+
+
+.contact-phone {
+    font-weight: 400;
+    font-size: 36px;
+    color: #959E93;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+/* поиск */
+
+.button-search {
+    cursor: pointer;
+}
+
+.search form {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#specSearch {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+
+
 
 /* Список офферов для мастеров */
 

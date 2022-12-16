@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Userinfo;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -64,11 +68,37 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        Log::error(var_export($data, true));
+
+        $user = User::create([
             'name' => $data['name'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'usertype' => $data['usertype'],
+            'score' => 3,
+            'language' => $data['language'],
+            'region' => $data['region'],
         ]);
+
+
+
+        if ($data['usertype'] == User::typeMaster ) {
+            // Userinfo::updateOrCreate(
+            //     ['user_id' => $user->id],
+            //     [
+            //     'user_id' => $user->id,
+            //     'content' => '',
+            //     'tagline' => '',
+            //     'pricelist' => '',
+            //     'rating' => 5
+            // ]
+            // );
+
+            DB::insert("insert into user_spec (user_id, spec_id, subspec_id) values(?,?,?)", [$user->id, $data['spec1'], $data['subspec1']]);
+        }
+
+        Auth::loginUsingId($user->id);
+
+        return $user;
     }
 }

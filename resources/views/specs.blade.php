@@ -15,10 +15,7 @@
 
         <div class="h1">Мы - профи. Кто вам нужен?</div>
 
-        <div class="search">
-            <input type="text" name="spec_search" id="specSearch">
-            <img src="/img/go.svg" alt="Search" width="32" height="32">
-        </div>
+        @include('components.search')
 
         <div class="specs">
             @php

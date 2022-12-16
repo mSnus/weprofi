@@ -57,8 +57,8 @@ class ClientController extends Controller
 		]);
 
 		$user = User::create([
-			'name' => $phone,
-			'email' => $request->email,
+			'name' => $request->name,
+			'email' => $phone,
 			'password' => Hash::make($request->password),
 			'usertype' => User::typeClient,
 		]);
@@ -109,21 +109,12 @@ class ClientController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-			$client =  Client::find($id);
-			$user = User::find($client->userid);
+			$user = User::findOrFail($id);
 
-			if ($client->userid != Auth::user()->user_role->userid) {
-				return redirect('profile')->with('error', 'Профиль не сохранён, ошибка авторизации.');
-			}
-
-			$user->linked_id = $client->id;
 			$user->name = $request->name;
-			$user->email= $request->email;
+			$user->phone= $request->phone;
 			$user->update();
 
-
-			$client->title = $request->title;
-			$client->update();
 
 			return redirect('profile')->with('status', 'Профиль сохранён');
 	}
