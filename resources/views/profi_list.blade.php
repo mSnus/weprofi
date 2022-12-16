@@ -18,12 +18,17 @@
                 </div>
             @endif
 
+            {{-- поиск --}}
+
             <h1 onclick="window.location.href='/'">{{ $spec->title }}</h1>
 
             <div class="search">
                 <input type="text" name="spec_search" id="specSearch">
                 <img src="/img/go.svg" alt="Search" width="32" height="32">
             </div>
+
+
+            {{-- список категорий --}}
 
             @php
                 $subspec_count = count($spec->subspecs);
