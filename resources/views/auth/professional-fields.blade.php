@@ -2,8 +2,14 @@
 <!-- professiona-fields -->
 
 <script src="{{ asset('js/subspecs.js') }}"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="{{ asset('css/select2-materialize.css') }}" rel="stylesheet" />
 
 @php
+    $cities = App\Models\City::get()->sortByDesc('slug')->all();
+    $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит'];
+
     $specs = \App\Models\Spec::get()->all();
     $subspecs = \App\Models\Subspec::get()->all();
     $subspecs_arr = [];
@@ -16,30 +22,65 @@
     ];
     }
 
-    $user = App\Models\User::getData(Auth::id())['user'];
+    $user_cities = ['_israel']; 
+    $user_specs = [];
+    $user_subspecs = [];
+    $user_languages = ['ru'];
+
     
-    $cities = App\Models\City::get()->sortByDesc('slug')->all();
-    $user_cities = explode(',', Auth::user()->region);
-
-    $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит'];
-    $user_languages = explode(',', Auth::user()->language);
-
-    $user_specs = Auth::user()->specs();
-    $user_subspecs = Auth::user()->subspecs();
-    $spec1 = reset($user_specs);
-    $subspec1 = $user_subspecs[$spec1];
+    $spec1 = reset($specs);
+    $user_subspecs1 = [];
 @endphp
+
+@auth
+    @php
+
+
+        $user = App\Models\User::getData(Auth::id())['user'];
+
+        $user_cities = explode(',', Auth::user()->region);
+        $user_languages = explode(',', Auth::user()->language);
+
+        $user_specs = Auth::user()->specs();
+        $user_subspecs = Auth::user()->subspecs();
+
+        $spec1 = reset($user_specs);
+        $user_subspecs1 = empty($user_subspecs) ? [] : $user_subspecs[$spec1];
+    @endphp
+@endauth
 
 <script>
 function showSubspecs(select, spec){
     const subspecs = {!! json_encode($subspecs_arr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS ) !!};
-    const user_subspecs =  {{ '['. join(',', $subspec1) . ']' }};
+    const user_subspecs =  {{ '['. join(',', $user_subspecs1) . ']' }};
     return showSubspecsList(select, spec, subspecs, user_subspecs);
 }
 
-window.addEventListener('load', function(event) { 
+document.addEventListener("DOMContentLoaded", ()=>{
+    //загрузить подкатегории соответствующий первому в списке категорий
     const spec1 = document.getElementById('spec1');
     showSubspecs(showSubspecs('subspec1', spec1.options[spec1.selectedIndex].value))
+
+    //делаем нормальные  списки
+    $('#spec1').select2({
+        placeholder: "Выберите один или несколько"
+    });
+
+    $('#subspec1').select2({
+        placeholder: "Выберите один или несколько"
+    });
+
+    $('#region').select2({
+        placeholder: "Выберите один или несколько"
+    });
+
+    $('#language').select2({
+        placeholder: "Выберите один или несколько"
+    });
+});
+
+window.addEventListener('load', function(event) { 
+    
 });
 </script>
 

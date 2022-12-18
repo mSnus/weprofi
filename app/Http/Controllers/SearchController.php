@@ -36,7 +36,9 @@ class SearchController extends Controller
                 $join->on('images.parent_id', '=', 'users.id');
                 $join->on('images.type', '=', DB::raw("1"));
             })
-            ->whereRaw('userinfos.content LIKE \'%'.mb_strtolower($term).'%\'')
+            ->whereRaw('userinfos.content LIKE \'%'.mb_strtolower($term).'%\'  
+                        OR userinfos.tagline LIKE \'%'.mb_strtolower($term).'%\' 
+                        OR userinfos.pricelist LIKE \'%'.mb_strtolower($term).'%\' ')
             ->distinct()
             ->get();
     }

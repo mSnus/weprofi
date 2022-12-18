@@ -33,3 +33,22 @@ function uploadAvatar(){
 }
 
 
+
+function uploadGallery(){
+    const fileRef = document.getElementById('fileGallery'); 
+ 
+    fileRef.value = "";   
+ 
+     $('#fileGallery').trigger('click');
+ 
+     fileRef.onchange = function () {
+         if(fileRef.files !== undefined && fileRef.files.length > 0) {
+
+             document.forms['formGallery'].submit();
+         } 
+     };
+ 
+     
+ 
+ }
+ 

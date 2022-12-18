@@ -31,7 +31,8 @@ class HomeController extends Controller
 				case User::typeClient:
         			return Redirect::to('/');
 				case User::typeMaster:
-					return view('masters_home');
+                    return Redirect::to('/');
+					// return view('masters_home');
 				default:
 					throw new \Exception("No home for usertype ".$role." exists", 1);
 			}

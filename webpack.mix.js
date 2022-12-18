@@ -15,6 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
 .js('resources/js/suggestions.js', 'public/js')
 	.css('resources/css/app.css', 'public/css')
 	.css('resources/css/app-mobile.css', 'public/css')
+	.css('resources/css/select2-materialize.css', 'public/css')
+//	.sass('resources/css/select2_material.scss', 'public/css')
 // .sass('resources/sass/app-boot.scss', 'public/css');
    //  .sourceMaps();
 

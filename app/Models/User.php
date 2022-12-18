@@ -42,6 +42,9 @@ class User extends Authenticatable
 	public const typeModerator = '55';
 	public const typeAdmin = '999';
 
+	public const imageAvatar = 1;
+	public const imageGallery = 2;
+
 
 	/**
 	 * The attributes that should be hidden for arrays.

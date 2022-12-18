@@ -6,6 +6,7 @@
 body {
     background-color: #fff !important;
     font-display: swap;
+    font-size: 1.1rem;
 }
 
 #app {
@@ -50,6 +51,11 @@ a:hover {
     text-align: right;
     max-width: 50vw;
     font-size: 1rem;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   .topbar .cabinet {
@@ -66,6 +72,23 @@ a:hover {
 
   .topbar .cabinet a {
     color: #b79e6d;
+    margin-left: 0.5rem;
+  }
+
+  .topbar .logout {
+    display: flex;
+    background-color: #dedcdc;
+    padding: 8px 16px;
+    border-radius: 32px;
+    fill: #a3a3a3;
+    width: -moz-fit-content;
+    width: fit-content;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .topbar .logout a {
+    color: #a3a3a3;
     margin-left: 0.5rem;
   }
 
@@ -262,6 +285,17 @@ select.form-control {
     padding-bottom: 20px;
     border-radius: 12px;
 }
+/* 
+.select2-container,
+.select2 .selection,
+.select2-selection {
+    background-color: #EBECEB; 
+    border: none;
+}
+
+.select2-selection__choice {
+    background-color: #f8f3d4;
+} */
 
 option[selected] {
     color: #766d6b;
@@ -331,12 +365,14 @@ select.form-control[multiple] {
 .user .tagline {
     font-size: .85rem;
     color: #858282;
+    max-width: 200px;
 }
 
 .user .tagline.page {
     margin-top: 1rem;
     font-size: 1.2rem;
     color: #858282;
+    max-width: unset;
 }
 
 .user .title {
@@ -368,6 +404,7 @@ select.form-control[multiple] {
     font-size: 1.5rem;
     line-height: 125%;
     color: #858282;
+    text-align: left;
 }
 
 .user .pricelist {
@@ -474,9 +511,26 @@ select.form-control[multiple] {
 }
 
 .gallery img {
-    max-width: 250px;
-    max-height: 140px;}
+    max-width: 200px;
+    max-height: 120px;
+}
 
+.profile .gallery {
+    -webkit-mask-image: none;
+            mask-image: none;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+.profile .gallery img {
+    margin-right: 8px;
+    border-radius: 8px;
+}
 
 .contact-phone {
     font-weight: 400;

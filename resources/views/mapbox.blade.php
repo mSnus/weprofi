@@ -42,7 +42,7 @@
 		 var noAutocenter = {{ (isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true) ? "true" : "false" }};
 
 		 function updateLocation(coords) {
-			  let location = $('.form-with-map #location');
+			  let location = $('#location');
 			  location.val(coords.lng+", "+coords.lat);
 		 }
 

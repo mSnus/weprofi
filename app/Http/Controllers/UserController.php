@@ -38,6 +38,9 @@ class UserController extends Controller
 			$user->phone = $request->phone;
 			$user->location = $request->location;
 			$user->usertype = ($request->usertype == User::typeMaster) ? User::typeMaster : User::typeClient;
+            
+            $request->region = $request->region ?? ['_israel'];
+            $request->language = $request->language ?? ['ru'];
 
 			if ($request->usertype == User::typeMaster) {
 				$user->language = join(',', $request->language);
@@ -89,25 +92,58 @@ class UserController extends Controller
 	    $image_ids = [];
         $subpath = "/img/avatars";
 
-        $files_count = count($request->files);
+        $files_count = count($request->file('files'));
+        if ($files_count > 0) {
+            $file = $request->file('files')[0];
+
+            $name = $file->getClientOriginalName();
+            $image_ext = $file->getClientOriginalExtension();
+
+            $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
+            $path = public_path() . $subpath;
+            $storedAs = $file->move($path, $filename);
+
+            DB::table('images')->where('type', '=', User::imageAvatar)->where('parent_id', '=', Auth::id())->delete();
+
+            DB::table('images')->insert([
+                'path' => $subpath.'/'.$filename,
+                'thumb' => $subpath.'/'.$filename,
+                'type' => User::imageAvatar,//avatar
+                'parent_id' => Auth::id(),
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+
+        }
+
+        return redirect('/profile');
+    }
+
+    function uploadGallery(Request $request){
+	    $image_ids = [];
+        $subpath = "/img/gallery";
+
+        $files_count = count($request->file('files'));
+
+        Log::error($files_count);
+        
         if ($files_count > 0) {
 
+            DB::table('images')->where('type', '=', User::imageGallery)->where('parent_id', '=', Auth::id())->delete();
+
             for ($i = 0; $i < $files_count; $i++) {
-                $file = $request->file('files')[0];
+                $file = $request->file('files')[$i];
 
                 $name = $file->getClientOriginalName();
                 $image_ext = $file->getClientOriginalExtension();
 
                 $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
                 $path = public_path() . $subpath;
-                $storedAs = $file->move($path, $filename);
-
-                DB::table('images')->where('type','=',1)->where('parent_id', '=', Auth::id())->delete();
+                $storedAs = $file->move($path, $filename);    
 
                 DB::table('images')->insert([
                     'path' => $subpath.'/'.$filename,
                     'thumb' => $subpath.'/'.$filename,
-                    'type' => 1,//avatar
+                    'type' => User::imageGallery,
                     'parent_id' => Auth::id(),
                     'created_at' => date('Y-m-d H:i:s')
                 ]);

@@ -79,22 +79,27 @@ class RegisterController extends Controller
             'region' => $data['region'],
         ]);
 
-        var_export($data->language);
-
 
         if ($data['usertype'] == User::typeMaster ) {
-            // Userinfo::updateOrCreate(
-            //     ['user_id' => $user->id],
-            //     [
-            //     'user_id' => $user->id,
-            //     'content' => '',
-            //     'tagline' => '',
-            //     'pricelist' => '',
-            //     'rating' => 5
-            // ]
-            // );
+            if (isset( $data['subspec1'] ) && !empty( $data['subspec1'] )) {
+                $spec_data = [];
 
-            DB::insert("insert into user_spec (user_id, spec_id, subspec_id) values(?,?,?)", [$user->id, $data['spec1'], $data['subspec1']]);
+                foreach ($data['subspec1'] as $subspec1) {
+                    $spec_data[] = [
+                        $user->id, 
+                        $data['spec1'], 
+                        $subspec1
+                    ];
+                }
+            } else {
+                $spec_data[] = [
+                        $user->id, 
+                        $data['spec1'], 
+                        0
+                    ];
+            }
+
+            DB::insert("insert into user_spec (user_id, spec_id, subspec_id) values(?,?,?)", $spec_data);
         }
 
         Auth::loginUsingId($user->id);
