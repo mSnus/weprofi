@@ -26,7 +26,7 @@ class SpecController extends Controller
                 ->leftJoin('users', 'user_id', '=', 'users.id')
                 ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
                 ->leftJoin('images', function ($join) {
-                    $join->on('userinfos.avatar', '=', 'images.id');
+                    $join->on('images.parent_id', '=', 'users.id');
                     $join->on('images.type', '=', DB::raw("1"));
                 })
                 ->where('spec_id', $spec_id)

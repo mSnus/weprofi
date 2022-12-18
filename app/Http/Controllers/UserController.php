@@ -3,92 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Userinfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id)
     {
-        $user = null;
-        $gallery = null;
-        $skills = null;
-        $skills_list = "";        
+        $data = User::getData($id);
 
-        if ($request->user_id) {
-            $user_id = intval($request->user_id);
-            $user = DB::table('users')
-                ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id',
-                        'images.path as avatar', 'users.created_at', 
-                        'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist', 'userinfos.rating')
-                ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
-                ->leftJoin('images', function($join) {
-                             $join->on('userinfos.avatar', '=', 'images.id');
-                             $join->on('images.type', '=', DB::raw("1"));
-                         })
-                ->where('users.id', $user_id)
-                ->first();
-
-            $user->content = nl2br($user->content);
-            
-            $pricelist = array_filter(preg_split('~[\r\n]~', $user->pricelist));
-
-            foreach ($pricelist as $key => $line) {
-                $pricelist[$key] = preg_replace(
-                    '~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims', 
-                    '<div class="price-block">
-                        <div class="price-text">$1</div>
-                        <div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>                        
-                    </div>', 
-                    $pricelist[$key]);                
-            }
-
-
-            $user->pricelist = join("\n", $pricelist);
-
-            $user->join_date = date("d-m-Y", strtotime($user->created_at));
-
-            $gallery = DB::table('users')
-                ->select('users.id as user_id', 'images.path as src')
-                ->leftJoin('images', function($join) {
-                             $join->on('images.parent_id', '=', 'users.id');
-                             $join->on('images.type', '=', DB::raw("2"));
-                         })
-                ->where('users.id', $user_id)
-                ->whereNotNull('path')
-                ->get();
-
-            $skills = DB::table('users')
-                ->select('users.id as user_id', 'specs.title as spec_title', 'subspecs.title as subspec_title')
-                ->leftJoin('user_spec', function($join) {
-                             $join->on('user_spec.user_id', '=', 'users.id');
-                         })
-                ->leftJoin('specs', function($join) {
-                            $join->on('user_spec.spec_id', '=', 'specs.id');
-                        })
-                ->leftJoin('subspecs', function($join) {
-                            $join->on('user_spec.subspec_id', '=', 'subspecs.id');
-                        })                        
-                ->where('users.id', $user_id)
-                ->get();    
-            
-            foreach ($skills as $skill) {
-                $skills_list .= $skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').', ';
-            }
-
-            $skills_list = mb_substr($skills_list, 0, mb_strlen($skills_list) - 2);
-        }
-
-        return view('user_page', [
-            'user_id' => $user_id,
-            'user' => $user,
-            'gallery' => $gallery,
-            'skills' => $skills_list
-        ]);
+        return view('user_page', $data);
     }
 
 
@@ -133,6 +63,20 @@ class UserController extends Controller
                 }
 
                 DB::table('user_spec')->insert($spec_data);
+
+                $master = Userinfo::where('user_id', $id)->first();
+
+                if ($master === null) {
+                
+                    $master = new Userinfo(['user_id' => $id]);
+                    $master->user_id = $id;
+                    $master->rating = 5;
+                }
+
+                $master->content = trim($request->content) ?? '';
+                $master->tagline = trim($request->tagline) ?? '';
+                $master->pricelist = trim($request->pricelist) ?? '';
+                $master->save();
 			}
 
 			$user->save();
@@ -140,4 +84,38 @@ class UserController extends Controller
 
 			return redirect('/profile')->with('status', 'Профиль сохранён');
 	}
+
+    function uploadAvatar(Request $request){
+	    $image_ids = [];
+        $subpath = "/img/avatars";
+
+        $files_count = count($request->files);
+        if ($files_count > 0) {
+
+            for ($i = 0; $i < $files_count; $i++) {
+                $file = $request->file('files')[0];
+
+                $name = $file->getClientOriginalName();
+                $image_ext = $file->getClientOriginalExtension();
+
+                $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
+                $path = public_path() . $subpath;
+                $storedAs = $file->move($path, $filename);
+
+                DB::table('images')->where('type','=',1)->where('parent_id', '=', Auth::id())->delete();
+
+                DB::table('images')->insert([
+                    'path' => $subpath.'/'.$filename,
+                    'thumb' => $subpath.'/'.$filename,
+                    'type' => 1,//avatar
+                    'parent_id' => Auth::id(),
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+
+
+        }
+
+        return redirect('/profile');
+    }
 }

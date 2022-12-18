@@ -47,7 +47,10 @@
 
                     @foreach ($persons as $person)
                         <div class="user" onclick="window.location.href='/user/{{ $person->user_id }}'">
-                            <div class="avatar"><img src="{{ $person->avatar ?? '/img/avatar.png' }}" alt="User avatar">
+                            
+                            <div class="avatar" 
+                                style="background-image: url({{ $person->avatar ?? '/img/avatar.png' }})"
+                                 alt="User avatar">
                             </div>
                             <div class="title">{{ $person->name }}</div>
                             <div class="rating">

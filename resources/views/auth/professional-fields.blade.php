@@ -15,6 +15,8 @@
             'spec_id' =>  $subspec->spec_id
     ];
     }
+
+    $user = App\Models\User::getData(Auth::id())['user'];
     
     $cities = App\Models\City::get()->sortByDesc('slug')->all();
     $user_cities = explode(',', Auth::user()->region);
@@ -97,3 +99,4 @@ window.addEventListener('load', function(event) {
 
     </div>
 </div>
+

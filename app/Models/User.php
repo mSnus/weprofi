@@ -193,4 +193,86 @@ class User extends Authenticatable
 		// $usertype = SELF::with('user.usertype')->get();
         return $value;
     }
+
+	public static function getData($user_id)
+    {
+        $user = null;
+        $gallery = null;
+        $skills = null;
+        $skills_list = "";        
+
+        if ($user_id) {
+            $user_id = intval($user_id);
+            $user = DB::table('users')
+                ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id', 'users.usertype',
+                        'images.path as avatar', 'users.created_at', 
+                        'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist', 'userinfos.rating')
+                ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
+                ->leftJoin('images', function($join) {
+                             $join->on('images.parent_id', '=', 'users.id');
+                             $join->on('images.type', '=', DB::raw("1"));
+                         })
+                ->where('users.id', $user_id)
+                ->first();
+
+			$user->content_raw = $user->content;
+            $user->content = nl2br($user->content);
+            
+			
+            $pricelist = array_filter(preg_split('~[\r\n]~', $user->pricelist));
+
+            foreach ($pricelist as $key => $line) {
+                $pricelist[$key] = preg_replace(
+                    '~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims', 
+                    '<div class="price-block">
+                        <div class="price-text">$1</div>
+                        <div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>                        
+                    </div>', 
+                    $pricelist[$key]);                
+            }
+
+			$user->pricelist_raw = $user->pricelist;
+
+            $user->pricelist = join("\n", $pricelist);
+
+            $user->join_date = date("d-m-Y", strtotime($user->created_at));
+
+            $gallery = DB::table('users')
+                ->select('users.id as user_id', 'images.path as src')
+                ->leftJoin('images', function($join) {
+                             $join->on('images.parent_id', '=', 'users.id');
+                             $join->on('images.type', '=', DB::raw("2"));
+                         })
+                ->where('users.id', $user_id)
+                ->whereNotNull('path')
+                ->get();
+
+            $skills = DB::table('users')
+                ->select('users.id as user_id', 'specs.title as spec_title', 'subspecs.title as subspec_title')
+                ->leftJoin('user_spec', function($join) {
+                             $join->on('user_spec.user_id', '=', 'users.id');
+                         })
+                ->leftJoin('specs', function($join) {
+                            $join->on('user_spec.spec_id', '=', 'specs.id');
+                        })
+                ->leftJoin('subspecs', function($join) {
+                            $join->on('user_spec.subspec_id', '=', 'subspecs.id');
+                        })                        
+                ->where('users.id', $user_id)
+                ->get();    
+            
+            foreach ($skills as $skill) {
+                $skills_list .= $skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').', ';
+            }
+
+            $skills_list = mb_substr($skills_list, 0, mb_strlen($skills_list) - 2);
+        }
+
+        return [
+            'user_id' => $user_id,
+            'user' => $user,
+            'gallery' => $gallery,
+            'skills' => $skills_list
+        ];
+    }
 }

@@ -267,6 +267,16 @@ select.form-control[multiple] {
     height: 8rem;
 }
 
+.form-hint {
+    color: #da9b63;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    width: 100%;
+  }
+
+ /* писок категорий */ 
+
 .specs .spec {
     font-family: 'Open Sans';
     font-style: normal;
@@ -337,9 +347,14 @@ select.form-control[multiple] {
     width: 1.5rem;
 }
 
-.user .avatar img {
+.user .avatar {
     width: 9rem;
     border-radius: 50%;
+    height: 9rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .user .description {
@@ -410,11 +425,39 @@ select.form-control[multiple] {
 }
 
 /* профиль пользователя */
-.profile .avatar img {
+.profile .avatar-container {
+    width: 100%;
+    text-align: center;
+}
+
+.profile .avatar {
     width: 12rem;
+    height: 12rem;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 50%;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile .avatar svg{
+    width: 2rem;
+    height: 2rem;
+    fill: #ffffff70;
+}
+
+.profile .avatar:hover svg{
+    fill: #ffffffff;
+    transition: fill 0.5s ease;
+}
+
+.profile .avatar img:hover {
+    box-shadow: 3px 3px 15px #00335555;
+    transition: all 0.5s ease-out;;
 }
 
 /* Галерея */

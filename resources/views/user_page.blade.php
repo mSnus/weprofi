@@ -51,11 +51,28 @@
 
 @section('content')
 
+    @php
+        $cities = App\Models\City::get()->sortByDesc('slug')->all();
+        $user_cities = explode(',', $user->region);
+
+        $city_list = [];
+        foreach ($cities as $city) {
+            if (in_array($city->slug, $user_cities)) {
+                $city_list[] = $city->title;
+            }
+        }
+    @endphp
+
     <div class="d-block text-center">
         <div class="user page">
-            <h1>{{ $user->name }}</h1>
+            <h1 class="mb-0">{{ $user->name }}</h1>
 
-            <div class="avatar"><img src="{{ $user->avatar ?? '/img/avatar.png' }}" alt="User avatar"></div>
+            <div class="tagline page mt-0 mb-3">{{ join(', ', $city_list) }}</div>
+
+            <div class="avatar" 
+                style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
+                alt="User avatar">
+            </div>
             <div class="rating page">
                 @for ($i = 1; $i <= $user->rating; $i++)
                     <img src="/img/star.svg" alt="star">
@@ -68,7 +85,9 @@
                     {{ $skills }}
                 </div>
             @endif
+
             <div class="description">{!! $user->content !!}</div>
+
             <div class="pricelist">{!! $user->pricelist !!}</div>
 
             @if (!is_null($gallery) && count($gallery) > 0)

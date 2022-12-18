@@ -34,6 +34,8 @@ Route::redirect('/test', '/test.php');
 Route::redirect('/snusminer.php', '/snusminer.php');
 
 Route::post('/profile.update/{id}', [UserController::class, 'update']);
+Route::post('/profile.avatar', [UserController::class, 'uploadAvatar']);
+Route::post('/profile.gallery', [UserController::class, 'uploadGallery']);
 Route::resource('master', MasterController::class);
 Route::resource('moderator', ModeratorController::class);
 Route::resource('feedback', FeedbackController::class);
