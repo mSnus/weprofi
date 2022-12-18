@@ -1,12 +1,16 @@
 created:
-    - database/factories/UserinfoFactory.php
-    - database/factories/ImageFactory.php
-    - database/migrations/2022_12_09_142516_create_userinfos_table.php
-    - database/migrations/2022_12_09_142517_create_images_table.php
-    - app/Models/Userinfo.php
-    - app/Models/Image.php
+    - app/Http/Controllers/CityController.php
+    - database/factories/CityFactory.php
+    - database/migrations/2022_12_17_202446_create_cities_table.php
+    - app/Models/City.php
+    - tests/Feature/Http/Controllers/CityControllerTest.php
+    - app/Http/Requests/CityStoreRequest.php
+    - resources/views/city/index.blade.php
+updated:
+    - routes/web.php
 models:
     Spec: { id: id, title: 'string:200', content: text, timestamps: timestamps, relationships: { hasMany: Subspec } }
     Subspec: { id: id, title: 'string:200', content: text, spec_id: id, timestamps: timestamps, relationships: { belongsToMany: Spec } }
     Userinfo: { id: id, content: text, pricelist: text, rating: integer, avatar: bigInteger, timestamps: timestamps, relationships: { belongsTo: Users, hasMany: Images } }
     Image: { id: id, path: 'string:200', thumb: 'string:200', type: integer, parent_id: bigInteger, timestamps: timestamps }
+    City: { id: id, title: 'string:50', slug: 'string:20' }

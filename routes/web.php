@@ -33,16 +33,20 @@ Route::get('/', function () {
 Route::redirect('/test', '/test.php');
 Route::redirect('/snusminer.php', '/snusminer.php');
 
-Route::resource('client', ClientController::class);
+Route::post('/profile.update/{id}', [UserController::class, 'update']);
 Route::resource('master', MasterController::class);
 Route::resource('moderator', ModeratorController::class);
-Route::resource('offer', OfferController::class);
 Route::resource('feedback', FeedbackController::class);
 
-Route::view('/profile', 'profile');
+// Route::view('/profile', 'profile');
+Route::get('/profile', function () {
+    if (Auth::user()) {
+        return view('profile');
+    } else {
+        return Redirect::to('/login');
+    }
+});
 
-/*require __DIR__.'/auth.php';
-*/
 
 Auth::routes();
 Route::get('logout', function ()
@@ -54,9 +58,6 @@ Route::get('logout', function ()
 })->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::put('/respond/{id}', [App\Http\Controllers\MasterController::class, 'takeOffer'])->middleware(['auth'])->name('master.respond');
-Route::put('/accept/{id}/{userid}', [App\Http\Controllers\ClientController::class, 'acceptOffer'])->middleware(['auth'])->name('client.accept');
-Route::get('/edit-offer/{id}', [App\Http\Controllers\ClientController::class, 'editOffer'])->middleware(['auth'])->name('client.edit-offer');
 
 //Set Telegram webhook
 //NOTE: do it only once!
@@ -70,3 +71,6 @@ Route::get('/spec/{spec_id}/{subspec_id?}', [SpecController::class, 'index'])->n
 Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
 Route::get('/search/{term}', [SearchController::class, 'search'])->name('search');
 
+
+
+Route::resource('city', App\Http\Controllers\CityController::class)->only('index', 'store');

@@ -145,6 +145,43 @@ class User extends Authenticatable
 		return Client::where('userid', $this->id)->first();
 	}
 
+	public function specs()
+	{
+		$specs = DB::table('user_spec')
+					->select('spec_id')
+					->where('user_id', $this->id)
+					->distinct()
+					->get()
+					->toArray();
+
+		$arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
+		return $arrSpecs;
+				
+	}
+
+	public function subspecs($spec_id = 0)
+	{
+		$subspecs = DB::table('user_spec')
+					->select('spec_id','subspec_id')
+					->where('user_id', $this->id)
+					->when($spec_id > 0, function ($q) use ($spec_id) {
+						return $q->where(function ($query) use ($spec_id){
+							$query->where('spec_id', '=', $spec_id);
+						}
+						);
+					})
+					->get()
+					->toArray();
+		$arrSubspecs = [];
+		
+		foreach ($subspecs as $subspec) {
+			$arrSubspecs[$subspec->spec_id][] = $subspec->subspec_id;
+		}
+		// array_map(function($el) {return ['spec_id' => $el->spec_id, 'subspec_id'=> $el->subspec_id];}, $subspecs);
+
+		return $arrSubspecs;
+	}
+
 	/**
      * Get the user's type.
      *

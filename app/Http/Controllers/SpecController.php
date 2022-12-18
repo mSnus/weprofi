@@ -22,7 +22,7 @@ class SpecController extends Controller
             $spec_id = intval($request->spec_id);
             $subspec_id = intval($request->subspec_id);
             $persons = DB::table('user_spec')
-                ->select('users.title', 'users.id as user_id', 'images.path as avatar', 'userinfos.tagline')
+                ->select('users.name', 'users.id as user_id', 'images.path as avatar', 'userinfos.tagline')
                 ->leftJoin('users', 'user_id', '=', 'users.id')
                 ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
                 ->leftJoin('images', function ($join) {

@@ -68,7 +68,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        Log::error(var_export($data, true));
 
         $user = User::create([
             'name' => $data['name'],
@@ -80,6 +79,7 @@ class RegisterController extends Controller
             'region' => $data['region'],
         ]);
 
+        var_export($data->language);
 
 
         if ($data['usertype'] == User::typeMaster ) {

@@ -67,9 +67,13 @@
                     </div>
 
                     <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="col-md-8 offset-md-4 d-flex" style="column-gap: 1rem;">
+                            <button type="submit" class="button-primary">
                                 {{ __('Login') }}
+                            </button>
+
+                            <button type="submit" class="button-tertiary">
+                                {{ __('Register') }}
                             </button>
 
                             @if (Route::has('password.request'))

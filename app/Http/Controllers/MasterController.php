@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\Client;
 use App\Models\Master;
 
 use App\Models\User;
 use App\Models\Offer;
 use App\Models\OfferToMaster;
+use App\Models\Userinfo;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -50,27 +53,27 @@ class MasterController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$phone = $request->name;
-		$phone = preg_replace("~[^0-9\+]~", "", $phone);
-		if (substr($phone, 0, 1) == "8") $phone = "+7".substr($phone,1); // 8925xxxx => +7925xxxx
-		if (substr($phone, 0, 1) == "9") $phone = "+7".$phone; // 925xxxx => +7925xxxx
+		// $phone = $request->name;
+		// $phone = preg_replace("~[^0-9\+]~", "", $phone);
+		// if (substr($phone, 0, 1) == "8") $phone = "+7".substr($phone,1); // 8925xxxx => +7925xxxx
+		// if (substr($phone, 0, 1) == "9") $phone = "+7".$phone; // 925xxxx => +7925xxxx
 
-		$request->validate([
-			'name' => 'required|string|max:255|unique:users',
-			// 'email' => 'required|string|email|max:255|unique:users',
-			// 'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
-		]);
+		// $request->validate([
+		// 	'name' => 'required|string|max:255|unique:users',
+		// 	// 'email' => 'required|string|email|max:255|unique:users',
+		// 	// 'password' => ['sometimes','required', 'confirmed', Rules\Password::min(6)],
+		// ]);
 
-		$user = User::create([
-			'name' => $phone,
-			'email' => $request->email,
-			'password' => Hash::make($request->password),
-			'usertype' => User::typeMaster,
-		]);
+		// $user = User::create([
+		// 	'name' => $phone,
+		// 	'email' => $request->email,
+		// 	'password' => Hash::make($request->password),
+		// 	'usertype' => User::typeMaster,
+		// ]);
 
-		event(new Registered($user));
+		// event(new Registered($user));
 
-		Auth::login($user);
+		// Auth::login($user);
 
 		$master = new Master;
 		$master->title = $request->title;
@@ -113,25 +116,28 @@ class MasterController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-			$master =  Master::find($id);
-			$user = User::find($master->userid);
+		Log::error(var_export($request->all(), true));
+			$user = User::findOrFail($id);
 
-			if ($master->userid != Auth::user()->user_role->userid) {
-				return redirect('profile')->with('error', 'Профиль не сохранён, ошибка авторизации.');
-			}
-
-			$user->linked_id = $master->userid;
 			$user->name = $request->name;
-			$user->email= $request->email;
+			$user->phone= $request->phone;
 			$user->update();
 
+			$master = Userinfo::where('user_id', $id)->first();
 
-			$master->title = $request->title;
-			$master->location = $request->location;
-			$master->descr = $request->descr ?? '';
-			$master->update();
+			if ($master === null) {
+			
+				$master = new Userinfo(['user_id' => $id]);
+				$master->user_id = $id;
+				$master->rating = 5;
+			}
 
-			return redirect('profile')->with('status', 'Профиль сохранён');
+			$master->content = $request->content ?? '';
+			$master->tagline = $request->tagline ?? '';
+			$master->pricelist = $request->pricelist ?? '';
+			$master->save();
+
+			return view('masters_home', ['master' => $master])->with('status', 'Профиль сохранён');
 	}
 
 	/**

@@ -6,10 +6,6 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
-    <!-- Promise polyfill script is required -->
-    <!-- to use Mapbox GL Geocoder in IE 11. -->
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 	 <style>
 		.coordinates {
 			 background: rgba(0, 0, 0, 0.5);
@@ -31,7 +27,7 @@
 
 <div class="mapbox-container">
 
-	<div id='map_id' style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '660px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '660px' }}; margin-top: 20px;'></div>
+	<div id='map_id' class="m-auto" style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '420px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '420px' }}; margin-top: 20px;'></div>
 	<pre id="coordinates" class="coordinates"></pre>
 
 
@@ -39,10 +35,10 @@
 		 mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
 
 
-		 var moscowLng = 35.074002;
-		 var moscowLat = 32.930288;
-		 var startLng = {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'moscowLng' }};
-		 var startLat = {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'moscowLat' }};
+		 var defaultLng = 35.074002;
+		 var defaultLat = 32.930288;
+		 var startLng = {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'defaultLng' }};
+		 var startLat = {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'defaultLat' }};
 		 var noAutocenter = {{ (isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true) ? "true" : "false" }};
 
 		 function updateLocation(coords) {

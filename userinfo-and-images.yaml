@@ -1,0 +1,19 @@
+models:
+  Userinfo:
+    id
+    content: text
+    pricelist: text
+    rating: integer
+    avatar: bigInteger
+    timestamps
+    relationships:
+      belongsTo: Users
+      hasMany: Images
+  Image:
+    id
+    path: string:200
+    thumb: string:200
+    type: integer
+    parent_id: bigInteger
+    timestamps
+

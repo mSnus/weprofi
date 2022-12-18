@@ -1,19 +1,14 @@
 models:
-  Userinfo:
+  City:
     id
-    content: text
-    pricelist: text
-    rating: integer
-    avatar: bigInteger
-    timestamps
-    relationships:
-      belongsTo: Users
-      hasMany: Images
-  Image:
-    id
-    path: string:200
-    thumb: string:200
-    type: integer
-    parent_id: bigInteger
-    timestamps
+    title: string:50
+    slug: string:20
+controllers:
+  City:
+    index:
+      query: all
+      render: city.index with:posts
 
+    store:
+      save: city
+      validate: title,slug

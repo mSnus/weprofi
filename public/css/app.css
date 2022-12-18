@@ -161,16 +161,16 @@ button.tertiary, .button-tertiary {
 .form-register .input[type="text"],
 .form-register .input[type="phone"],
 .form-register .input[type="password"],
-.form-register select {
+.form-register select,
+.form-register textarea {
     min-width: 300px;
 }
 
-.col-form-label {
+.form-group label, .col-form-label {
     font-size: 1.1rem;
     color: #959e93;
-    text-align: center;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     line-height: 0.9;
     padding-right: 0px;
   }
@@ -241,7 +241,9 @@ h2, .h2 {
 
 input[type="text"].form-control,
 input[type="phone"].form-control,
-input[type="password"].form-control {
+input[type="password"].form-control,
+select.form-control,
+textarea.form-control {
     background: #EBECEB;
     border: none;
     font-weight: 400;
@@ -252,6 +254,22 @@ input[type="password"].form-control {
     border-radius: 40px;
     padding: 12px 20px;
     margin-left: 8px;
+}
+
+select.form-control {
+    min-height: 4rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 12px;
+}
+
+option[selected] {
+    color: #766d6b;
+    font-weight: bold;
+  }
+
+select.form-control[multiple] {
+    height: 8rem;
 }
 
 .specs .spec {
@@ -357,6 +375,8 @@ input[type="password"].form-control {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    border-bottom: solid 1px #9AAEB6;
+    margin-bottom: 0.5rem;
 }
 
 .user .price-block .price-value {
@@ -364,6 +384,7 @@ input[type="password"].form-control {
     min-width: 110px;
     max-width: 250px;
     font-weight: 900;
+    margin-left: 2rem;
 }
 
 .user .price-block .price-extra {
@@ -393,6 +414,14 @@ input[type="password"].form-control {
     color: #858282;
 }
 
+/* профиль пользователя */
+.profile .avatar img {
+    width: 12rem;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Галерея */
 
 .gallery {
@@ -415,6 +444,11 @@ input[type="password"].form-control {
     align-items: center;
     justify-content: center;
 }
+
+.contact-phone svg {
+    width: 24px;
+    height: 24px;
+  }
 
 /* поиск */
 
@@ -476,6 +510,10 @@ input[type="password"].form-control {
     flex-basis: 100%;
 }
 
+.profi-fields {
+    display: flex;
+    flex-direction: column;
+}
 /* Большие цифры и интро на главной */
 
 .introtext p {

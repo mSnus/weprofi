@@ -39,13 +39,21 @@
             })
         });
     </script>
+
+
+    <!-- MapBox -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 @endsection
 
 @section('content')
 
     <div class="d-block text-center">
         <div class="user page">
-            <h1>{{ $user->title }}</h1>
+            <h1>{{ $user->name }}</h1>
 
             <div class="avatar"><img src="{{ $user->avatar ?? '/img/avatar.png' }}" alt="User avatar"></div>
             <div class="rating page">
@@ -63,7 +71,7 @@
             <div class="description">{!! $user->content !!}</div>
             <div class="pricelist">{!! $user->pricelist !!}</div>
 
-            @if (!is_null($gallery))
+            @if (!is_null($gallery) && count($gallery) > 0)
                 <div class="gallery" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
                     @foreach ($gallery as $image)
                         <div class="gallery-image">
@@ -73,15 +81,33 @@
                     @endforeach
                 </div>
             @endif
+
+            @php
+                $mapbox = ['no_autocenter' => true, 'height' => '100%'];
+                
+                $location = $user->location;
+                
+                if ($location != '') {
+                    $lng = substr($location, 0, strpos($location, ','));
+                    $lat = substr($location, strpos($location, ',') + 1);
+                    $mapbox['lng'] = $lng;
+                    $mapbox['lat'] = $lat;
+                }
+
+                $mapbox['id'] = 'map_' . $user->id;
+                
+            @endphp
+
+            @include('mapbox_static', $mapbox)
         </div>
     </div>
 
     @guest
         <div class="register-block">
-            <button class="primary" onclick="window.location.href='/register'">посмотреть контакт</button>
+            <button class="primary" onclick="window.location.href='/login'">посмотреть контакт</button>
             <div class="need-registration">
-                Для просмотра контактов необходимо <a href="/register">зарегистрироваться</a> или <a href="/login">войти на
-                    сайт</a>
+                Для просмотра контактов необходимо <a href="/register">зарегистрироваться</a><br>
+                 или <a href="/login">войти на сайт</a>
             </div>
         </div>
     @endguest

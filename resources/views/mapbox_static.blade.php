@@ -1,27 +1,3 @@
-@section('head')
-    <!-- MapBox -->
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
-    <!-- Load the `mapbox-gl-geocoder` plugin. -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
-
-    <!-- Promise polyfill script is required -->
-    <!-- to use Mapbox GL Geocoder in IE 11. -->
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
-
-        var moscowLng = 37.613067626953125;
-        var moscowLat = 55.750303644490394;
-        var noAutocenter = {{ isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true ? 'true' : 'false' }};
-
-    </script>
-@endsection
-
-
 <div class="mapbox-container">
 
     <div id='{{ $mapbox['id'] }}' style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '100%' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '300px' }}; margin-top: 20px;'></div>
@@ -30,12 +6,18 @@
 
     <script>
         $(document).ready(() => {
+            mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
+
+            var defaultLng = 35.074002;
+		    var defaultLat = 32.930288;
+            var noAutocenter = {{ isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true ? 'true' : 'false' }};
+
             var obj_{{ $mapbox['id'] }} = {
                 map: {},
 					 marker: {},
 					 navcon: {},
-                startLng: {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'moscowLng' }},
-                startLat: {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'moscowLat' }},
+                startLng: {{ isset($mapbox['lng']) ? $mapbox['lng'] : 'defaultLng' }},
+                startLat: {{ isset($mapbox['lat']) ? $mapbox['lat'] : 'defaultLat' }},
 
                 loadMap: function() {
                     this.map = new mapboxgl.Map({

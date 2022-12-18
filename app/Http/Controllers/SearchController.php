@@ -29,13 +29,13 @@ class SearchController extends Controller
 
     if ($term) {
         $persons = DB::table('users')
-            ->select('users.title', 'users.id as user_id', 'images.path as avatar', 'userinfos.content')
+            ->select('users.name', 'users.id as user_id', 'images.path as avatar', 'userinfos.content')
             ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
             ->leftJoin('images', function ($join) {
                 $join->on('userinfos.avatar', '=', 'images.id');
                 $join->on('images.type', '=', DB::raw("1"));
             })
-            ->whereRaw('userinfos.content LIKE \'%'.$term.'%\'')
+            ->whereRaw('userinfos.content LIKE \'%'.mb_strtolower($term).'%\'')
             ->distinct()
             ->get();
     }

@@ -26,6 +26,7 @@
     "/img/logo1a.svg": "/img/logo1a.svg",
     "/img/logo2.png": "/img/logo2.png",
     "/img/logo3.png": "/img/logo3.png",
+    "/img/phone.svg": "/img/phone.svg",
     "/img/robot2.png": "/img/robot2.png",
     "/img/splash-bg.jpg": "/img/splash-bg.jpg",
     "/img/star.svg": "/img/star.svg",
@@ -36,10 +37,11 @@
     "/img/text3.png": "/img/text3.png",
     "/img/text_bg.jpg": "/img/text_bg.jpg",
     "/img/tg.svg": "/img/tg.svg",
+    "/img/user.svg": "/img/user.svg",
     "/fonts/slick.eot": "/fonts/slick.eot",
     "/fonts/slick.svg": "/fonts/slick.svg",
     "/fonts/slick.ttf": "/fonts/slick.ttf",
     "/fonts/slick.woff": "/fonts/slick.woff",
-    "/img/user.svg": "/img/user.svg",
-    "/img/phone.svg": "/img/phone.svg"
+    "/js/subspecs.js": "/js/subspecs.js",
+    "/js/register.js": "/js/register.js"
 }

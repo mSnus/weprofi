@@ -49,7 +49,7 @@
                         <div class="user" onclick="window.location.href='/user/{{ $person->user_id }}'">
                             <div class="avatar"><img src="{{ $person->avatar ?? '/img/avatar.png' }}" alt="User avatar">
                             </div>
-                            <div class="title">{{ $person->title }}</div>
+                            <div class="title">{{ $person->name }}</div>
                             <div class="rating">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <img src="/img/star.svg" alt="star">
