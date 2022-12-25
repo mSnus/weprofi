@@ -32,6 +32,8 @@ class User extends Authenticatable
 		'phone',
 		'password',
 		'usertype',
+		'language',
+		'region'
 	];
 
 	/**
@@ -207,9 +209,9 @@ class User extends Authenticatable
         if ($user_id) {
             $user_id = intval($user_id);
             $user = DB::table('users')
-                ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id', 'users.usertype',
+                ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id', 'users.usertype', 'users.rating',
                         'images.path as avatar', 'users.created_at', 
-                        'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist', 'userinfos.rating')
+                        'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist')
                 ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
@@ -241,7 +243,7 @@ class User extends Authenticatable
             $user->join_date = date("d-m-Y", strtotime($user->created_at));
 
             $gallery = DB::table('users')
-                ->select('users.id as user_id', 'images.path as src')
+                ->select('users.id as user_id', 'images.id as image_id', 'images.path as src')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
                              $join->on('images.type', '=', DB::raw("2"));

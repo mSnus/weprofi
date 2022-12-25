@@ -1,25 +1,129 @@
 @media (max-width: 991px) {
-   .section-requests {
-      flex-wrap: wrap;
-   }
+    .section-requests {
+        flex-wrap: wrap;
+    }
 
-   .head-descr img {
-      max-width: 100%;
-   }
+    .head-descr img {
+        max-width: 100%;
+    }
 
-   .head-texts img {
-      height: 30px;
-   }
+    .head-texts img {
+        height: 30px;
+    }
 
-	.head-texts {
-		flex-wrap: wrap;
-		font-size: 16px;
+    .head-texts {
+        flex-wrap: wrap;
+        font-size: 16px;
+    }
+
+    #map_id {
+        max-width: 95vw;
+        max-height: 95vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #app {
+        max-width: 98%;
+    }
+
+    .top-logo {
+        padding-top: 0;
+    }
+
+    .topbar {
+        line-height: 0.9;
+        align-items: normal;
+        max-width: 98%;
+        justify-content: space-between;
+    }
+
+    .card-body {
+        padding: 0;
+        ;
+    }
+
+    .button-block {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 1rem;
+    }
+
+    .button-block .button-primary {
+        margin-left: 0;
+    }
+
+    .users {
+        min-width: 98%;
+        position: relative;
+    }
+
+    .user {
+        width: 45%;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        position: relative;
+    }
+
+    .user .tagline {
+        max-width: 90%;
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .user .pricelist {
+        min-width: unset;
+        max-width: unset;
+        width: 100%;
+    }
+
+    .user.page {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    h1,
+    .h1 {
+        margin-top: 0.5rem;
+    }
+
+    .form-group.row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    input[type="text"].form-control,
+    input[type="phone"].form-control,
+    input[type="password"].form-control,
+    select.form-control,
+    textarea.form-control {
+		font-size: 1.2rem;
 	}
 
-	#map_id {
-		max-width: 95vw;
-		max-height: 95vw;
-		margin-left: auto;
-		margin-right: auto;
-	}
+    .footer {
+        font-size: 1rem;
+    }
+
+    .footer img{
+        width:100px;
+    }
+
+    .gallery-item {
+        position: relative;
+      }
+
+    .button-delete {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        filter: drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7));
+        cursor: pointer;
+    }
+
+    .register-form-simple > div {
+        display: flex;
+        justify-content: center;
+      }
 }
+

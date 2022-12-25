@@ -8,7 +8,7 @@
 
 @php
     $cities = App\Models\City::get()->sortByDesc('slug')->all();
-    $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит'];
+    $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит', 'ar' => 'Арабский'];
 
     $specs = \App\Models\Spec::get()->all();
     $subspecs = \App\Models\Subspec::get()->all();
@@ -63,20 +63,30 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     //делаем нормальные  списки
     $('#spec1').select2({
-        placeholder: "Выберите один или несколько"
+        placeholder: "", //варианты ответа
+        minimumResultsForSearch: -1,
+        tags: false,
     });
 
     $('#subspec1').select2({
-        placeholder: "Выберите один или несколько"
+        placeholder: "", //варианты ответа
+        minimumResultsForSearch: -1,
+        tags: false,
     });
 
     $('#region').select2({
-        placeholder: "Выберите один или несколько"
+        placeholder: "", //варианты ответа
+        minimumResultsForSearch: -1,
+        tags: false,
     });
 
     $('#language').select2({
-        placeholder: "Выберите один или несколько"
+        placeholder: "", //варианты ответа
+        minimumResultsForSearch: -1,
+        tags: false,
     });
+
+    //setDefaultSelection();
 });
 
 window.addEventListener('load', function(event) { 

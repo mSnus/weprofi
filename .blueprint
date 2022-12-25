@@ -1,11 +1,9 @@
 created:
-    - app/Http/Controllers/CityController.php
-    - database/factories/CityFactory.php
-    - database/migrations/2022_12_17_202446_create_cities_table.php
-    - app/Models/City.php
-    - tests/Feature/Http/Controllers/CityControllerTest.php
-    - app/Http/Requests/CityStoreRequest.php
-    - resources/views/city/index.blade.php
+    - app/Http/Controllers/UserViewsController.php
+    - database/factories/UserFeedbackFactory.php
+    - database/migrations/2022_12_25_180319_create_user_feedback_table.php
+    - app/Models/UserFeedback.php
+    - tests/Feature/Http/Controllers/UserViewsControllerTest.php
 updated:
     - routes/web.php
 models:
@@ -14,3 +12,5 @@ models:
     Userinfo: { id: id, content: text, pricelist: text, rating: integer, avatar: bigInteger, timestamps: timestamps, relationships: { belongsTo: Users, hasMany: Images } }
     Image: { id: id, path: 'string:200', thumb: 'string:200', type: integer, parent_id: bigInteger, timestamps: timestamps }
     City: { id: id, title: 'string:50', slug: 'string:20' }
+    UserViews: { id: id, source_id: id, target_id: id, timestamps: timestamps }
+    UserFeedback: { id: id, source_id: id, target_id: id, content: text, value: int, timestamps: timestamps }

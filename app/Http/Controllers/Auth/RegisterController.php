@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+include_once(base_path().'/app/helpers.php');
 
 class RegisterController extends Controller
 {
@@ -55,7 +56,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'min:9','max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:1', 'confirmed'],
         ]);
     }
@@ -68,15 +69,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $phone = parsePhone($data['phone']);
 
         $user = User::create([
-            'name' => $data['name'],
-            'phone' => $data['phone'],
+            'name' => trim($data['name']),
+            'phone' => $phone,
             'password' => Hash::make($data['password']),
-            'usertype' => $data['usertype'],
-            'score' => 3,
-            'language' => $data['language'],
-            'region' => $data['region'],
+            'usertype' => $data['usertype']  == User::typeMaster ? User::typeMaster : User::typeClient,
+            'rating' => 5,
+            'language' => join(',', $data['language'] ?? ['ru']),
+            'region' => join(',', $data['region'] ?? ['_israel']),
         ]);
 
 
@@ -86,20 +88,20 @@ class RegisterController extends Controller
 
                 foreach ($data['subspec1'] as $subspec1) {
                     $spec_data[] = [
-                        $user->id, 
-                        $data['spec1'], 
-                        $subspec1
+                        'user_id' => $user->id, 
+                        'spec_id' => $data['spec1'], 
+                        'subspec_id' => $subspec1
                     ];
                 }
             } else {
                 $spec_data[] = [
-                        $user->id, 
-                        $data['spec1'], 
-                        0
+                        'user_id' => $user->id, 
+                        'spec_id' => $data['spec1'], 
+                        'subspec_id' =>  0
                     ];
             }
 
-            DB::insert("insert into user_spec (user_id, spec_id, subspec_id) values(?,?,?)", $spec_data);
+            DB::table('user_spec')->insert($spec_data);
         }
 
         Auth::loginUsingId($user->id);

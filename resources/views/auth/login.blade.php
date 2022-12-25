@@ -69,7 +69,7 @@
                     </div> --}}
 
                     <div class="form-group row mb-0 d-flex">
-                        <div class="col-md-8 d-flex" style="column-gap: 1rem;">
+                        <div class="button-block col-md-8 d-flex" style="column-gap: 1rem;">
                             <button type="submit" class="button-primary">
                                 {{ __('Login') }}
                             </button>

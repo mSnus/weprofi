@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+include_once(base_path().'/app/helpers.php');
 class LoginController extends Controller
 {
     /*
@@ -43,12 +44,21 @@ class LoginController extends Controller
     {
         return 'phone';
     }
-
+ 
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
             'phone' => 'required|string',
             'password' => 'required|string',
         ]);
+    }
+
+    public function attemptLogin(Request $request)
+    {
+        $request['phone'] = parsePhone($request->phone);
+
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->boolean('remember')
+        );
     }
 }

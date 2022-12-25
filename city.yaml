@@ -1,0 +1,14 @@
+models:
+  City:
+    id
+    title: string:50
+    slug: string:20
+controllers:
+  City:
+    index:
+      query: all
+      render: city.index with:posts
+
+    store:
+      save: city
+      validate: title,slug

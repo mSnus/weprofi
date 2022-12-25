@@ -1,14 +1,13 @@
 models:
-  City:
+  UserFeedback:
     id
-    title: string:50
-    slug: string:20
+    source_id: id
+    target_id: id
+    content: text
+    value: int
+    timestamps
 controllers:
-  City:
-    index:
-      query: all
-      render: city.index with:posts
-
+  UserViews:
     store:
-      save: city
-      validate: title,slug
+      save: user_feedback
+      validate: value,content

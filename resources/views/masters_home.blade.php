@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="mt-2">
-                                <x-form-textarea id="content" label="Подробное описание" class="block mt-1 w-full"
+                                <x-form-textarea id="content" label="Дробное описание" class="block mt-1 w-full"
                                     type="text" name="content">
                                     {{ $master->content ?? old('content') }}
                                 </x-form-textarea>

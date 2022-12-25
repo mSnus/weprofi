@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserFeedback;
 use App\Models\Userinfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,17 @@ class UserController extends Controller
     {
         $data = User::getData($id);
 
-        return view('user_page', $data);
+        $feedback = UserFeedback::gePersonalFeedback(Auth::id(), $id) ?? (object) ['value'=>5, 'content'=>''];
+
+        if (!isset($feedback->value)) $feedback->value = 5;
+        if (!isset($feedback->content)) $feedback->content = '';
+
+        return view('user_page', [
+            'user_id' => $data['user_id'],
+            'user' => $data['user'],
+            'gallery' => $data['gallery'],
+            'skills' => $data['skills'],
+            'feedback' => $feedback]);
     }
 
 
@@ -73,7 +84,6 @@ class UserController extends Controller
                 
                     $master = new Userinfo(['user_id' => $id]);
                     $master->user_id = $id;
-                    $master->rating = 5;
                 }
 
                 $master->content = trim($request->content) ?? '';
@@ -153,5 +163,43 @@ class UserController extends Controller
         }
 
         return redirect('/profile');
+    }
+
+    private function recalculateRating($user_id){
+        $user = User::find($user_id);
+
+        $new_rating = DB::table('user_feedback')
+            ->selectRaw('avg(value) as rating')
+            ->where('target_id', '=', $user_id)
+            ->get()
+            ->first();
+
+        $user->rating = round($new_rating->rating);
+        $user->update();
+    }
+
+    public function sendFeedback(Request $request, $target_id){
+        $source_id = Auth::id();
+
+        if ($source_id != $target_id) {
+            $content = trim($request->feedback_text ?? '');
+            $value = min(max($request->feedback_rating ?? 5, 1), 5);
+
+            DB::table('user_feedback')
+                ->updateOrInsert(
+                [
+                    'source_id' => $source_id, 
+                    'target_id' => $target_id
+                ],
+                [
+                    'content' => $content, 
+                    'value' => $value,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]
+            );
+
+            $this->recalculateRating($target_id);
+        }
+        return redirect('/user/'.$target_id);
     }
 }

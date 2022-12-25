@@ -3,6 +3,8 @@
 @section('title', 'WeProfi')
 
 @section('head')
+    <!-- blade:user_page -->
+
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -123,7 +125,7 @@
 
     @guest
         <div class="register-block">
-            <button class="primary" onclick="window.location.href='/login'">посмотреть контакт</button>
+            <button class="primary" onclick="window.location.href='/login'">Посмотреть&nbsp;контакт</button>
             <div class="need-registration">
                 Для просмотра контактов необходимо <a href="/register">зарегистрироваться</a><br>
                  или <a href="/login">войти на сайт</a>
@@ -133,7 +135,39 @@
 
     @auth
     <div class="profi-contact" id="contact">
-        <div class="button-primary" onclick="showContact()">посмотреть контакт</div>
+        <div class="button-primary" onclick="showContact()">Посмотреть&nbsp;контакт</div>
+    </div>
+
+    @if ($user->id != Auth::id())
+        <div class="profi-feedback" id="feedback">
+            <div class="button-tertiary" onclick="showFeedback()">Оставить отзыв</div>
+        </div>    
+    @endif
+    
+
+    <div class="profi-feedback__form" style="display: none;">
+        <form id="feedbackForm" class="form-group" action="/feedback/{{ $user_id }}" method="POST">
+            @csrf
+
+            <div class="feedback-stars" id="feedbackStars">
+                @for ($i = 1; $i <= 5; $i++)
+                    @php 
+                        $src = ($i <= $feedback->value) ? '/img/star.svg' : '/img/star_off.svg'; 
+                    @endphp
+
+                    <img src="{{ $src }}" width="32" alt="star" id="feedbackStar{{ $i }}" onclick="setRating({{ $i }})">
+                @endfor
+            </div>
+
+            <input type="hidden" name="feedback_rating" id="feedbackRating" value="5">
+
+            <label for="feedbackForm">Вы можете написать, что вам понравилось или не понравилось:</label>
+
+            <textarea name="feedback_text" id="feedbackText" class="form-control block mt-1 w-full" cols="30" rows="10"
+            >{{ $feedback->content }}</textarea>
+
+            <button type="submit" class="button-primary">Отправить отзыв</button>
+        </form>
     </div>
 
     <script>
@@ -149,11 +183,26 @@
                 </svg>
                 {{ $user->phone }}
                 </div>
-            <div class="button-primary" onclick="callPhone('{{ $user->phone }}')">позвонить</div>`
+            <div class="button-primary" onclick="callPhone('{{ $user->phone }}')">Позвонить</div>`
         }
 
         function callPhone(phone) {
-            window.location.href='tel://'+phone.replace('[^0-9\+]','');
+            window.location.href='tel:'+phone.replace('[^0-9\+]','');
+        }
+
+        function showFeedback() {
+            $('.profi-feedback').hide('slow');
+            $('.profi-feedback__form').show('slow');
+        }
+
+        function setRating(newValue) {
+            console.log(newValue);
+            $('#feedbackForm #feedbackRating').val(newValue);
+
+            for (let i = 1; i <= 5; i++){
+                const src = (i <= newValue) ? '/img/star.svg' : '/img/star_off.svg';
+                $('#feedbackForm #feedbackStar' + i)[0].src = src;
+            }
         }
     </script>
     @endauth

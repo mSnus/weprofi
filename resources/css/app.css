@@ -11,7 +11,7 @@ body {
 }
 
 #app {
-    max-width: calc(min(80vw, 540px));
+    max-width: calc(min(80vw, 740px));
     margin: 0 auto;
   }
 
@@ -102,6 +102,22 @@ a:hover {
     width: fit-content;
 }
 
+.register-form-simple button {
+    margin-left: 9px;
+}
+
+
+/*  кнопки */
+.button-block {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.button-block .button-primary {
+    margin-left: 2rem;
+}
+
 button.primary, .button-primary {
     min-width: 13rem;
     height: 3rem;
@@ -119,7 +135,7 @@ button.primary, .button-primary {
 }
 
 button.secondary, .button-secondary {
-    min-width: 13rem;
+    min-width: 8rem;
     height: 3rem;
     background: #EFEEEB;
 	padding: 14px 55px;
@@ -185,6 +201,10 @@ button.tertiary, .button-tertiary {
 .form-register select,
 .form-register textarea {
     min-width: 300px;
+}
+
+.form-group {
+    justify-content: center;
 }
 
 .form-group label, .col-form-label {
@@ -266,9 +286,9 @@ textarea.form-control {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.25rem;
-    color: #858282;
+    color: #6b6767;;
     outline: none;
-    border-radius: 40px;
+    border-radius: 20px;
     padding: 12px 20px;
     margin-left: 8px;
 }
@@ -427,7 +447,8 @@ select.form-control[multiple] {
 
 .user .price-block .price-value {
     text-align: left;
-    min-width: 110px;
+    font-family: "Open Sans", sans-serif;
+    min-width: 140px;
     max-width: 250px;
     font-weight: 900;
     margin-left: 2rem;
@@ -454,6 +475,15 @@ select.form-control[multiple] {
     margin-right: auto;
 }
 
+.user .price-text {
+    text-align: left;
+}
+
+
+.user .price-text {
+    text-align: left;
+}
+
 .empty-result {
     margin-top: 2rem;
     font-size: 1.5rem;
@@ -476,18 +506,18 @@ select.form-control[multiple] {
     margin-right: auto;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+justify-content: flex-end;
 }
 
 .profile .avatar svg{
     width: 2rem;
     height: 2rem;
-    fill: #ffffff70;
+    fill: #766d6b;
 }
 
 .profile .avatar:hover svg{
-    fill: #ffffffff;
+    fill: #858282;
     transition: fill 0.5s ease;
 }
 
@@ -517,6 +547,7 @@ select.form-control[multiple] {
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
+    row-gap: 0.5rem;
 }
 
 .profile .gallery img {
@@ -538,6 +569,46 @@ select.form-control[multiple] {
     width: 24px;
     height: 24px;
   }
+
+/* отправка отзыва */
+#feedbackForm {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.profi-feedback {
+    margin-top: 2rem;
+}
+
+.feedback-stars {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 12px;
+}
+
+.feedback-stars img {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.gallery-item {
+    position: relative;
+  }
+
+.button-delete {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    filter: drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7));
+    cursor: pointer;
+}  
 
 /* поиск */
 
@@ -657,3 +728,10 @@ div#map_id {
     font-weight: 100;
     font-family: 'Open Sans', sans-serif;
 }
+
+
+/* backpack  */
+
+.noty_bar {
+    display: none !important;
+  }

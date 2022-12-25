@@ -13,12 +13,13 @@ function showSubspecsList(selectId, spec, subspecs, user_subspecs=null){
             selectRef.removeChild(selectRef.lastChild)
         }
 
-        let option = document.createElement("option");
-        option.value = 0;
-        option.text = '- без уточнения -';
-        if (user_subspecs === null) { option.selected = true;}
-        selectRef.appendChild(option);                            
+        // let option = document.createElement("option");
+        // option.value = 0;
+        // option.text = '- без уточнения -';
+        // if (user_subspecs === null) { option.selected = true;}
+        // selectRef.appendChild(option);                            
 
+        let first = true;
         for (const val of options)   {
             let option = document.createElement("option");
             option.value = val.key;
@@ -26,15 +27,26 @@ function showSubspecsList(selectId, spec, subspecs, user_subspecs=null){
             if (user_subspecs !== null) {
                 if ( user_subspecs.includes(val.key) ) {
                     option.selected = true;
-                } 
-                
+                }                 
+            } else {
+                if (first) {
+                // if (val.key == 'acre') {
+                    option.selected = true;
+                    first = false;
+                }
             }
             selectRef.appendChild(option);
         }
 
 
         $('#'+selectId+'_row').show();
+        // $(selectRef).val(1).select2();
     } else {
         $('#'+selectId+'_row').hide();
     }
+}
+
+
+function setDefaultSelection(){
+    document.getElementById('region').select2("trigger", "select", "val", "acre");
 }

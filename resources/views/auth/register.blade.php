@@ -64,7 +64,7 @@
 
                         <input type="hidden" name="usertype" id="usertype" value="{{ App\Models\User::typeClient }}">
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 register-form-simple">
                             <div class="col-md-8 offset-md-4">
                                 
                                 <button type="submit" class="primary">
@@ -84,7 +84,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 
-                                <button type="button" class="tertiary" onclick="registerProfi()">
+                                <button type="button" class="tertiary m-auto" onclick="registerProfi()">
                                     Создать&nbsp;профиль
                                 </button>
                             </div>

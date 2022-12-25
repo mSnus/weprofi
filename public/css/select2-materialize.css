@@ -186,6 +186,7 @@
 }
 
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    font-size: 0.9rem;
     color: #999
 }
 
@@ -249,6 +250,7 @@
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
+    font-size: 0.9rem;
     color: #999;
     margin-top: 5px;
     float: left
@@ -286,6 +288,7 @@
 }
 
 .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice, .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder, .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-search--inline {
+    font-size: 0.9rem;
     float: right
 }
 
@@ -332,7 +335,8 @@
     border: none;
     outline: 0;
     box-shadow: none;
-    -webkit-appearance: textfield
+    -webkit-appearance: textfield;
+    cursor: pointer;
 }
 
 .select2-container--default .select2-results > .select2-results__options {
@@ -423,6 +427,7 @@
 }
 
 .select2-container--classic .select2-selection--single .select2-selection__placeholder {
+    font-size: 0.9rem;
     color: #999
 }
 
@@ -701,4 +706,12 @@
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
     border-right: none;
+}
+
+select2-search select2-search--inline textarea::-moz-placeholder {
+    font-size: 0.9rem;
+}
+
+select2-search select2-search--inline textarea::placeholder {
+    font-size: 0.9rem;
 }
