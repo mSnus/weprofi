@@ -33,7 +33,7 @@ class UserFeedback extends Model
         'target_id' => 'integer',
     ];
 
-    public static function gePersonalFeedback($source_id, $target_id)
+    public static function getFeedbackFromUser($source_id, $target_id)
     {
         $feedback = 
             DB::table('user_feedback')
@@ -42,6 +42,21 @@ class UserFeedback extends Model
             ->where('target_id', '=', $target_id)
             ->get()
             ->first();
+
+        return $feedback;
+    }
+
+    public static function getFeedbackList($target_id)
+    {
+        $feedback = 
+            DB::table('user_feedback')
+            ->select('source_id', 'target_id', 'user_feedback.content', 'user_feedback.value', 'user_feedback.updated_at',
+            'users.name'
+            )
+            ->where('target_id', '=', $target_id)
+            ->leftJoin('users', 'users.id', '=', 'source_id')
+            ->get()
+            ->all();
 
         return $feedback;
     }

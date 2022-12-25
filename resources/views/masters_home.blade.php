@@ -7,53 +7,51 @@
         </div>
     @endif
 
+    @php
+        $feedbacks = App\Models\UserFeedback::getFeedbackList(Auth::id());
+    @endphp
+
+    @auth
     <div class="container">
         <div class="row justify-content-center">
-            @auth
                 <div class="col-md-12">
-                    <h1><a href="/user/{{Auth::user()->id}}">Ваш профиль</a>:</h1>
+                    @if (Auth::user()->isMaster())
+                        @include('components.profile_navigation', ['section' => 'feedback'])
+                    @else
+                        <h1>Основные данные:</h1>
+                    @endif
+                    
+                    @if (count($feedbacks) > 0)
+                        @foreach ($feedbacks as $feedback)
+                            <div class="feedback-list">
+                                <div class="feedback-name">{{ $feedback->name }} :</div>
 
-                    <div class="card-body d-flex flex-nowrap">
+                                <div class="feedback-date">
+                                    {{ date('d-m-Y', strtotime($feedback->updated_at)) }}
+                                </div>
 
-                        <x-form :action="route('master.update', Auth::user()->id)" class=" d-flex flex-wrap w-100 mb-4 mr-4 form-with-map form-profile">
-                            @method('PUT')
+                                <div>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @php 
+                                            $src = ($i <= $feedback->value) ? '/img/star.svg' : '/img/star_off.svg'; 
+                                        @endphp
+                    
+                                        <img src="{{ $src }}" width="16" alt="star" id="feedbackStar{{ $i }}">
+                                    @endfor
+                                </div>
 
-                            @include('auth.register-fields', ['password_required' => false])
+                                <div class="feedback-content">
+                                    {{ $feedback->content}}
+                                </div>
 
-                            <div class="mt-4">
-                                <x-form-input id="tagline" label="Краткое описание" class="block mt-1 w-full" 
-                                type="text" name="tagline" :value="$master->tagline ?? old('tagline')"/>
-                            </div>
-
-                            <div class="mt-2">
-                                <x-form-textarea id="content" label="Дробное описание" class="block mt-1 w-full"
-                                    type="text" name="content">
-                                    {{ $master->content ?? old('content') }}
-                                </x-form-textarea>
-                            </div>
-
-                            <div class="mt-2">
-                                <x-form-textarea id="pricelist" label="Прайс (образец для красивого оформления: 'Услуга__100sh/час')" class="block mt-1 w-full"
-                                    type="text" name="pricelist">
-                                    {{ $master->pricelist ?? old('pricelist') }}
-                                </x-form-textarea>
-                            </div>                            
-
-
-                            <div class="offer-actions d-flex flex-nowrap align-items-start">
-                                <x-form-submit class="ml-4 button-primary">
-                                    Сохранить
-                                </x-form-submit>
-
-                                <button class="secondary" onclick="window.location.href='/logout'; return false;">
-                                    Выйти
-                                </button>
-                            </div>
-
-                        </x-form>
-                    </div>
-
-                @endauth
+                            </div>    
+                        @endforeach    
+                    @else
+                        Пока никто не оставлял о вас отзывы...
+                    @endif
+                    
+                    
             </div>
         </div>
+    @endauth    
     @endsection

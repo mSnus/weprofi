@@ -125,7 +125,7 @@
 
     @guest
         <div class="register-block">
-            <button class="primary" onclick="window.location.href='/login'">Посмотреть&nbsp;контакт</button>
+            <button class="primary" onclick="window.location.href='/login?return=user/{{ $user->id }}'">Посмотреть&nbsp;контакт</button>
             <div class="need-registration">
                 Для просмотра контактов необходимо <a href="/register">зарегистрироваться</a><br>
                  или <a href="/login">войти на сайт</a>

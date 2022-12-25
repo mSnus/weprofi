@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $data = User::getData($id);
 
-        $feedback = UserFeedback::gePersonalFeedback(Auth::id(), $id) ?? (object) ['value'=>5, 'content'=>''];
+        $feedback = UserFeedback::getFeedbackFromUser(Auth::id(), $id) ?? (object) ['value'=>5, 'content'=>''];
 
         if (!isset($feedback->value)) $feedback->value = 5;
         if (!isset($feedback->content)) $feedback->content = '';
