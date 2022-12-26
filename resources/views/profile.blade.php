@@ -172,7 +172,7 @@
                                 </div>
 
                                 <div class="form-group row mt-4">
-                                    <label for="tagline" class="col-md-12 mt-4">Галерея работ</label>
+                                    <label for="tagline" class="col-md-12 mt-4"><h2>Галерея работ</h2></label>
                                     <div class="form-hint">Вы можете закачать до 10 файлов размером не более 10Мб</i>
                                     </div>
 

@@ -57,6 +57,10 @@ class LoginController extends Controller
     {
         $request['phone'] = parsePhone($request->phone);
 
+        if (isset($request->return)) {
+            $this->redirectTo = $request->return;
+        }
+
         return $this->guard()->attempt(
             $this->credentials($request), $request->boolean('remember')
         );

@@ -63,6 +63,8 @@ a:hover {
     flex-basis: 100%;
     display: flex;
     justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 .topbar .cabinet {
@@ -84,6 +86,8 @@ a:hover {
 .topbar .logout-wrapper {
     display: flex;
     justify-content: flex-end;
+    flex-grow: 0;
+    flex-shrink: 1;
 }
 
 .topbar .logout {
@@ -125,7 +129,7 @@ a:hover {
 }
 
 .button-block .button-primary {
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
 }
 
 button.primary,
