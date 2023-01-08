@@ -54,7 +54,7 @@
                             </div>
                             <div class="title">{{ $person->name }}</div>
                             <div class="rating">
-                                @for ($i = 1; $i <= 5; $i++)
+                                @for ($i = 1; $i <= $person->rating; $i++)
                                     <img src="/img/star.svg" alt="star">
                                 @endfor
                             </div>

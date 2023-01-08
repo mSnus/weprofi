@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "backpack/crud": "4.1.*",
+        "backpack/crud": "^5.4",
         "backpack/settings": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -20,7 +20,7 @@
         "wulfheart/pretty_routes": "^0.3.0"
     },
     "require-dev": {
-        "backpack/generators": "^3.1",
+        "backpack/generators": "^3.3",
         "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
