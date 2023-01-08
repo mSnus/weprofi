@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Subspec extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
     /**
@@ -39,6 +41,12 @@ class Subspec extends Model
     {
         return $this->belongsTo(Spec::class);
     }
+
+    public function specName()
+    {
+        return Spec::where('id', $this->spec_id)->firstOrFail()->title;
+    }
+
 
     public function users()
     {

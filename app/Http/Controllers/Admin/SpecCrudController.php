@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\SpecRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class UserCrudController
+ * Class SpecCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class UserCrudController extends CrudController
+class SpecCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\User::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
-        CRUD::setEntityNameStrings('user', 'users');
+        CRUD::setModel(\App\Models\Spec::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/spec');
+        CRUD::setEntityNameStrings('категория', 'категории');
     }
 
     /**
@@ -39,17 +39,8 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
-        CRUD::column('phone');
-
-        $this->crud->addColumn(
-            [
-                'name'  => 'usertype',
-                'label' => 'Тип',
-                'type'  => 'model_function',
-                'function_name' => 'getUserRoleStringAttribute',
-             ],
-        );
+        CRUD::column('title');
+        // CRUD::column('content');
     }
 
     /**
@@ -60,12 +51,10 @@ class UserCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(UserRequest::class);
+        CRUD::setValidation(SpecRequest::class);
 
-        CRUD::field('name');
-        CRUD::field('phone');
-        CRUD::field('password');
-        // CRUD::field('usertype');
+        CRUD::field('title');
+        CRUD::field('content');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
