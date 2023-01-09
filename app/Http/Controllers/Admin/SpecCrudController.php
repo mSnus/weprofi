@@ -54,7 +54,7 @@ class SpecCrudController extends CrudController
         CRUD::setValidation(SpecRequest::class);
 
         CRUD::field('title');
-        CRUD::field('content');
+        CRUD::field('ordering');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

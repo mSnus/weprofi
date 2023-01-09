@@ -17,7 +17,7 @@ class CityCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -28,7 +28,7 @@ class CityCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\City::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/city');
-        CRUD::setEntityNameStrings('city', 'cities');
+        CRUD::setEntityNameStrings('город', 'города');
     }
 
     /**
@@ -41,6 +41,7 @@ class CityCrudController extends CrudController
     {
         CRUD::column('title');
         CRUD::column('slug');
+        CRUD::column('macroregion');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -61,6 +62,7 @@ class CityCrudController extends CrudController
 
         CRUD::field('title');
         CRUD::field('slug');
+        CRUD::field('macroregion');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

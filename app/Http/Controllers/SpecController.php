@@ -36,6 +36,7 @@ class SpecController extends Controller
                     }
                     );
 				})
+                // ->orderBy('spec.ordering', 'ASC')
                 ->distinct()
                 ->get();
 

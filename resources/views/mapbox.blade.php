@@ -32,7 +32,7 @@
 
 
 	<script>
-		 mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2tvNGdweGxnMTI4bDJ4bHBtdG93emo0bSJ9.T7mUOCjIaSp_z5ylugLHyA';
+		 mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2xjcDR6aXl6MW1ucjNucnlla2QxMDlxNyJ9.TkJDK4vDlvyO62e_OVbJ3A';
 
 
 		 var defaultLng = 35.074002;
@@ -47,7 +47,7 @@
 		 }
 
 
-		 $(document).ready(() => {
+		 document.addEventListener("DOMContentLoaded", ()=>{
 			  var geolOptions = {
 					enableHighAccuracy: true,
 					timeout: 5000,
@@ -108,7 +108,7 @@
 					map_id.addControl(new mapboxgl.NavigationControl());
 					map_id.setLayoutProperty('country-label', 'text-field', [
 						 'get',
-						 'name_ru'
+						 'name_en'
 					]);
 
 					// var coordinates = document.getElementById('coordinates');
