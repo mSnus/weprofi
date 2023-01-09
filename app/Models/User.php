@@ -32,8 +32,20 @@ class User extends Authenticatable
 		'phone',
 		'password',
 		'usertype',
-		'language',
-		'region'
+		
+		'phone2',
+        'language',
+        'tagline',
+        'content',
+        'rating',
+        'pricelist',
+        'location',
+        'region',
+
+        'spec_id',
+        'subspec_id',
+
+        'avatar'
 	];
 
 	/**
@@ -195,7 +207,7 @@ class User extends Authenticatable
      */
     public function getUsertypeAttribute($value)
     {
-		// $usertype = SELF::with('user.usertype')->get();
+		// $usertype = SELF::with('users.usertype')->get();
         return $value;
     }
 
@@ -211,8 +223,7 @@ class User extends Authenticatable
             $user = DB::table('users')
                 ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id', 'users.usertype', 'users.rating',
                         'images.path as avatar', 'users.created_at', 
-                        'userinfos.tagline', 'userinfos.content', 'userinfos.pricelist')
-                ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
+                        'users.tagline', 'users.content', 'users.pricelist')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
                              $join->on('images.type', '=', DB::raw("1"));

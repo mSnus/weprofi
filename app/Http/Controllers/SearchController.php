@@ -29,16 +29,16 @@ class SearchController extends Controller
 
     if ($term) {
         $persons = DB::table('users')
-            ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'userinfos.content' ,
-            'userinfos.tagline')
-            ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
+            ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'users.content' ,
+            'users.tagline')
             ->leftJoin('images', function ($join) {
                 $join->on('images.parent_id', '=', 'users.id');
                 $join->on('images.type', '=', DB::raw("1"));
             })
-            ->whereRaw('userinfos.content LIKE \'%'.mb_strtolower($term).'%\'  
-                        OR userinfos.tagline LIKE \'%'.mb_strtolower($term).'%\' 
-                        OR userinfos.pricelist LIKE \'%'.mb_strtolower($term).'%\' ')
+            ->where('users.status', 'active')
+            ->whereRaw('users.content LIKE \'%'.mb_strtolower($term).'%\'  
+                        OR users.tagline LIKE \'%'.mb_strtolower($term).'%\' 
+                        OR users.pricelist LIKE \'%'.mb_strtolower($term).'%\' ')
             ->distinct()
             ->get();
     }

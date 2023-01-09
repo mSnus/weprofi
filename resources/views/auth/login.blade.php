@@ -19,13 +19,13 @@
                                 name="phone" value="{{ old('phone') }}" required autocomplete="phone"
                                 placeholder="Номер телефона" autofocus>
 
-                            @if ($errors->any())
+                            {{-- @if ($errors->any())
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
-                            @endif
+                            @endif --}}
 
                             @error('name')
                                 <span role="alert">

@@ -18,18 +18,18 @@ class SpecController extends Controller
         $persons = null;
         $subspecs = null;
 
-        if ($request->spec_id) {
-            $spec_id = intval($request->spec_id);
-            $subspec_id = intval($request->subspec_id);
-            $persons = DB::table('user_spec')
-                ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'userinfos.tagline')
-                ->leftJoin('users', 'user_id', '=', 'users.id')
-                ->leftJoin('userinfos', 'userinfos.user_id', '=', 'users.id')
+        $spec_id = intval($request->spec_id);
+        $subspec_id = intval($request->subspec_id);
+
+        if ($spec_id > 0) {
+            $persons = DB::table('users')
+                ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'users.tagline')
                 ->leftJoin('images', function ($join) {
                     $join->on('images.parent_id', '=', 'users.id');
                     $join->on('images.type', '=', DB::raw("1"));
                 })
                 ->where('spec_id', $spec_id)
+                ->where('users.status', 'active')
                 ->when($subspec_id > 0, function ($q) use ($subspec_id) {
                     return $q->where(function ($query) use ($subspec_id){
                         $query->where('subspec_id', '=', $subspec_id)->orWhere('subspec_id', '=', 0);
@@ -47,8 +47,8 @@ class SpecController extends Controller
         }
 
         return view('profi_list', [
-            'spec_id' => $request->spec_id,
-            'subspec_id' => $request->subspec_id,
+            'spec_id' => $spec_id,
+            'subspec_id' => $subspec_id,
             'spec' => $spec,
             'persons' => $persons,
             'subspecs' => $subspecs

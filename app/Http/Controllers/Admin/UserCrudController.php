@@ -42,6 +42,8 @@ class UserCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
 
+        CRUD::column('phone2');
+
         $this->crud->addColumn(
             [
                 'name'  => 'usertype',
@@ -65,6 +67,20 @@ class UserCrudController extends CrudController
         CRUD::field('name');
         CRUD::field('phone');
         CRUD::field('password');
+
+        CRUD::field('phone2');
+        CRUD::field('language');
+        CRUD::field('tagline');
+        CRUD::field('content');
+        CRUD::field('rating');
+        CRUD::field('pricelist');
+        CRUD::field('location');
+        CRUD::field('region');
+
+        CRUD::field('spec_id');
+        CRUD::field('subspec_id');
+
+        CRUD::field('avatar');
         // CRUD::field('usertype');
 
         /**

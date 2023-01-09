@@ -264,6 +264,14 @@ h1,
     margin-bottom: 1rem;
 }
 
+.cat-header {
+    cursor: pointer;
+}
+
+.cat-header__back {
+    opacity: 0.5;
+}
+
 h2,
 .h2 {
     font-style: normal;
@@ -365,6 +373,10 @@ select.form-control[multiple] {
     margin-left: 1rem;
 }
 
+.specs .spec.subspec-current {
+    font-weight: bold;
+}
+
 /* Список пользователей */
 
 .users {
@@ -382,6 +394,8 @@ select.form-control[multiple] {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+
     height: 100%;
     cursor: pointer;
 
@@ -816,4 +830,14 @@ div#map_id {
 
 .noty_bar {
     display: none !important;
+}
+
+
+/*  системное */
+.alert-danger {
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 32px;
+    width: max-content;
 }

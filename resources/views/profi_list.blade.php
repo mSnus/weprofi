@@ -20,7 +20,12 @@
 
             {{-- поиск --}}
 
-            <h1 onclick="window.location.href='/'">{{ $spec->title }}</h1>
+            @php
+             $h1_link = (isset($subspec_id) && $subspec_id  > 0) ? '/spec/'.$spec_id : '/';
+             $h1_pre = (isset($subspec_id) && $subspec_id  > 0) ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back">' : '';
+            @endphp
+
+            <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }}</h1>
 
             @include('components.search')
 
@@ -35,8 +40,9 @@
 
                 @if ($subspec_count > 0)
                     @foreach ($spec->subspecs as $subspec)
-                        <div class="spec"><a
-                                href="/spec/{{ $spec->id }}/{{ $subspec->id }}">{{ $subspec->title }}</a></div>
+                        <div class="spec {{ $subspec->id == $subspec_id ? 'subspec-current' : ''}}">
+                            <a href="/spec/{{ $spec->id }}/{{ $subspec->id }}">{{ $subspec->title }}</a>
+                        </div>
                     @endforeach
                 @endif
 
