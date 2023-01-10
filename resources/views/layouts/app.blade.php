@@ -171,7 +171,7 @@
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
 
             <div class="">
-                &copy; 2022 <img src="/img/logo.svg" width="220" class="mr-4 mb-2">
+                &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"></a>
             </div>
         </footer>
     </div>

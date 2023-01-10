@@ -60,16 +60,17 @@
     }
 
     .user {
-        width: 31%;
+        flex: 0 1 31%;
         font-size: 1.2rem;
         line-height: 1.2;
         position: relative;
     }
 
     .user .tagline {
-        max-width: 90%;
+        max-width: unset;
         font-size: 1rem;
         line-height: 1;
+        color: #6a98af;
     }
 
     .user .pricelist {

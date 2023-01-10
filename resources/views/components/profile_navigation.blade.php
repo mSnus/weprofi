@@ -18,5 +18,9 @@
         </div>
     @endif    
 
-    @endforeach
+@endforeach
+
+<div class="profile-navigation__section">
+    <a href="/user/{{ Auth::id() }}">Ваша страница</a>
+</div>
 </div>

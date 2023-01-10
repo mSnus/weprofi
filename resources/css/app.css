@@ -183,6 +183,21 @@ button.tertiary,
     cursor: pointer;
 }
 
+.button-whatsapp {
+    min-width: 13rem;
+    height: 3rem;
+    background: #70B685;
+    padding: 14px 55px;
+    border-radius: 40px;
+    color: #CEE7C8;
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+}
 
 /* регистрация и логин */
 .already-registered,
@@ -596,10 +611,13 @@ select.form-control[multiple] {
 .profi-contact {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .contact-phone {
     font-weight: 400;
+    width: 100%;
     font-size: 36px;
     color: #959E93;
     margin-bottom: 1.5rem;

@@ -54,6 +54,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['phone'] = parsePhone($data['phone']);
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'min:9','max:255', 'unique:users'],
@@ -71,14 +73,26 @@ class RegisterController extends Controller
     {
         $phone = parsePhone($data['phone']);
 
+        $spec_id = '0';
+        $subspecs = '0';
+
+        if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
+            $subspecs = join(',', $request->subspec1);
+        } else {
+            $subspecs = intval($request->subspec1 ?? '0') ;
+        }
+
         $user = User::create([
             'name' => trim($data['name']),
             'phone' => $phone,
             'password' => Hash::make($data['password']),
             'usertype' => $data['usertype']  == User::typeMaster ? User::typeMaster : User::typeClient,
-            'rating' => 5,
+            'rating' => 0,
             'language' => join(',', $data['language'] ?? ['ru']),
             'region' => join(',', $data['region'] ?? ['_israel']),
+            'status' => 'active',
+            'spec_id' => $spec_id,
+            'subspec_id' => $subspecs
         ]);
 
 

@@ -4,6 +4,13 @@
 
 @section('content')
 
+{{-- 
+    uses:
+        $spec_id
+        $subspec_id
+        $persons
+ --}}
+
     <div class="d-flex justify-content-center section-requests">
 
         <div class="newoffer-form mr-0">
@@ -49,25 +56,7 @@
             </div>
 
             @if (!is_null($persons) && count($persons))
-                <div class="users">
-
-                    @foreach ($persons as $person)
-                        <div class="user" onclick="window.location.href='/user/{{ $person->user_id }}'">
-                            
-                            <div class="avatar" 
-                                style="background-image: url({{ $person->avatar ?? '/img/avatar.png' }})"
-                                 alt="User avatar">
-                            </div>
-                            <div class="title">{{ $person->name }}</div>
-                            <div class="rating">
-                                @for ($i = 1; $i <= $person->rating; $i++)
-                                    <img src="/img/star.svg" alt="star">
-                                @endfor
-                            </div>
-                            <div class="tagline">{{ $person->tagline ?? 'профи' }}</div>
-                        </div>
-                    @endforeach
-                </div>
+                @include('components.profi-list', $persons)
             @else
                 <div class="empty-result">Тут пока никого нет</div>
             @endif

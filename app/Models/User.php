@@ -42,6 +42,8 @@ class User extends Authenticatable
         'location',
         'region',
 
+		'status',
+
         'spec_id',
         'subspec_id',
 
@@ -85,20 +87,6 @@ class User extends Authenticatable
 		return $this->user_role->title;
 	}
 
-	public function offers()
-	{
-		switch ($this->usertype) {
-			case SELF::typeClient:
-				return \App\Models\Offer::where('client', $this->id)->get();
-
-			case SELF::typeMaster:
-				return $this->user_role->counteroffers($this->id);
-
-			default:
-				throw new \Exception("No offers for usertype ".$this->user_role." exists", 1);
-		}
-	}
-
 	public function getUserRoleAttribute(){
 		switch ($this->usertype) {
 			case SELF::typeClient:
@@ -109,6 +97,9 @@ class User extends Authenticatable
 
 			case SELF::typeModerator:
 				return  $this->moderator();
+
+			case SELF::typeAdmin:
+				return  $this->admin();				
 
 			default:
 				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
@@ -125,6 +116,9 @@ class User extends Authenticatable
 
 			case SELF::typeModerator:
 				return 'moderator';
+
+				case SELF::typeAdmin:
+					return 'admin';
 
 			default:
 				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
@@ -152,6 +146,11 @@ class User extends Authenticatable
 		return Moderator::where('userid', $this->id)->first();
 	}
 
+	public function admin()
+	{
+		return Moderator::where('userid', $this->id)->first();
+	}
+
 	public function master()
 	{
 		return Master::where('userid', $this->id)->first();
@@ -171,7 +170,8 @@ class User extends Authenticatable
 					->get()
 					->toArray();
 
-		$arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
+		// $arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
+		$arrSpecs = explode(',', $this->spec_id);
 		return $arrSpecs;
 				
 	}
@@ -221,7 +221,8 @@ class User extends Authenticatable
         if ($user_id) {
             $user_id = intval($user_id);
             $user = DB::table('users')
-                ->select('users.name', 'users.phone', 'users.id as user_id', 'users.location', 'users.region', 'users.id', 'users.usertype', 'users.rating',
+                ->select('users.name', 'users.phone', 'users.phone2', 'users.id as user_id', 
+						'users.location', 'users.region', 'users.id', 'users.usertype', 'users.rating', 'users.tagline',
                         'images.path as avatar', 'users.created_at', 
                         'users.tagline', 'users.content', 'users.pricelist')
                 ->leftJoin('images', function($join) {

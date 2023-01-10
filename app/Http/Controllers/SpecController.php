@@ -24,18 +24,19 @@ class SpecController extends Controller
         if ($spec_id > 0) {
             $persons = DB::table('users')
                 ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'users.tagline')
+                ->leftJoin('user_spec', 'user_spec.user_id', '=', 'users.id')
                 ->leftJoin('images', function ($join) {
                     $join->on('images.parent_id', '=', 'users.id');
                     $join->on('images.type', '=', DB::raw("1"));
                 })
-                ->where('spec_id', $spec_id)
-                ->where('users.status', 'active')
+                ->where('user_spec.spec_id', $spec_id)
                 ->when($subspec_id > 0, function ($q) use ($subspec_id) {
                     return $q->where(function ($query) use ($subspec_id){
-                        $query->where('subspec_id', '=', $subspec_id)->orWhere('subspec_id', '=', 0);
+                        $query->where('user_spec.subspec_id', '=', $subspec_id)->orWhere('user_spec.subspec_id', '=', 0);
                     }
                     );
 				})
+                ->where('users.status', 'active')
                 // ->orderBy('spec.ordering', 'ASC')
                 ->distinct()
                 ->get();

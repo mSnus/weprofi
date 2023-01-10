@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
+include_once(base_path().'/app/helpers.php');
+
 class UserController extends Controller
 {
     /**
@@ -46,7 +48,8 @@ class UserController extends Controller
 			$user = User::findOrFail($id);
 
 			$user->name = $request->name;
-			$user->phone = $request->phone;
+			$user->phone  = parsePhone($request->phone);
+
 			$user->location = $request->location;
 			$user->usertype = ($request->usertype == User::typeMaster) ? User::typeMaster : User::typeClient;
             
@@ -59,7 +62,6 @@ class UserController extends Controller
 
                 DB::table('user_spec')->where('user_id', '=', $user->id)->delete();
 
-                // foreach();
                 if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
                     foreach ($request->subspec1 as $subspec) {
                         $spec_data[] = [
@@ -75,21 +77,21 @@ class UserController extends Controller
                         'subspec_id' => 0
                     ];
                 }
-
                 DB::table('user_spec')->insert($spec_data);
 
-                $master = Userinfo::where('user_id', $id)->first();
-
-                if ($master === null) {
-                
-                    $master = new Userinfo(['user_id' => $id]);
-                    $master->user_id = $id;
+                $subspecs = '0';
+                if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
+                    $subspecs = join(',', $request->subspec1);
+                } else {
+                    $subspecs = intval($request->subspec1 ?? '0') ;
                 }
 
-                $master->content = trim($request->content) ?? '';
-                $master->tagline = trim($request->tagline) ?? '';
-                $master->pricelist = trim($request->pricelist) ?? '';
-                $master->save();
+                $user->spec_id = intval($request->spec1 ?? 0);
+                $user->subspec_id = $subspecs ;
+                $user->content = trim($request->content) ?? '';
+                $user->tagline = trim($request->tagline) ?? '';
+                $user->pricelist = trim($request->pricelist) ?? '';
+                // $master->save();
 			}
 
 			$user->save();
