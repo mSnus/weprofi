@@ -36,11 +36,21 @@
   </style>
 @endsection
 
+
+
 @section('content')
 <div class="row">
   <div class="col-md-12 text-center">
+      <a href="{{ url('/') }}">
+          <img src="/img/logo-simple.svg">
+      </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-center">
+
     <div class="error_number">
-      <small>ERROR</small><br>
+      <small>ОШИБКА</small><br>
       {{ $error_number }}
       <hr>
     </div>

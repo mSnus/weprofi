@@ -11,13 +11,16 @@
     "/img/avatars/myimage_232c5f98a18417ba09e88e1e7fdecd2d.jpeg": "/img/avatars/myimage_232c5f98a18417ba09e88e1e7fdecd2d.jpeg",
     "/img/avatars/myimage_23c037fc363a3dfc00317ee14028263d.jpg": "/img/avatars/myimage_23c037fc363a3dfc00317ee14028263d.jpg",
     "/img/avatars/myimage_2801af4e7ae173ebe00862086a923473.jpg": "/img/avatars/myimage_2801af4e7ae173ebe00862086a923473.jpg",
+    "/img/avatars/myimage_2a4d870f7782e69202c35a4cc46c04db.jpg": "/img/avatars/myimage_2a4d870f7782e69202c35a4cc46c04db.jpg",
     "/img/avatars/myimage_2ba5add93d25e124f1fb27a285e07128.jpg": "/img/avatars/myimage_2ba5add93d25e124f1fb27a285e07128.jpg",
     "/img/avatars/myimage_3f84c0d27237faa78573c5d3a19da4aa.png": "/img/avatars/myimage_3f84c0d27237faa78573c5d3a19da4aa.png",
     "/img/avatars/myimage_450fde33bb852eb2113e27a756fa623f.jpg": "/img/avatars/myimage_450fde33bb852eb2113e27a756fa623f.jpg",
     "/img/avatars/myimage_458e1f36c9f2aa2ceaae2f01afb95f17.jpg": "/img/avatars/myimage_458e1f36c9f2aa2ceaae2f01afb95f17.jpg",
     "/img/avatars/myimage_55a3e608abadcfc2e15814a33094f0e2.png": "/img/avatars/myimage_55a3e608abadcfc2e15814a33094f0e2.png",
     "/img/avatars/myimage_66847dea0ce7ff18fdd0791bcff4948f.jpg": "/img/avatars/myimage_66847dea0ce7ff18fdd0791bcff4948f.jpg",
+    "/img/avatars/myimage_74b763dd64a6eadf16ba48cbb47a807a.jpeg": "/img/avatars/myimage_74b763dd64a6eadf16ba48cbb47a807a.jpeg",
     "/img/avatars/myimage_a2fb5f6c4698046b35798a64ba43157a.png": "/img/avatars/myimage_a2fb5f6c4698046b35798a64ba43157a.png",
+    "/img/avatars/myimage_b261d14dc294b1b38f97e0487fe4fd68.jpeg": "/img/avatars/myimage_b261d14dc294b1b38f97e0487fe4fd68.jpeg",
     "/img/avatars/myimage_b9c3d01887b4cc8f16f3cabef6214523.png": "/img/avatars/myimage_b9c3d01887b4cc8f16f3cabef6214523.png",
     "/img/avatars/myimage_bf411762ed7afea5f1eb5fa310234e07.jpg": "/img/avatars/myimage_bf411762ed7afea5f1eb5fa310234e07.jpg",
     "/img/avatars/myimage_d37f86d297b738fe173351a2cb814c84.jpeg": "/img/avatars/myimage_d37f86d297b738fe173351a2cb814c84.jpeg",
@@ -63,6 +66,7 @@
     "/img/icon2-tools.png": "/img/icon2-tools.png",
     "/img/icon3-rouble.png": "/img/icon3-rouble.png",
     "/img/icon4-mp.png": "/img/icon4-mp.png",
+    "/img/left.svg": "/img/left.svg",
     "/img/logo-big-v.svg": "/img/logo-big-v.svg",
     "/img/logo-simple.svg": "/img/logo-simple.svg",
     "/img/logo.png": "/img/logo.png",
@@ -94,6 +98,5 @@
     "/js/subspecs.js": "/js/subspecs.js",
     "/js/register.js": "/js/register.js",
     "/js/uploads.js": "/js/uploads.js",
-    "/js/gallery.js": "/js/gallery.js",
-    "/img/left.svg": "/img/left.svg"
+    "/js/gallery.js": "/js/gallery.js"
 }

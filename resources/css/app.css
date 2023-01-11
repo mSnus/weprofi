@@ -421,6 +421,7 @@ select.form-control[multiple] {
     margin-top: 1rem;
 
     color: #858282;
+    flex-basis: 31%;
 }
 
 .user.page {

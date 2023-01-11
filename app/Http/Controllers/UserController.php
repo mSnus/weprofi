@@ -26,7 +26,7 @@ class UserController extends Controller
         if (!isset($feedback->value)) $feedback->value = 5;
         if (!isset($feedback->content)) $feedback->content = '';
 
-        return view('user_page', [
+        return view('pages.user_page', [
             'user_id' => $data['user_id'],
             'user' => $data['user'],
             'gallery' => $data['gallery'],

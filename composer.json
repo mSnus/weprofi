@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "protonemedia/laravel-form-components": "^2.5",
+        "twilio/sdk": "^6.44",
         "wulfheart/pretty_routes": "^0.3.0"
     },
     "require-dev": {

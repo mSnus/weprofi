@@ -24,3 +24,4 @@ Route::get('/specs', function (Request $request) {
 
 Route::get('/specs', [App\Http\Controllers\SpecController::class, 'getSpecList']);
 Route::get('/subspecs', [App\Http\Controllers\SpecController::class, 'getSubspecList']);
+

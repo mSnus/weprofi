@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InviteController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpecController;
 use App\Http\Controllers\UserController;
@@ -48,6 +49,9 @@ Route::get('/profile', function () {
 
 Auth::routes();
 
+Route::get('/admin/sms', [App\Http\Controllers\SmsController::class, 'show']);
+Route::post('/admin/sms', [App\Http\Controllers\SmsController::class, 'send']);
+
 Route::get('logout', function ()
 {
     auth()->logout();
@@ -70,7 +74,7 @@ Route::get('/spec/{spec_id}/{subspec_id?}', [SpecController::class, 'index'])->n
 Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
 Route::get('/search/{term}', [SearchController::class, 'search'])->name('search');
 
-
+Route::get('/invite/{user_id}/{token}', [InviteController::class, 'processLink'])->name('invite');
 
 Route::resource('city', App\Http\Controllers\CityController::class)->only('index', 'store');
 

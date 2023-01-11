@@ -48,7 +48,7 @@ class SpecController extends Controller
             }
         }
 
-        return view('profi_list', [
+        return view('pages.profi_list', [
             'spec_id' => $spec_id,
             'subspec_id' => $subspec_id,
             'spec' => $spec,

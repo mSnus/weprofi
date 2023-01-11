@@ -45,7 +45,7 @@ class SearchController extends Controller
 
         $count = count($persons);
 
-    return view('search', [
+    return view('pages.search', [
         'term' => $term,
         'persons' => $persons,
         'count' => $count,
