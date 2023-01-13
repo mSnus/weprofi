@@ -17,6 +17,7 @@ class Userinfo extends Model
     protected $fillable = [
         'content',
         'pricelist',
+        'timetable',
         'rating',
         'avatar',
     ];

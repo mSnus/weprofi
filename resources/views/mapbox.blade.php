@@ -27,7 +27,13 @@
 
 <div class="mapbox-container">
 
-	<div id='map_id' class="m-auto" style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '420px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '420px' }}; margin-top: 20px;'></div>
+	<div 
+		id='map_id' 
+		class="m-auto" 
+		style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '100%' }}; 
+			  height: {{ isset($mapbox['width']) ? $mapbox['height'] : '100%' }};
+			  position: relative;
+			  margin-top: 1.2rem;'></div>
 	<pre id="coordinates" class="coordinates"></pre>
 
 

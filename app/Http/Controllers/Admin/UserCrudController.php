@@ -74,6 +74,7 @@ class UserCrudController extends CrudController
         CRUD::field('content');
         CRUD::field('rating');
         CRUD::field('pricelist');
+        CRUD::field('timetable');
         CRUD::field('location');
         CRUD::field('region');
 

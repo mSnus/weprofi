@@ -75,11 +75,15 @@
                 style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
                 alt="User avatar">
             </div>
+            
+            @if ($user->rating_count > 3)
             <div class="rating page">
                 @for ($i = 1; $i <= $user->rating; $i++)
                     <img src="/img/star.svg" alt="star">
                 @endfor
-            </div>
+            </div>    
+            @endif
+        
             <div class="tagline page">{{ $user->tagline ?? 'профи' }}</div>
             <div class="joindate">с нами с {{ $user->join_date }}</div>
             @if (!empty($skills))
@@ -91,6 +95,12 @@
             <div class="description">{!! $user->content !!}</div>
 
             <div class="pricelist">{!! $user->pricelist !!}</div>
+
+            @if (!empty($user->timetable))
+                <div class="h3">График работы</div>
+                <div class="pricelist">{{ $user->timetable }}</div>    
+            @endif
+            
 
             @if (!is_null($gallery) && count($gallery) > 0)
                 <div class="gallery" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
@@ -174,6 +184,10 @@
         function showContact(){
             let div = document.getElementById('contact');
             div.innerHTML = `
+            <div class="col-md-10 tell-about-us-warning">
+                {{ Setting::get('text_tell_about_us') }}
+            </div>
+
             <div class="contact-phone"  onclick="callPhone('{{ $user->phone }}')">
                 <img src="/img/phone.svg" width="24" height="24">
                 {{ $user->phone }}

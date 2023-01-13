@@ -77,6 +77,9 @@
                             <div class="col-md-8">
                                 <h2>Вы профессионал?</h2>
                             </div>
+                            <div class="col-md-10 price-warning">
+                                {{ Setting::get('text_free_period') }}
+                            </div>
                         </div>
 
                         @include('auth.professional-fields')

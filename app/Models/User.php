@@ -42,6 +42,10 @@ class User extends Authenticatable
         'location',
         'region',
 
+		'is_show_map',
+		'is_whatsap',
+		'is_whatsap2',
+
 		'status',
 
         'spec_id',
@@ -222,9 +226,10 @@ class User extends Authenticatable
             $user_id = intval($user_id);
             $user = DB::table('users')
                 ->select('users.name', 'users.phone', 'users.phone2', 'users.id as user_id', 
-						'users.location', 'users.region', 'users.id', 'users.usertype', 'users.rating', 'users.tagline',
+						'users.location', 'users.region', 'users.id', 'users.usertype', 
+						'users.rating', 'users.rating_count', 'users.tagline',
                         'images.path as avatar', 'users.created_at', 
-                        'users.tagline', 'users.content', 'users.pricelist')
+                        'users.tagline', 'users.content', 'users.pricelist', 'users.timetable')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
                              $join->on('images.type', '=', DB::raw("1"));
@@ -251,6 +256,8 @@ class User extends Authenticatable
 			$user->pricelist_raw = $user->pricelist;
 
             $user->pricelist = join("\n", $pricelist);
+
+			$user->timetable = trim($user->timetable);
 
             $user->join_date = date("d-m-Y", strtotime($user->created_at));
 

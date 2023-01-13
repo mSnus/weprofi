@@ -91,6 +91,7 @@ class UserController extends Controller
                 $user->content = trim($request->content) ?? '';
                 $user->tagline = trim($request->tagline) ?? '';
                 $user->pricelist = trim($request->pricelist) ?? '';
+                $user->timetable = trim($request->timetable) ?? '';
                 // $master->save();
 			}
 
@@ -171,12 +172,13 @@ class UserController extends Controller
         $user = User::find($user_id);
 
         $new_rating = DB::table('user_feedback')
-            ->selectRaw('avg(value) as rating')
+            ->selectRaw('avg(value) as rating, count(value) as rating_count')
             ->where('target_id', '=', $user_id)
             ->get()
             ->first();
 
         $user->rating = round($new_rating->rating);
+        $user->rating_count = round($new_rating->rating_count);
         $user->update();
     }
 

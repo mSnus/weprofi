@@ -298,6 +298,17 @@ h2,
     margin-bottom: 1rem;
 }
 
+.price-warning,
+.tell-about-us-warning {
+	line-height: 1.2;
+	color: #bca579;
+	font-size: 1.2rem;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
 
 .search {
     background: #EBECEB;
@@ -832,6 +843,14 @@ div#map_id {
 .mapboxgl-canvas {
     padding: 10px;
     border-radius: 8px;
+}
+
+.mapbox-container {
+    width: min(560px,100vw);
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    height: 420px;
 }
 
 /* Футер */

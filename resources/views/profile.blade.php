@@ -101,7 +101,7 @@
                             <input type="hidden" name="usertype" id="usertype" value="{{ $user->usertype }}">
 
                             @if (!$isMaster)
-                                <div id="userButtons" class="offer-actions d-flex flex-nowrap align-items-start mt-4">
+                                <div id="userButtons" class="offer-actions d-flex flex-nowrap align-items-start justify-content-center mt-4">
                                     <x-form-submit class="ml-4 button-primary mr-4">
                                         Сохранить
                                     </x-form-submit>
@@ -117,6 +117,9 @@
                             <div class="card-body">
                                 @if (!$isMaster)
                                     <h3 class="mt-4">Вы профессионал? </h3>
+                                    <div class="col-md-10 price-warning">
+                                        {{ Setting::get('text_free_period') }}
+                                    </div>
                                     <script>
                                         function showProfiFields() {
                                             document.getElementById('usertype').value = {{ App\Models\User::typeMaster }};
@@ -158,6 +161,11 @@
                                             <i>название услуги, два нижних подчеркивания, цена, sh</i>
                                         </div>
                                         <textarea id="pricelist" name="pricelist" class="form-control block mt-1 w-full" type="text" style="height: 12rem;">{{ $user->pricelist_raw ?? '' }}</textarea>
+                                    </div>
+
+                                    <div class="form-group row mt-2">
+                                        <label for="tagline" class="col-md-12">График работы</label>
+                                        <textarea id="timetable" name="timetable" class="form-control block mt-1 w-full" type="text" style="height: 12rem;">{{ $user->timetable ?? '' }}</textarea>
                                     </div>
 
                                     <div id="profiButtons" class="button-block">
