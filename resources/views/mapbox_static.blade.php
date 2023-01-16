@@ -2,7 +2,9 @@
 
     <div 
         id='{{ $mapbox['id'] }}' 
-        style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '400px' }}; height: {{ isset($mapbox['width']) ? $mapbox['height'] : '360px' }}; margin-top: 20px;'
+        style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '100%' }}; 
+              height: {{ isset($mapbox['width']) ? $mapbox['height'] : '100%' }}; 
+              margin-top: 20px;'
     ></div>
 
     <pre id="coordinates" class="coordinates"></pre>
