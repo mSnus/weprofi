@@ -250,23 +250,6 @@ button.tertiary,
 }
 
 
-/* каталог на главной */
-.specs {
-    text-align: left;
-    column-count: 2;
-    column-gap: 2rem;
-    padding-left: 20px;
-}
-
-.specs.single-column {
-    column-count: 1;
-}
-
-@media screen and (max-width: 768px) {
-    .specs {
-        column-count: 1;
-    }
-}
 
 h1,
 .h1 {
@@ -285,6 +268,7 @@ h1,
 
 .cat-header__back {
     opacity: 0.5;
+    cursor: pointer;
 }
 
 h2,
@@ -384,7 +368,28 @@ select.form-control[multiple] {
     width: 100%;
 }
 
-/* писок категорий */
+/* список категорий */
+
+/* каталог на главной */
+.specs {
+    text-align: left;
+    column-count: 2;
+    column-gap: 2rem;
+    padding-left: 20px;
+}
+
+.specs.single-column {
+    column-count: 1;
+    text-align: center;
+    padding-left: 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .specs {
+        column-count: 1;
+    }
+}
+
 
 .specs .spec {
     font-family: 'Open Sans';
@@ -551,6 +556,12 @@ select.form-control[multiple] {
     margin-top: 2rem;
     font-size: 1.5rem;
     color: #858282;
+}
+
+.empty-result__text {
+    color: #8b9fa7;
+    max-width: 70%;
+    margin: 1rem auto;
 }
 
 /* профиль пользователя */

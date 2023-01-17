@@ -37,7 +37,7 @@ class SpecController extends Controller
                     );
 				})
                 ->where('users.status', 'active')
-                // ->orderBy('spec.ordering', 'ASC')
+                ->orderBy(DB::raw('RAND()'))
                 ->distinct()
                 ->get();
 

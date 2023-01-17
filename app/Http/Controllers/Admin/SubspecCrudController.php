@@ -63,6 +63,7 @@ class SubspecCrudController extends CrudController
         CRUD::setValidation(SubspecRequest::class);
 
         CRUD::field('title');
+        CRUD::field('synonims');
         CRUD::field('ordering');
         CRUD::field('spec_id');
 

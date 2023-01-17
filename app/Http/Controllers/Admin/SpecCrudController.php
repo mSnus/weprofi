@@ -54,6 +54,7 @@ class SpecCrudController extends CrudController
         CRUD::setValidation(SpecRequest::class);
 
         CRUD::field('title');
+        CRUD::field('synonims');
         CRUD::field('ordering');
 
         /**

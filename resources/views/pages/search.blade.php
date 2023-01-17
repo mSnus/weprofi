@@ -20,16 +20,43 @@
 
             {{-- поиск --}}
 
-            <h1 onclick="window.location.href='/'">{!! $result !!}</h1>
+            <h1 onclick="window.location.href='/'"><img src=/img/left.svg width="16" height="16" class="cat-header__back"> {!! $result !!}</h1>
 
             @include('components.search', ['term' => $term])
 
 
             {{-- результаты поиска --}}
 
+            @php
+                $somethingFound = (!is_null($persons) && count($persons)) || (!is_null($specs) && count($specs));
+            @endphp
 
-            @if (!is_null($persons) && count($persons))
-                @include('components.profi-list', $persons)
+            @if ($somethingFound)
+                <h3>Найдены категории:</h3>
+
+                @if (!is_null($specs) && count($specs))
+                    <div class="specs {{ (count($specs) < 4 ? ' single-column' : '') }}">
+                    @foreach ($specs as $spec)
+                        <div class="spec mb-2">
+                            @if (!isset($spec->subspec_id))
+                                <a href="/spec/{{ $spec->id }}">{{ $spec->title }}</a>
+                            @else
+                                <a href="/spec/{{ $spec->id }}/{{ $spec->subspec_id }}">{{$spec->title}}: {{ $spec->subspec_title }}</a>
+                            @endif
+                            
+                        </div>
+                    @endforeach
+                    </div>
+                @else
+                    Категорий по слову <i> {{ $term }} </i> не найдено     
+                @endif
+
+                @if (!is_null($persons) && count($persons))
+                    <h3>Найдены профи:</h3>
+                    @include('components.profi-list', $persons)
+                @endif
+            @else 
+                По слову <i> {{ $term }} </i> ничего не найдено 
             @endif
 
         </div>

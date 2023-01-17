@@ -29,7 +29,7 @@
 
             @php
              $h1_link = (isset($subspec_id) && $subspec_id  > 0) ? '/spec/'.$spec_id : '/';
-             $h1_pre = (isset($subspec_id) && $subspec_id  > 0) ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back">' : '';
+             $h1_pre = ((isset($spec_id) && $spec_id  > 0) || (isset($subspec_id) && $subspec_id  > 0)) ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back">' : '';
             @endphp
 
             <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }}</h1>
@@ -58,7 +58,10 @@
             @if (!is_null($persons) && count($persons))
                 @include('components.profi-list', $persons)
             @else
-                <div class="empty-result">Тут пока никого нет</div>
+                <div class="empty-result">
+                    Тут пока никого нет.                    
+                </div>
+                <div class="empty-result__text">{{ Setting::get('text_empty_category') }}</div>
             @endif
 
         </div>

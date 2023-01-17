@@ -19,6 +19,8 @@ class Subspec extends Model
     protected $fillable = [
         'title',
         'content',
+        'synonims',
+        'ordering',
         'spec_id',
     ];
 

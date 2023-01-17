@@ -18,6 +18,8 @@ class Spec extends Model
     protected $fillable = [
         'title',
         'content',
+        'synonims',
+        'ordering',
     ];
 
     /**
@@ -39,4 +41,8 @@ class Spec extends Model
         // $users = User::where('')
         return $this->belongsToMany(User::class, 'user_spec')->distinct();
     }
+
+    // public function list(){
+    //     return $this->all()->orderBy('spec.title', 'ASC')->orderBy('spec.ordering', 'ASC');
+    // }
 }
