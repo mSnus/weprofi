@@ -299,9 +299,17 @@ h2,
     background: #EBECEB;
     border-radius: 40px;
     padding: 12px 20px;
-    margin-bottom: 32px;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.search-clear img{
+    opacity: 0.1;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 
 .search input[type="text"] {
@@ -313,6 +321,25 @@ h2,
     color: #858282;
     outline: none;
     padding: .5rem;
+}
+
+.formSearch .select2-container--default .select2-selection--single{
+    background: #fff;
+    background-color: #fff;
+}
+
+.formSearch .select2-container,
+.formSearch #regionSearch {
+    width: 150px;
+}
+
+.region-search-container {
+    width: 300px;
+    margin: 0 auto 2rem;
+    gap: 1rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
 }
 
 input[type="text"].form-control,

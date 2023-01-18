@@ -56,6 +56,12 @@ class UserController extends Controller
             $request->region = $request->region ?? ['_israel'];
             $request->language = $request->language ?? ['ru'];
 
+            $user->avatar = intval(trim($request->avatar)) ?? 0;
+
+            if (isset($request->password) && trim($request->password) != '') {
+                $user->password = trim($request->password);
+            }
+
 			if ($request->usertype == User::typeMaster) {
 				$user->language = join(',', $request->language);
 				$user->region = in_array('_israel', $request->region) ? '_israel' : join(',', $request->region);
@@ -79,19 +85,21 @@ class UserController extends Controller
                 }
                 DB::table('user_spec')->insert($spec_data);
 
-                $subspecs = '0';
-                if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
-                    $subspecs = join(',', $request->subspec1);
-                } else {
-                    $subspecs = intval($request->subspec1 ?? '0') ;
-                }
+                // $subspecs = '0';
+                // if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
+                //     $subspecs = join(',', $request->subspec1);
+                // } else {
+                //     $subspecs = intval($request->subspec1 ?? '0') ;
+                // }
 
-                $user->spec_id = intval($request->spec1 ?? 0);
-                $user->subspec_id = $subspecs ;
+                // $user->spec_id = intval($request->spec1 ?? 0);
+                // $user->subspec_id = $subspecs ;
+
                 $user->content = trim($request->content) ?? '';
                 $user->tagline = trim($request->tagline) ?? '';
                 $user->pricelist = trim($request->pricelist) ?? '';
                 $user->timetable = trim($request->timetable) ?? '';
+
                 // $master->save();
 			}
 

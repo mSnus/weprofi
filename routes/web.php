@@ -70,7 +70,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhook', [TelegramController::class, 'webhook']);
 
-Route::get('/spec/{spec_id}/{subspec_id?}', [SpecController::class, 'index'])->name('spec');
+Route::get('/spec/{spec_id}/{subspec_id?}/{region_id?}', [SpecController::class, 'index'])->name('spec');
 Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
 Route::get('/search/{term}', [SearchController::class, 'search'])->name('search');
 

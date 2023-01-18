@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -47,6 +48,7 @@ class User extends Authenticatable
 		'is_whatsap2',
 
 		'status',
+		'invite_token',
 
         'spec_id',
         'subspec_id',
@@ -91,6 +93,9 @@ class User extends Authenticatable
 		return $this->user_role->title;
 	}
 
+	public function setPasswordAttribute($value) {
+		$this->attributes['password'] = Hash::make($value);
+	}
 	public function getUserRoleAttribute(){
 		switch ($this->usertype) {
 			case SELF::typeClient:

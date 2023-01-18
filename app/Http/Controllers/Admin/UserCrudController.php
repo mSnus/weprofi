@@ -66,22 +66,24 @@ class UserCrudController extends CrudController
 
         CRUD::field('name');
         CRUD::field('phone');
-        CRUD::field('password');
+        CRUD::field('password')->type('password');
 
         CRUD::field('phone2');
         CRUD::field('language');
         CRUD::field('tagline');
         CRUD::field('content');
-        CRUD::field('rating');
+        CRUD::field('rating')->type('number');
         CRUD::field('pricelist');
         CRUD::field('timetable');
         CRUD::field('location');
         CRUD::field('region');
 
-        CRUD::field('spec_id');
-        CRUD::field('subspec_id');
+        CRUD::field('spec_id')->type('number');
+        CRUD::field('subspec_id')->type('number');
 
-        CRUD::field('avatar');
+        CRUD::field('invite_token');
+
+        // CRUD::field('avatar')->type('number');
         // CRUD::field('usertype');
 
         /**

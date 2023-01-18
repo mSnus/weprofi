@@ -26,3 +26,4 @@ mix.copy('resources/js/subspecs.js', 'public/js');
 mix.copy('resources/js/register.js', 'public/js');
 mix.copy('resources/js/uploads.js', 'public/js');
 mix.copy('resources/js/gallery.js', 'public/js');
+mix.copy('resources/js/path.js', 'public/js');

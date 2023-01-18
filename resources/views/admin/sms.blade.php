@@ -29,6 +29,15 @@
                 tags: false,
             });
         });
+
+        function doMassSubmit(){
+            if (window.confirm('Точно разослать это по всей базе?')) {
+                $('#sendMode').val('mass');
+                $('#sendForm').submit();
+            } else {
+                return false;
+            }
+        }
     </script>
 
     <div class="container">
@@ -39,7 +48,7 @@
                     <div class="card">
                             
                         <div class="card-body text-center">
-                            <form method="POST" class="form-group text-center">
+                            <form method="POST" class="form-group text-center" id="sendForm">
                                 @csrf
 
                                 @php
@@ -60,7 +69,13 @@
                             class="form-control mt-4"
                             style="width: 100%; height:200px;"
                             >{{ Setting::get('text_sms_invite') }}</textarea>
+                            <input type="hidden" name="send_mode" value="single" id="sendMode">
                             <button type="submit" class="button-primary mr-auto ml-auto mt-4">Отправить</button>
+                            <button 
+                                type="button" 
+                                class="button-tertiary mr-auto ml-auto mt-4"
+                                onclick="return doMassSubmit()"
+                                >Массовая рассылка по всем</button>
                             </form>
                         </div>
                     </div>

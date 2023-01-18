@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -105,6 +106,9 @@ class SearchController extends Controller
     $count = (is_array($persons)) ? count($persons) : 0;
     $count_specs = (is_array($specs)) ? count($specs) : 0;
 
+    $cities = City::get()->all();
+    $region_options = ['Израиль'];
+
     return view('pages.search', [
       'term' => $parsedSearchTerm,
       'persons' => $persons,
@@ -112,6 +116,7 @@ class SearchController extends Controller
       'count' => $count,
       'count_specs' => $count_specs,
       'result' => 'Результаты поиска',
+      // 'region_options' => $region_options,
     ]);
   }
 

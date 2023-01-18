@@ -12,18 +12,19 @@
             </div>
         @endif
 
+        @php
+            $specs = App\Models\Spec::get()->all();
+        @endphp
+
 
         <div class="h1">Мы - профи. Кто вам нужен?</div>
 
-        @include('components.search')
+        @include('components.search', ['region_options' => null])
 
         <div class="specs">
-            @php
-                $specs = App\Models\Spec::get()->all();
-            @endphp
             @foreach ($specs as $spec)
                 <div class="spec">
-                    <a href="/spec/{{ $spec->id }}">{{ $spec->title }}</a>
+                    <a href="/spec/{{ $spec->id }}/0/">{{ $spec->title }}</a>
                 </div>
             @endforeach
         </div>

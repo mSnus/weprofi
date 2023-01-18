@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class Macroregion extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
@@ -31,12 +31,10 @@ class City extends Model
     ];
 
     public static function getOptions($default_slug = ''){
-        $cities = City::orderBy('ordering')->orderBy('title')->get()->all();//orderBy('macroregion')->
-
-        $default_slug = ($default_slug == '') ? '_israel' : $default_slug;
+        $regions = Macroregion::orderBy('title')->get()->all();
 
         $region_options = [];
-        foreach ($cities as $city) {
+        foreach ($regions as $city) {
             $default = ($city->slug == $default_slug);
             
             $region_options[] = (object) [

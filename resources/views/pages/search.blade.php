@@ -39,7 +39,7 @@
                     @foreach ($specs as $spec)
                         <div class="spec mb-2">
                             @if (!isset($spec->subspec_id))
-                                <a href="/spec/{{ $spec->id }}">{{ $spec->title }}</a>
+                                <a href="/spec/{{ $spec->id }}/0/">{{ $spec->title }}</a>
                             @else
                                 <a href="/spec/{{ $spec->id }}/{{ $spec->subspec_id }}">{{$spec->title}}: {{ $spec->subspec_title }}</a>
                             @endif
@@ -48,7 +48,7 @@
                     @endforeach
                     </div>
                 @else
-                    Категорий по слову <i> {{ $term }} </i> не найдено     
+                    <div class="mb-4">Категорий по слову <i> {{ $term }} </i> не найдено     </div>
                 @endif
 
                 @if (!is_null($persons) && count($persons))
