@@ -13,7 +13,7 @@
         @endif
 
         @php
-            $specs = App\Models\Spec::get()->all();
+            $specs = App\Http\Controllers\SpecController::getNonEmptySpecs();
         @endphp
 
 

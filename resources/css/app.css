@@ -60,9 +60,9 @@ a:hover {
 }
 
 .topbar .cabinet-wrapper {
-    flex-basis: 100%;
+    /* flex-basis: 100%; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-grow: 1;
     flex-shrink: 0;
 }
@@ -75,7 +75,6 @@ a:hover {
     fill: #b79e6d;
     width: fit-content;
     align-items: center;
-    margin-left: 7rem;
 }
 
 .topbar .cabinet a {
@@ -282,6 +281,12 @@ h2,
     margin-bottom: 1rem;
 }
 
+h4, .h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #6C5B52;
+}
+
 .price-warning,
 .tell-about-us-warning {
 	line-height: 1.2;
@@ -334,11 +339,12 @@ h2,
 
 .region-search-container {
     width: 300px;
+    color: #858282;
     margin: 0 auto 2rem;
     gap: 1rem;
     display: flex;
     flex-wrap: nowrap;
-    align-items: flex-end;
+    align-items: center;
 }
 
 input[type="text"].form-control,
@@ -531,6 +537,22 @@ select.form-control[multiple] {
     margin-right: auto;
 }
 
+.timetable {
+    max-width: calc(min(80vw, 600px));
+    margin-left: auto;
+    margin-right: auto;
+
+    font-weight: normal;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 150%;
+    color: #858282;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 .user .price-block {
     min-width: 100%;
     display: flex;
@@ -628,6 +650,10 @@ select.form-control[multiple] {
     ;
 }
 
+.profile-body {
+    max-width: 86vw;
+    margin: 0 auto;
+}
 /* Галерея */
 
 .gallery {
@@ -659,6 +685,7 @@ select.form-control[multiple] {
 
 /* контакты  */
 .profi-contact {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -916,4 +943,16 @@ div#map_id {
     margin-right: auto;
     border-radius: 32px;
     width: max-content;
+    max-width: 94%;
+}
+
+.alert-info {
+    background-color: inherit;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 32px;
+    width: max-content;
+    padding: 1rem;
+    max-width: 94%;
 }

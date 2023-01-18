@@ -28,6 +28,7 @@
     "/img/avatars/myimage_e0d27b0a8721c7e829930b1a11aeb00d.png": "/img/avatars/myimage_e0d27b0a8721c7e829930b1a11aeb00d.png",
     "/img/bg1.jpg": "/img/bg1.jpg",
     "/img/big_request.png": "/img/big_request.png",
+    "/img/close-circle.svg": "/img/close-circle.svg",
     "/img/delete.svg": "/img/delete.svg",
     "/img/description.png": "/img/description.png",
     "/img/exit.svg": "/img/exit.svg",
@@ -100,6 +101,5 @@
     "/js/register.js": "/js/register.js",
     "/js/uploads.js": "/js/uploads.js",
     "/js/gallery.js": "/js/gallery.js",
-    "/js/path.js": "/js/path.js",
-    "/img/close-circle.svg": "/img/close-circle.svg"
+    "/js/path.js": "/js/path.js"
 }

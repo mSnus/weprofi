@@ -46,7 +46,7 @@ class SearchController extends Controller
     }
 
     // между терминами - И
-    $searchString = join(' AND ', $searchFields);
+    $searchString = join(' OR ', $searchFields);
 
     return $searchString;
   }

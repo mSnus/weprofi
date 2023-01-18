@@ -12,6 +12,7 @@
             <img src="/img/go.svg" alt="Search" width="32" height="32" class="button-search" onclick="return doSearch()" >
         </div>
 
+        {{--
         @if (isset($region_options))
         <div class="region-search-container">
             <div>город/регион: </div>
@@ -23,6 +24,7 @@
             <div class="search-clear" onclick="chooseIsrael(event)"><img src="/img/close-circle.svg"></div>
         </div>
         @endif
+        --}}
     </form>
 
 
@@ -39,11 +41,11 @@
     }
 
     function handleRegionChange(event) {
-            goPath(event, {{ $spec_id }}, {{ $subspec_id }});
+            goPath(event, {{ $spec_id ?? 0 }}, {{ $subspec_id ?? 0}});
     }
 
     function chooseIsrael(event){
-        goPath(event, {{ $spec_id }}, {{ $subspec_id }}, '')
+        goPath(event, {{ $spec_id ?? 0}}, {{ $subspec_id ?? 0}}, '')
     }
 
     document.addEventListener("DOMContentLoaded", ()=>{

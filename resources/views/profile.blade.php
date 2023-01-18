@@ -19,6 +19,12 @@
         </div>
     @endif
 
+    @if (session('status_html'))
+        <div class="status-message" role="alert">
+            {!! session('status_html') !!}
+        </div>
+    @endif
+
     @php
         $profileData = App\Models\User::getData(Auth::id());
         $user = $profileData['user'];
@@ -70,7 +76,7 @@
 
                     </form>
 
-                    <div class="card-body d-flex flex-nowrap">
+                    <div class="card-body d-flex flex-nowrap profile-body">
                         <x-form :action="'/profile.update/' . $user->id" class=" d-flex flex-wrap w-100 mb-4 mr-4 form-with-map form-profile">
                             @method('POST')
                             @csrf

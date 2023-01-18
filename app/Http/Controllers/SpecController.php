@@ -55,6 +55,9 @@ class SpecController extends Controller
                 ->get();
 
             $spec = Spec::where('id', $spec_id)->firstOrFail();
+            $subspecs = $this->getNonEmptySubspecs($spec_id);
+            //Spec::where('id', $spec_id)->firstOrFail();
+            // dd($spec->subspecs);
 
             if ($subspec_id == 0) {
                 $subspecs = Subspec::where('spec_id', $spec_id);
@@ -77,6 +80,67 @@ class SpecController extends Controller
             'region_options' =>  $region_options,
         ]);
     }
+
+    public static function getNonEmptySpecs($spec_id = 0) {
+        $specs = DB::table('specs')
+        ->select('specs.*')
+        ->selectRaw('COUNT(distinct users.id) as user_count')
+        ->selectRaw('specs.title, specs.ordering')
+        ->selectRaw('subspecs.title as subspec_title')
+        ->selectRaw('user_spec.spec_id as id')
+        ->selectRaw('user_spec.subspec_id as ussid')
+        ->leftJoin('user_spec', 'user_spec.spec_id', '=', 'specs.id')
+        ->leftJoin('users', 'user_spec.user_id', '=', 'users.id')
+        ->leftJoin('subspecs', 'user_spec.subspec_id', '=', 'subspecs.id')
+        ->where('users.status', 'active')
+        ->groupByRaw('user_spec.spec_id, ussid')
+        ->orderBy('ordering', 'ASC')
+        ->orderBy('title', 'ASC')
+        // ->having('ussid',0)
+        ->when(($spec_id > 0), function($q) use ($spec_id){
+            return $q->where('user_spec.spec_id', $spec_id);
+        })
+        ->get()
+        ->all();
+
+        // dd((array)$specs);
+
+        $specs_filtered = [];
+
+        foreach ($specs as $spec) {
+            $specs_filtered[$spec->id] = $spec;
+        }
+        return $specs_filtered;
+    }
+
+    public static function getNonEmptySubspecs($spec_id) {
+        $specs = DB::table('specs')
+        ->selectRaw('COUNT(distinct users.id) as user_count')
+        ->selectRaw('subspecs.title as subspec_title')
+        ->selectRaw('user_spec.subspec_id as id')
+        ->leftJoin('user_spec', 'user_spec.spec_id', '=', 'specs.id')
+        ->leftJoin('users', 'user_spec.user_id', '=', 'users.id')
+        ->leftJoin('subspecs', 'user_spec.subspec_id', '=', 'subspecs.id')
+        ->where('users.status', 'active')
+        ->groupByRaw('user_spec.spec_id, id')
+        ->orderBy('subspecs.title', 'ASC')
+        // ->having('ussid',0)
+        ->where('user_spec.spec_id', $spec_id)
+        ->get()
+        ->all();
+
+        // dd((array)$specs);
+
+        $specs_filtered = [];
+
+        // foreach ($specs as $spec) {
+        //     $specs_filtered[$spec->id] = $spec;
+        // }
+
+        // dd($spe)
+        return (object)$specs;
+    }
+
 
     public static function getPath($spec_id = null, $subspec_id = null, $region_id = null) {
         $path = '/';

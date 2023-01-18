@@ -126,5 +126,10 @@
         display: flex;
         justify-content: center;
       }
+
+      .profile-navigation {
+        font-size: 1.2rem;
+        line-height: 1.1;
+      }
 }
 

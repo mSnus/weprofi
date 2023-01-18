@@ -96,6 +96,7 @@ class User extends Authenticatable
 	public function setPasswordAttribute($value) {
 		$this->attributes['password'] = Hash::make($value);
 	}
+
 	public function getUserRoleAttribute(){
 		switch ($this->usertype) {
 			case SELF::typeClient:
@@ -242,8 +243,11 @@ class User extends Authenticatable
                 ->where('users.id', $user_id)
                 ->first();
 
-			$user->content_raw = $user->content;
-            $user->content = nl2br($user->content);
+			$user->content_raw = strip_tags($user->content);
+            $user->content = nl2br(strip_tags($user->content));
+
+			$user->timetable = nl2br(strip_tags($user->timetable));
+			$user->pricelist = strip_tags($user->pricelist);
             
 			
             $pricelist = array_filter(preg_split('~[\r\n]~', $user->pricelist));

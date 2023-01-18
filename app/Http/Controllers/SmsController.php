@@ -16,11 +16,14 @@ class SmsController extends Controller
     }
 
     public function realSendSms($smsText, $phone){
+        //! TEST MODE:
+        // $phone = '534384699';
+
         $sendSmsGateLink = 'http://webapi.mymarketing.co.il/api/smssendingrequest?'.
         'Token='.'0XF41E6695CE6FF93F8C4BEEB302A47E3BF538E03FBB237051FA9C6C479E81110B982BD66B6DC9A6223ECCD5E06804F208'.
         '&UnsubscribeText='.'Unsubscribe'.
         '&CanUnsubscribe='.'false'.
-        '&Mobiles='."972".'534384699'.//$phone.
+        '&Mobiles='."972".$phone.
         '&Id='.'5449005'.
         '&Name='.'invite'.
         '&FromName='.'WeProfi'.
@@ -69,7 +72,7 @@ class SmsController extends Controller
             
             $response = $this->realSendSms($body, $user->phone);
 
-            return $response;
+            return view('admin.sms')->with('status', 'Отправлены сообщения:<br><pre>' . $response . '</pre>');
         }
     }
     public function massSend(Request $request)
@@ -91,8 +94,8 @@ class SmsController extends Controller
             $body = preg_replace('~\#id\#~', $user->id, $body);
             $body = preg_replace('~\#invite_token\#~', $user->invite_token, $body);
 
-            $response[] = 'Было бы отправлено на ' . $user->phone;
-            //$response[] = $this->realSendSms($body, $user->phone);
+            // $response[] = 'Было бы отправлено на ' . $user->phone;
+            $response[] = $this->realSendSms($body, $user->phone);
    
         }
 

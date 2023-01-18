@@ -97,8 +97,8 @@
             <div class="pricelist">{!! $user->pricelist !!}</div>
 
             @if (!empty($user->timetable))
-                <div class="h3">График работы</div>
-                <div class="pricelist">{{ $user->timetable }}</div>    
+                <div class="h4">График работы:</div>
+                <div class="timetable">{!! $user->timetable !!}</div>    
             @endif
             
 

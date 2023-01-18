@@ -13,4 +13,12 @@ function parsePhone($phone) {
     return $phone;
 }
 
+function filterTagsExceptBr($html) {
+    $html = preg_replace('~<br[^>]*>~', '__br__', $html);
+    $html = preg_replace('~<[^>]*>~', '', $html);
+    $html = preg_replace('~__br__~', '<br/>', $html);
+
+    return $html;
+}
+
 ?>
