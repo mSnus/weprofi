@@ -3,7 +3,7 @@
 @section('title', 'WeProfi')
 
 @section('head')
-    <!-- blade:user_page -->
+    <!-- blade:master_page -->
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -129,7 +129,9 @@
                 
             @endphp
 
-            @include('mapbox_static', $mapbox)
+            @if (isset($user->is_show_map) && ($user->is_show_map == 1)) 
+                @include('mapbox_static', $mapbox)
+            @endif
         </div>
     </div>
 
@@ -189,23 +191,37 @@
             </div>
 
             <div class="contact-phone"  onclick="callPhone('{{ $user->phone }}')">
-                <img src="/img/phone.svg" width="24" height="24">
-                {{ $user->phone }}
+                0{{ $user->phone }}
             </div>
 
-            <div class="button-primary" onclick="callPhone('{{ $user->phone }}')">Позвонить</div>
-            <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone }}')">WhatsApp</div>
+            <div class="button-primary" onclick="callPhone('{{ $user->phone }}')">
+                Позвонить
+            </div>
+
+            @if (isset($user->is_whatsapp) && ($user->is_whatsapp == 1)) 
+                <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone }}')">WhatsApp</div>
+            @endif
+
+            @if (isset($user->is_telegram) && ($user->is_telegram == 1)) 
+                <div class="button-telegram" onclick="tryTelegram('{{ $user->phone }}')">Telegram</div>
+            @endif
             
             @if (isset($user->phone2) && !empty($user->phone2)) 
             
-            <div class="contact-phone"  onclick="callPhone('{{ $user->phone2 }}')">
-                <img src="/img/phone.svg" width="24" height="24">
-                {{ $user->phone2 }}
-            </div>                    
+                <div class="contact-phone"  onclick="callPhone('{{ $user->phone2 }}')">
+                    <img src="/img/phone.svg" width="24" height="24">
+                    {{ $user->phone2 }}
+                </div>                    
 
-            <div class="button-primary" onclick="callPhone('{{ $user->phone2 }}')">Позвонить</div>
-            <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone2 }}')">WhatsApp</div>
+                <div class="button-primary" onclick="callPhone('{{ $user->phone2 }}')">Позвонить</div>
 
+                @if (isset($user->is_whatsapp2) && ($user->is_whatsapp2 == 1)) 
+                    <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone2 }}')">WhatsApp</div>
+                @endif
+                
+                @if (isset($user->is_telegram2) && ($user->is_telegram2 == 1)) 
+                    <div class="button-telegram" onclick="tryTelegram('{{ $user->phone2 }}')">Telegram</div>
+                @endif
             @endif
             `
         }
@@ -225,6 +241,19 @@
             } 
             
             window.open('https://api.whatsapp.com/send?phone='+waPhone, '_blank');
+        }
+
+        function tryTelegram(phone) {
+            let tgPhone = phone.replace('[^0-9\+]','');
+            
+            if (phone.substring(0,3) !== '972') {
+                if (phone.substring(0,1) === '0'){
+                    tgPhone = phone.substring(1);
+                }
+                tgPhone = "972" + tgPhone;
+            } 
+            
+            window.open('https://t.me/+'+tgPhone, '_blank');
         }
 
         function showFeedback() {

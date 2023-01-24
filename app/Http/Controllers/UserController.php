@@ -26,7 +26,7 @@ class UserController extends Controller
         if (!isset($feedback->value)) $feedback->value = 5;
         if (!isset($feedback->content)) $feedback->content = '';
 
-        return view('pages.user_page', [
+        return view('pages.master_page', [
             'user_id' => $data['user_id'],
             'user' => $data['user'],
             'gallery' => $data['gallery'],
@@ -100,6 +100,13 @@ class UserController extends Controller
                 $user->pricelist = trim($request->pricelist) ?? '';
                 $user->timetable = trim($request->timetable) ?? '';
 
+                $user->phone2  = parsePhone($request->phone2);
+
+                $user->is_whatsapp = (isset($request->is_whatsapp) && ($request->is_whatsapp == 1)) ? 1 : 0;
+                $user->is_telegram = (isset($request->is_telegram) && ($request->is_telegram == 1)) ? 1 : 0;
+                $user->is_whatsapp2 = (isset($request->is_whatsapp2) && ($request->is_whatsapp2 == 1)) ? 1 : 0;
+                $user->is_telegram2 = (isset($request->is_telegram2) && ($request->is_telegram2 == 1)) ? 1 : 0;
+                $user->is_show_map = (isset($request->is_show_map) && ($request->is_show_map == 1)) ? 1 : 0;
                 // $master->save();
 			}
 

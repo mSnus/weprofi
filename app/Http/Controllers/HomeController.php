@@ -32,7 +32,7 @@ class HomeController extends Controller
         			return Redirect::to('/');
 				case User::typeMaster:
                     // return Redirect::to('/');
-					return view('masters_home');
+					return view('profile');
 				default:
 					throw new \Exception("No home for usertype ".$role." exists", 1);
 			}

@@ -27,15 +27,11 @@
     $user_subspecs = [];
     $user_languages = ['ru'];
 
-    
-    $spec1 = reset($specs);
     $user_subspecs1 = [];
 @endphp
 
 @auth
     @php
-
-
         $user = App\Models\User::getData(Auth::id())['user'];
 
         $user_cities = explode(',', Auth::user()->region);
@@ -43,9 +39,11 @@
 
         $user_specs = Auth::user()->specs();
         $user_subspecs = Auth::user()->subspecs();
-
+        
         $spec1 = reset($user_specs);
-        $user_subspecs1 = empty($user_subspecs) ? [] : $user_subspecs[$spec1];
+        $user_subspecs1 = empty($user_subspecs) ? [] : (
+            isset($user_subspecs[$spec1]) ? $user_subspecs[$spec1] : []
+        );
     @endphp
 @endauth
 

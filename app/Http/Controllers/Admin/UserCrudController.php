@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * Class UserCrudController
@@ -15,7 +18,7 @@ class UserCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -78,13 +81,51 @@ class UserCrudController extends CrudController
         CRUD::field('location');
         CRUD::field('region');
 
-        CRUD::field('spec_id')->type('number');
-        CRUD::field('subspec_id')->type('number');
+        $myip = '80.244.28.131';
 
-        CRUD::field('invite_token');
+        $this->crud->addField([
+         
+                'label' => "Статус",
+                'type' => 'select_from_array',
+                'name' => 'status',
+                'default'     => 'active',
+                'allows_null' => false,
+                'options' => ['active' => 'active', 'disabled' => 'disabled']
+         
+        ]);
+
+        if (getenv('REMOTE_ADDR') != $myip) {
+            CRUD::field('spec_id')->type('number');
+        } else {
+            $this->crud->addField([
+                'name' => 'spec_id',
+                'label' => 'Специализация',
+                'type' => "select",
+
+                'model' => "App\Models\Spec",
+                'attribute' => 'title',
+
+                'allows_null' => false,
+                'allows_multiple' => false,
+            ]);
+        }
+
+        CRUD::field('subspec_id');
+
+        CRUD::field('invite_token')->default(strtolower(Str::random(10)));
 
         // CRUD::field('avatar')->type('number');
-        // CRUD::field('usertype');
+        $this->crud->addField([
+         
+            'label' => "Тип",
+            'type' => 'select_from_array',
+            'name' => 'usertype',
+            'default'     => User::typeMaster,
+            'allows_null' => false,
+            'options' => [User::typeClient => 'пользователь', User::typeMaster => 'профи']
+     
+    ]);
+       
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -102,5 +143,38 @@ class UserCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update()
+    {
+        $user = $this->crud->getCurrentEntry();
+        $request = (object) $this->crud->getRequest()->request->all();
+
+        if ($user->usertype == User::typeMaster) {
+                DB::table('user_spec')->where('user_id', '=', $user->id)->delete();
+
+                $subspec_list = explode(',', $request->subspec_id);
+
+                if (count($subspec_list) > 0 && !in_array(0, $subspec_list)) {
+                    foreach ($subspec_list as $subspec) {
+                        $spec_data[] = [
+                            'user_id' => $user->id,
+                            'spec_id' => $request->spec_id,
+                            'subspec_id' => $subspec
+                        ];
+                    }
+                } else {      
+                    $spec_data = [
+                        'user_id' => $user->id,
+                        'spec_id' => $request->spec_id,
+                        'subspec_id' => 0
+                    ];
+                }
+                DB::table('user_spec')->insert($spec_data);
+        }
+
+        $response = $this->traitUpdate();
+        
+        return $response;
     }
 }

@@ -15,11 +15,7 @@
     <div class="container">
         <div class="row justify-content-center">
                 <div class="col-md-12">
-                    @if (Auth::user()->isMaster())
-                        @include('components.profile_navigation', ['section' => 'feedback'])
-                    @else
-                        <h1>Основные данные:</h1>
-                    @endif
+                    @include('components.profile_navigation', ['section' => 'feedback'])
                     
                     @if (count($feedbacks) > 0)
                         @foreach ($feedbacks as $feedback)

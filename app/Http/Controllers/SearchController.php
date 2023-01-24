@@ -67,7 +67,7 @@ class SearchController extends Controller
 
     if (count($arrTerms) > 0) {
 
-      $searchPersons = $this->buildSearchString($arrTerms, ['users.content', 'users.tagline', 'users.pricelist']);
+      $searchPersons = $this->buildSearchString($arrTerms, ['users.content', 'users.name', 'users.tagline', 'users.pricelist']);
 
       $persons = DB::table('users')
         ->select(

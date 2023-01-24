@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\MasterController;
-use App\Http\Controllers\ModeratorController;
-use App\Http\Controllers\OfferController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\TelegramController;
 
 use Illuminate\Support\Facades\Auth;

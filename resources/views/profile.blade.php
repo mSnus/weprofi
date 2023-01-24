@@ -41,8 +41,6 @@
                     @else
                         <h1>Основные данные:</h1>
                     @endif
-                    
-
 
                     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -75,6 +73,7 @@
                             accept="image/png, image/jpeg" multiple>
 
                     </form>
+                    
 
                     <div class="card-body d-flex flex-nowrap profile-body">
                         <x-form :action="'/profile.update/' . $user->id" class=" d-flex flex-wrap w-100 mb-4 mr-4 form-with-map form-profile">
@@ -84,6 +83,10 @@
                             @include('auth.register-fields', ['password_required' => false])
 
                             <div class="mt-2">
+                                Отметьте на карте, где вы находитесь (по желанию):
+                            </div>
+
+                            <div class="mt-2" id='mapToggler' {{ isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'}}>
                                 <input id="location" label="Где вы находитесь? Отметьте на карте" type="hidden"
                                     name="location" :value="old('location')" />
 
@@ -102,6 +105,18 @@
                                 @endphp
 
                                 @include('mapbox', $mapbox)
+                            </div>
+
+                            <div class="mt-2 mb-4 form-checks">
+                                <input 
+                                    type="checkbox" 
+                                    name="is_show_map" 
+                                    class="form-check-input" 
+                                    value="1" 
+                                    {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
+                                    onclick="$('#mapToggler').toggle()"
+                                >
+                                <label for="is_show_map">показывать карту</label>
                             </div>
 
                             <input type="hidden" name="usertype" id="usertype" value="{{ $user->usertype }}">

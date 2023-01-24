@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+include_once(base_path().'/app/helpers.php');
+
 
 
 /**
@@ -44,8 +46,10 @@ class User extends Authenticatable
         'region',
 
 		'is_show_map',
-		'is_whatsap',
-		'is_whatsap2',
+		'is_whatsapp',
+		'is_whatsapp2',
+		'is_telegram',
+		'is_telegram2',
 
 		'status',
 		'invite_token',
@@ -53,7 +57,8 @@ class User extends Authenticatable
         'spec_id',
         'subspec_id',
 
-        'avatar'
+        'avatar',
+
 	];
 
 	/**
@@ -234,6 +239,7 @@ class User extends Authenticatable
                 ->select('users.name', 'users.phone', 'users.phone2', 'users.id as user_id', 
 						'users.location', 'users.region', 'users.id', 'users.usertype', 
 						'users.rating', 'users.rating_count', 'users.tagline',
+						'is_show_map', 'is_whatsapp', 'is_whatsapp2', 'is_telegram', 'is_telegram2',
                         'images.path as avatar', 'users.created_at', 
                         'users.tagline', 'users.content', 'users.pricelist', 'users.timetable')
                 ->leftJoin('images', function($join) {
@@ -244,9 +250,9 @@ class User extends Authenticatable
                 ->first();
 
 			$user->content_raw = strip_tags($user->content);
-            $user->content = nl2br(strip_tags($user->content));
+            $user->content = processText(strip_tags($user->content));
 
-			$user->timetable = nl2br(strip_tags($user->timetable));
+			$user->timetable = processText(strip_tags($user->timetable));
 			$user->pricelist = strip_tags($user->pricelist);
             
 			

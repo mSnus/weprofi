@@ -21,4 +21,29 @@ function filterTagsExceptBr($html) {
     return $html;
 }
 
+
+function nl2p($text) {
+    $html = nl2br($text);
+    $html = preg_replace('~<br[^>]*>~', '</p><p>', $html);
+    $html = '<p>'.$html.'</p>';
+
+    return $html;
+}
+
+function processText($text) {
+    $html = trim($text);
+
+    if ($html) {
+        $html = nl2br($text);
+        $html = preg_replace('~<br[^>]*>~', '</p><p>', $html);
+        $html = '<p>'.$html.'</p>';
+        $html = preg_replace('~<p></p>~', '', $html);
+        //    $html = preg_replace('~(https?://[^\s/]*)~', '<a href="$1" target="_blank">[ссылка]</a>', $html);
+        $html = preg_replace('~([a-z0-9\.-_/+%]{10,})~', '<span class="force-breaks">$1</span>', $html);
+
+    }
+
+    return $html;
+}
+
 ?>

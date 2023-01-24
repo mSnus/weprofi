@@ -149,6 +149,12 @@ button.primary,
     cursor: pointer;
 }
 
+.button-primary svg {
+    fill:#6C5B52;
+    max-width: 24px;
+    max-height: 16px;
+}
+
 button.secondary,
 .button-secondary {
     min-width: 8rem;
@@ -199,6 +205,23 @@ button.tertiary,
     cursor: pointer;
 }
 
+.button-telegram {
+    min-width: 13rem;
+    height: 3rem;
+    background: #7097b6;
+    padding: 14px 55px;
+    border-radius: 40px;
+    color: #d3e5ee;
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
+}
+
+
 /* регистрация и логин */
 .already-registered,
 .need-registration {
@@ -241,7 +264,7 @@ button.tertiary,
 
 .form-group label,
 .col-form-label {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #959e93;
     display: flex;
     justify-content: center;
@@ -521,10 +544,15 @@ select.form-control[multiple] {
 .user .description {
     margin-top: 2rem;
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: 125%;
     color: #858282;
     text-align: left;
+    word-break: break-word;
+}
+
+.force-breaks {
+    word-break: break-all;
 }
 
 .user .pricelist {
@@ -872,6 +900,26 @@ select.form-control[multiple] {
 .profi-fields {
     display: flex;
     flex-direction: column;
+}
+
+.form-checks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: #8F8F9D;
+}
+
+.form-checks label {
+    margin: 0;
+}
+
+.form-check-input {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    margin-left: 1rem;
+    margin-top: 0;
 }
 
 /* Большие цифры и интро на главной */
