@@ -10,6 +10,7 @@ class City extends Model
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
 
+    public const DEFAULT_REGION = 'acre'; //_israel
     /**
      * The attributes that are mass assignable.
      *
@@ -31,9 +32,9 @@ class City extends Model
     ];
 
     public static function getOptions($default_slug = ''){
-        $cities = City::orderBy('ordering')->orderBy('title')->get()->all();//orderBy('macroregion')->
+        $cities = City::orderBy('ordering')->orderBy('slug')->get()->all();//orderBy('macroregion')->
 
-        $default_slug = ($default_slug == '') ? '_israel' : $default_slug;
+        $default_slug = ($default_slug == '') ? self::DEFAULT_REGION : $default_slug;
 
         $region_options = [];
         foreach ($cities as $city) {
@@ -41,6 +42,7 @@ class City extends Model
             
             $region_options[] = (object) [
                 'value' => $city->slug,
+                'slug' => $city->slug,
                 'title' => $city->title,
                 'region' =>  $city->macroregion,
                 'default' => $default,

@@ -7,7 +7,8 @@
 <link href="{{ asset('css/select2-materialize.css') }}" rel="stylesheet" />
 
 @php
-    $cities = App\Models\City::get()->sortByDesc('slug')->all();
+    // $cities = App\Models\City::get()->sortByDesc('slug')->all();
+    
     $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит', 'ar' => 'Арабский'];
 
     $specs = \App\Models\Spec::get()->all();
@@ -22,30 +23,36 @@
     ];
     }
 
-    $user_cities = ['_israel']; 
+
+    $user_cities = [App\Models\City::DEFAULT_REGION]; 
+    $default_city = App\Models\City::DEFAULT_REGION;
     $user_specs = [];
     $user_subspecs = [];
     $user_languages = ['ru'];
 
     $user_subspecs1 = [];
-@endphp
 
-@auth
-    @php
+    if (Auth::id()) {
         $user = App\Models\User::getData(Auth::id())['user'];
 
         $user_cities = explode(',', Auth::user()->region);
         $user_languages = explode(',', Auth::user()->language);
 
+        $default_city = reset($user_cities) ?? App\Models\City::DEFAULT_REGION;
+
         $user_specs = Auth::user()->specs();
         $user_subspecs = Auth::user()->subspecs();
-        
+
         $spec1 = reset($user_specs);
         $user_subspecs1 = empty($user_subspecs) ? [] : (
             isset($user_subspecs[$spec1]) ? $user_subspecs[$spec1] : []
         );
-    @endphp
-@endauth
+    }
+
+    $cities = App\Models\City::getOptions($default_city);
+
+    // dd($city_options, $default_city, $user_cities, $cities);
+@endphp
 
 <script>
 function showSubspecs(select, spec){

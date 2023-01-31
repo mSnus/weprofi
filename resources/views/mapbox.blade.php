@@ -152,6 +152,11 @@
 
 			  });
 
+			  if (typeof (window.$maps) == 'undefined') {
+				window.$maps = [];
+			  }
+
+			  window.$maps.push(map_id);
 
 
 		 });

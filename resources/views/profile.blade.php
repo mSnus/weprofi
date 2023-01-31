@@ -86,7 +86,7 @@
                                 Отметьте на карте, где вы находитесь (по желанию):
                             </div>
 
-                            <div class="mt-2" id='mapToggler' {{ isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'}}>
+                            <div class="mt-2" id='mapToggler' {!! isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'!!}>
                                 <input id="location" label="Где вы находитесь? Отметьте на карте" type="hidden"
                                     name="location" :value="old('location')" />
 
@@ -111,10 +111,11 @@
                                 <input 
                                     type="checkbox" 
                                     name="is_show_map" 
+                                    id="isShowMap"
                                     class="form-check-input" 
                                     value="1" 
                                     {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
-                                    onclick="$('#mapToggler').toggle()"
+                                    onclick="if (this.checked) {$('#mapToggler').show(); window.$maps[0].resize();} else {$('#mapToggler').hide()}"
                                 >
                                 <label for="is_show_map">показывать карту</label>
                             </div>
