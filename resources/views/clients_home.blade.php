@@ -181,7 +181,7 @@
 
             <div class="d-flex justify-content-center mt-5">
                 <div class="d-flex justify-content-center">
-                    <div class="">
+                    <div>
                         @include('requests', ['password_required' => false])
                     </div>
                 </div>

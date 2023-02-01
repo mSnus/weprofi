@@ -20,7 +20,7 @@
 
             {{-- поиск --}}
 
-            <h1 onclick="window.location.href='/'"><img src=/img/left.svg width="16" height="16" class="cat-header__back"> {!! $result !!}</h1>
+            <h1 onclick="window.location.href='/'"><img src=/img/left.svg width="16" height="16" class="cat-header__back" alt="back"> {!! $result !!}</h1>
 
             @include('components.search', ['term' => $term])
 

@@ -2,8 +2,9 @@
 
 @section('title', 'WeProfi - '.$spec->title)
 
-
+@section('head')
 <script src="{{ asset('js/path.js') }}"></script>
+@endsection
 
 @section('content')
 
@@ -32,7 +33,9 @@
 
             @php
              $h1_link = (isset($subspec_id) && $subspec_id  > 0) ? '/spec/'.$spec_id.'/0/' : '/';
-             $h1_pre = ((isset($spec_id) && $spec_id  > 0) || (isset($subspec_id) && $subspec_id  > 0)) ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back">' : '';
+             $h1_pre = ((isset($spec_id) && $spec_id  > 0) || (isset($subspec_id) && $subspec_id  > 0)) 
+                            ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back" alt="back">' 
+                            : '';
             @endphp
 
             <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }}</h1>

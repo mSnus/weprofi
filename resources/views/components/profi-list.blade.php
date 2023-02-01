@@ -28,7 +28,7 @@
             
             <div class="avatar" 
                 style="background-image: url({{ $person->avatar ?? '/img/avatar.png' }}); background-color: {{ $randomColor }}"
-                 alt="User avatar">
+            >
             </div>
             <div class="title">{{ $person->name }}</div>
             <div class="rating">

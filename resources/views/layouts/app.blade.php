@@ -65,7 +65,7 @@
         
         <div class="top-logo">
             <a href="{{ url('/') }}">
-                <img src="/img/logo-simple.svg">
+                <img src="/img/logo-simple.svg" alt="Logo">
             </a>
         </div>
         {{--         
@@ -123,7 +123,7 @@
         </div> --}}
 
         @hasSection('header')
-            <header class="">
+            <header>
                 <div class="container">
                     @yield('header')
                 </div>
@@ -152,8 +152,8 @@
 
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
 
-            <div class="">
-                &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"></a>
+            <div>
+                &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"  alt="Logo"></a>
             </div>
         </footer>
     </div>

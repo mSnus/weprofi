@@ -42,7 +42,7 @@
 <div class="row">
   <div class="col-md-12 text-center">
       <a href="{{ url('/') }}">
-          <img src="/img/logo-simple.svg">
+          <img src="/img/logo-simple.svg" alt="Logo">
       </a>
   </div>
 </div>

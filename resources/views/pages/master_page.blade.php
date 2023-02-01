@@ -73,7 +73,7 @@
 
             <div class="avatar" 
                 style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
-                alt="User avatar">
+            >
             </div>
             
             @if ($user->rating_count > 3)

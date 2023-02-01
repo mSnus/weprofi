@@ -20,7 +20,7 @@ async function refreshAvatar() {
     imageHtml = `
     <div class="avatar-container">
         <div class="avatar" style="background-image: url(${imageSrc})"
-            alt="User avatar" onclick="uploadAvatar()">
+            title="User avatar" onclick="uploadAvatar()">
             <svg height="1792" viewBox="0 0 1792 1792" width="1792"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
