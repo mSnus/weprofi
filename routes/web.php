@@ -70,6 +70,7 @@ Route::get('/user/{user_id}', [UserController::class, 'index'])->name('user');
 Route::get('/search/{term}', [SearchController::class, 'search'])->name('search');
 
 Route::get('/invite/{user_id}/{token}', [InviteController::class, 'processLink'])->name('invite');
+Route::get('/reset/{phone}', [InviteController::class, 'resetPassword'])->name('reset');
 
 Route::resource('city', App\Http\Controllers\CityController::class)->only('index', 'store');
 

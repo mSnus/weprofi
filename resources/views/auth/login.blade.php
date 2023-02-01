@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
+<script src="{{ asset('js/login_form.js') }}"></script>
+
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>{{ __('Login') }}</h1>
+                <h2 class="mb-4">Добро пожаловать!</h2>
 
 
 
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login') }}" class="login-form">
                     @csrf
 
                     <div class="form-group row">
-                        <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Телефон') }}</label>
+                        <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Телефон') }}</label>
 
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" value="{{ old('phone') }}" required autocomplete="phone"
                                 placeholder="Номер телефона" autofocus>
@@ -34,13 +37,12 @@
                             @enderror
                         </div>
 
-                        {{-- <input id="email" type="hidden" name="email" value="a1@a1.com"> --}}
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
                                 autocomplete="current-password">
@@ -54,19 +56,6 @@
                     </div>
 
                     <input class="form-check-input" type="hidden" name="remember" id="remember" checked>
-
-                    {{-- <div class="form-group row">
-                        <div class="col-md-12>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
-
-                                <label class="form-check-label" for="remember">
-                                    {{ __('Remember Me') }}
-                                </label>
-                            </div>
-                        </div>
-                    </div> --}}
 
                     <div class="form-group row mb-0 d-flex">
                         <div class="button-block col-md-8 d-flex" style="column-gap: 1rem;">
@@ -88,6 +77,14 @@
                                 </a>
                             @endif --}}
                         </div>
+
+                        <div class="col-md-12 d-block mt-4 button-quartiary button-reset">
+                            <div class="password-reset" onclick="resetPasswordInSms(event)">
+                                Отправить ссылку для входа по SMS
+                           </div>
+                        </div>
+
+                        <div class="reset-result"></div>
                     </div>
                 </form>
 

@@ -11,10 +11,14 @@
 @if (isset($isMaster) && $isMaster) 
 <div class="mt-0 mb-4 form-checks">
 	<div>на этом номере</div>
-	<input type="checkbox" name="is_whatsapp" class="form-check-input" value="1"  {{ isset($user->is_whatsapp) && ($user->is_whatsapp==1) ? ' checked' : ''}}>
-	<label for="is_whatsapp">есть Whatsapp</label>
-	<input type="checkbox" name="is_telegram" class="form-check-input" value="1"  {{ isset($user->is_telegram) && ($user->is_telegram==1) ? ' checked' : ''}}>
-	<label for="is_whatsapp">есть Telegram</label>
+	<div>
+		<input type="checkbox" name="is_whatsapp" class="form-check-input" value="1"  {{ isset($user->is_whatsapp) && ($user->is_whatsapp==1) ? ' checked' : ''}}>
+		<label for="is_whatsapp">есть Whatsapp</label>
+	</div>
+	<div>
+		<input type="checkbox" name="is_telegram" class="form-check-input" value="1"  {{ isset($user->is_telegram) && ($user->is_telegram==1) ? ' checked' : ''}}>
+		<label for="is_whatsapp">есть Telegram</label>
+	</div>
 </div>
 
 <div class="mt-4">
@@ -23,10 +27,14 @@
 
 <div class="mt-0 mb-4 form-checks">
 	<div>на этом номере</div>
-	<input type="checkbox" name="is_whatsapp2" class="form-check-input" value="1"  {{ isset($user->is_whatsapp2) && ($user->is_whatsapp2==1) ? ' checked' : ''}}>
-	<label for="is_whatsapp2">есть Whatsapp</label>
-	<input type="checkbox" name="is_telegram2" class="form-check-input" value="1"  {{ isset($user->is_telegram2) && ($user->is_telegram2==1) ? ' checked' : ''}}>
-	<label for="is_whatsapp2">есть Telegram</label>
+	<div>
+		<input type="checkbox" name="is_whatsapp2" class="form-check-input" value="1"  {{ isset($user->is_whatsapp2) && ($user->is_whatsapp2==1) ? ' checked' : ''}}>
+		<label for="is_whatsapp2">есть Whatsapp</label>
+	</div>
+	<div>
+		<input type="checkbox" name="is_telegram2" class="form-check-input" value="1"  {{ isset($user->is_telegram2) && ($user->is_telegram2==1) ? ' checked' : ''}}>
+		<label for="is_whatsapp2">есть Telegram</label>
+	</div>
 </div>
 @endif
 

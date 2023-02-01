@@ -136,7 +136,7 @@ button.primary,
     min-width: 13rem;
     height: 3rem;
     background: #EBD2A2;
-    padding: 14px 55px;
+    padding: 14px 25px;
     border-radius: 40px;
     color: #6C5B52;
     font-size: 1rem;
@@ -159,7 +159,7 @@ button.secondary,
     min-width: 8rem;
     height: 3rem;
     background: #EFEEEB;
-    padding: 14px 55px;
+    padding: 14px 25px;
     border-radius: 40px;
     color: #C5B8B3;
     font-size: 1rem;
@@ -176,7 +176,7 @@ button.tertiary,
     min-width: 13rem;
     height: 3rem;
     background: #A58D87;
-    padding: 14px 55px;
+    padding: 14px 25px;
     border-radius: 40px;
     color: #ECD2C6;
     font-size: 1rem;
@@ -186,6 +186,32 @@ button.tertiary,
     justify-content: center;
     border: 0;
     cursor: pointer;
+}
+
+button.quartiary,
+.button-quartiary {
+    min-width: 13rem;
+    height: 3rem;
+    background: #FFFFFF;
+    padding: 11px 25px 14px 25px;
+    border-radius: 40px;
+    color: #A58D87;
+    font-size: 1rem;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px #A58D87;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-disabled {
+    color: #CCCCCC;
+    background-color: #EBECEB;
+    border: dotted 1px #CCCCCC;
 }
 
 .button-whatsapp {
@@ -222,6 +248,21 @@ button.tertiary,
 
 
 /* регистрация и логин */
+.login-form {
+    width: calc(min(80vw, 400px));
+    margin: 0 auto;
+}
+
+.login-form .row label {
+    padding-left: 5px;
+    justify-content: left;
+    width: 100px;
+}
+
+.login-form .col-md-9 {
+    padding-right: 9px;
+}
+
 .already-registered,
 .need-registration {
     margin-top: 1rem;
@@ -242,6 +283,19 @@ button.tertiary,
     max-width: 260px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.reset-result {
+    font-size: 1rem;
+    padding: 1.3rem;
+}
+
+.reset-failed {
+    color: #a5330a;
+}
+
+.reset-ok {
+    color: #e2997e;
 }
 
 .already-registered a:link,
@@ -272,6 +326,7 @@ button.tertiary,
 }
 
 
+/* Типографика */
 
 h1,
 .h1 {
@@ -899,6 +954,15 @@ select.form-control[multiple] {
     align-items: center;
     gap: 1rem;
     color: #8F8F9D;
+    flex-wrap: wrap;
+}
+
+.form-checks > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
 }
 
 .form-checks label {
@@ -959,7 +1023,7 @@ div#map_id {
 }
 
 .mapbox-container {
-    width: min(560px,100vw);
+    width: min(560px,90vw);
     text-align: center;
     margin: 0 auto;
     position: relative;

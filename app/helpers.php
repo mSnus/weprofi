@@ -13,6 +13,14 @@ function parsePhone($phone) {
     return $phone;
 }
 
+function beautifyPhone($phone) {
+    $phone = parsePhone($phone);
+
+    $phone = '0' . substr($phone, 0, 2).' '.substr($phone, 2,3).' '.substr($phone, 5);
+    
+    return $phone;
+}
+
 function filterTagsExceptBr($html) {
     $html = preg_replace('~<br[^>]*>~', '__br__', $html);
     $html = preg_replace('~<[^>]*>~', '', $html);

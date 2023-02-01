@@ -30,6 +30,10 @@
         $user = $profileData['user'];
         $gallery = $profileData['gallery'];
         $isMaster = $user->usertype == App\Models\User::typeMaster;
+
+        $stats = App\Models\UserStats::firstOrNew(['user_id' => $user->id]);
+        $stats->own_profile_visits = $stats->own_profile_visits+1;
+        $stats->save();
     @endphp
 
     <div class="container profile">
