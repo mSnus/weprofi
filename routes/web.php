@@ -32,6 +32,9 @@ Route::redirect('/snusminer.php', '/snusminer.php');
 Route::post('/profile.update/{id}', [UserController::class, 'update']);
 Route::post('/profile.avatar', [UserController::class, 'uploadAvatar']);
 Route::post('/profile.gallery', [UserController::class, 'uploadGallery']);
+Route::get('/profile.removeimage/{id}', [UserController::class, 'removeImage']);
+Route::get('/profile.getgallery', [UserController::class, 'getGallery']);
+Route::get('/profile.getavatar', [UserController::class, 'getAvatar']);
 
 Route::get('/profile', function () {
     if (Auth::user()) {

@@ -744,6 +744,15 @@ select.form-control[multiple] {
     mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 15%, rgba(255, 255, 255, 1) 85%, rgba(255, 255, 255, 0) 100%);
 }
 
+.gallery-add {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.gallery-add:hover {
+    opacity: 0.7;
+}
+
 .gallery img {
     max-width: 200px;
     max-height: 120px;

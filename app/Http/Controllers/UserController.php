@@ -146,21 +146,50 @@ class UserController extends Controller
         return redirect('/profile');
     }
 
+    function removeImage(Request $request){
+        $image = DB::table('images')->where('type', '=', 2)->where('parent_id', '=', 51)->where('id', '=', $request->id);
+
+        if ($image) {
+            unlink(public_path().$image->get()->first()->path);
+            $image->delete();
+            return response('ok', 200);
+        } else {
+            return response('error: image not found', 201);
+        }       
+    }
+
+    function getGallery(Request $request){
+        $images = DB::table('images')
+            ->where('type', '=', User::imageGallery)
+            ->where('parent_id', '=', Auth::id())
+            ->get()
+            ->all();
+
+        return response()->json($images);       
+    }
+
+    function getAvatar(Request $request){
+        $images = DB::table('images')
+            ->where('type', '=', User::imageAvatar)
+            ->where('parent_id', '=', Auth::id())
+            ->get()
+            ->all();
+
+        return response()->json($images);       
+    }
+
     function uploadGallery(Request $request){
 	    $image_ids = [];
         $subpath = "/img/gallery";
 
-        $files_count = count($request->file('files'));
-
-        Log::error($files_count);
+        $files_count = 0;
         
-        if ($files_count > 0) {
+        if ($request->hasFile('files')) {
 
-            DB::table('images')->where('type', '=', User::imageGallery)->where('parent_id', '=', Auth::id())->delete();
+            $files = $request->file('files');
 
-            for ($i = 0; $i < $files_count; $i++) {
-                $file = $request->file('files')[$i];
-
+            foreach ($files as $file) {
+                $files_count++;
                 $name = $file->getClientOriginalName();
                 $image_ext = $file->getClientOriginalExtension();
 
@@ -180,7 +209,7 @@ class UserController extends Controller
 
         }
 
-        return redirect('/profile');
+        return response()->json('file count: '.$files_count);
     }
 
     private function recalculateRating($user_id){

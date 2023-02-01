@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Userinfo;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 include_once(base_path().'/app/helpers.php');
 
@@ -76,23 +74,24 @@ class RegisterController extends Controller
         $spec_id = '0';
         $subspecs = '0';
 
-        if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
-            $subspecs = join(',', $request->subspec1);
+        if (isset($data['subspec1']) && is_array($data['subspec1']) && !in_array(0, $data['subspec1'])) {
+            $subspecs = join(',', $data['subspec1']);
         } else {
-            $subspecs = intval($request->subspec1 ?? '0') ;
+            $subspecs = intval($data['subspec1'] ?? '0') ;
         }
 
         $user = User::create([
             'name' => trim($data['name']),
             'phone' => $phone,
-            'password' => Hash::make($data['password']),
+            'password' => $data['password'],
             'usertype' => $data['usertype']  == User::typeMaster ? User::typeMaster : User::typeClient,
             'rating' => 0,
             'language' => join(',', $data['language'] ?? ['ru']),
             'region' => join(',', $data['region'] ?? ['_israel']),
             'status' => 'active',
             'spec_id' => $spec_id,
-            'subspec_id' => $subspecs
+            'subspec_id' => $subspecs,
+            'invite_token' => strtolower(\Str::random(10)),
         ]);
 
 

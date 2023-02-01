@@ -8,47 +8,66 @@ function uploadAvatar(){
 
     fileRef.onchange = function () {
         if(fileRef.files !== undefined && fileRef.files.length > 0) {
-            // let files = new FormData();
+            displayLoading('avatar');
 
-            // Array.from(this.files).forEach(function(file){
-            //     files.append('files[]', file);
-            // });
+            let formData = new FormData();
+            let attaches = [];
 
-            // axios.post('/profile.avatar/54', {
-            //     files
-            // }, {
-            //         headers: {
-            //         'Content-Type': 'multipart/form-data'
-            //         }
-            //     }
-            // );
+            for (const file of fileRef.files) {
+                formData.append("files[]", file);
+            };
 
-
-            document.forms['formAvatar'].submit();
+            axios.post('/profile.avatar', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                '_token': window._csrf_token,
+                }
+            }).then(
+                ()=>{
+                    refreshAvatar();
+                }
+            )
         } 
-    };
+    }
+}
 
+function selectAndUploadGallery(fileRefSlug){
+    const fileRef = document.getElementById(fileRefSlug);    
+    fileRef.value = "";                    
+
+    fileRef.onchange = function () {
+        if(fileRef.files !== undefined && fileRef.files.length > 0) {
+            displayLoading('gallery');
+
+            let formData = new FormData();
+            let attaches = [];
+
+            for (const file of fileRef.files) {
+                formData.append("files[]", file);
+            };
+
+            axios.post('/profile.gallery', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                '_token': window._csrf_token,
+                }
+            }).then(
+                ()=>{
+                    refreshGallery();
+                }
+            )
+        }
+    }
     
+    $('#fileGallery').trigger('click');
+}
 
+
+function displayLoading(galleryId){
+    let gallery = $('#'+galleryId);
+
+    gallery.html('<img src=\'/img/loading.gif\' width=32 height=32>');
 }
 
 
 
-function uploadGallery(){
-    const fileRef = document.getElementById('fileGallery'); 
- 
-    fileRef.value = "";   
- 
-     $('#fileGallery').trigger('click');
- 
-     fileRef.onchange = function () {
-         if(fileRef.files !== undefined && fileRef.files.length > 0) {
-
-             document.forms['formGallery'].submit();
-         } 
-     };
- 
-     
- 
- }
- 
