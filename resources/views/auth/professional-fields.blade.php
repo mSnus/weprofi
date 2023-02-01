@@ -94,9 +94,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     //setDefaultSelection();
 });
 
-window.addEventListener('load', function(event) { 
-    
-});
+
 </script>
 
 <div class="form-group row" id="spec1_row">
@@ -107,7 +105,17 @@ window.addEventListener('load', function(event) {
                 onchange="showSubspecs('subspec1', this.options[this.selectedIndex].value)"
         >
             @foreach ($specs as $spec)
-                <option value="{{ $spec->id }}" {{ in_array($spec->id, $user_specs) ? 'selected=\''.$spec->id.'\'' : '' }}>{{ $spec->title }}</option>
+                <option value="{{ $spec->id }}">{{ $spec->title }}</option>
+            @endforeach
+
+            @foreach ($specs as $spec)
+                @if (in_array($spec->id, $user_specs))
+                    <script>
+                        document.addEventListener("DOMContentLoaded", ()=>{
+                            $('#spec1').val({{ $spec->id }}).trigger('change');
+                        });
+                    </script>
+                @endif
             @endforeach
         </select>
     </div>

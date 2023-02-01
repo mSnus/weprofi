@@ -84,7 +84,7 @@ class UserController extends Controller
                     ];
                 }
                 DB::table('user_spec')->insert($spec_data);
-
+                
                 // $subspecs = '0';
                 // if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
                 //     $subspecs = join(',', $request->subspec1);

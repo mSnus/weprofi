@@ -185,8 +185,8 @@ class User extends Authenticatable
 					->get()
 					->toArray();
 
-		// $arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
-		$arrSpecs = explode(',', $this->spec_id);
+		$arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
+		// $arrSpecs = explode(',', $this->spec_id);
 		return $arrSpecs;
 				
 	}
@@ -209,6 +209,7 @@ class User extends Authenticatable
 		foreach ($subspecs as $subspec) {
 			$arrSubspecs[$subspec->spec_id][] = $subspec->subspec_id;
 		}
+		// dd($arrSubspecs);
 		// array_map(function($el) {return ['spec_id' => $el->spec_id, 'subspec_id'=> $el->subspec_id];}, $subspecs);
 
 		return $arrSubspecs;
