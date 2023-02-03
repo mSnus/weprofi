@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManagerStatic as Image;
 
 include_once(base_path().'/app/helpers.php');
 
@@ -129,7 +130,11 @@ class UserController extends Controller
 
             $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
             $path = public_path() . $subpath;
-            $storedAs = $file->move($path, $filename);
+            // $storedAs = $file->move($path, $filename);
+
+            Image::make($file)->fit(300, 300, function ($constraint) {
+                $constraint->upsize();
+            })->save($path.'/'.$filename, 90);
 
             DB::table('images')->where('type', '=', User::imageAvatar)->where('parent_id', '=', Auth::id())->delete();
 
@@ -181,6 +186,7 @@ class UserController extends Controller
     function uploadGallery(Request $request){
 	    $image_ids = [];
         $subpath = "/img/gallery";
+        $thumbpath = "/img/thumb";
 
         $files_count = 0;
         
@@ -195,11 +201,21 @@ class UserController extends Controller
 
                 $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
                 $path = public_path() . $subpath;
-                $storedAs = $file->move($path, $filename);    
+                $thumb = public_path() . $thumbpath;
+                // $storedAs = $file->move($path, $filename);   
+                
+                Image::make($file)->resize(1600, 960, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->save($path.'/'.$filename, 90);
+
+                Image::make($file)->fit(500, 500, function ($constraint) {
+                    $constraint->upsize();
+                })->save($thumb.'/'.$filename, 85);
 
                 DB::table('images')->insert([
                     'path' => $subpath.'/'.$filename,
-                    'thumb' => $subpath.'/'.$filename,
+                    'thumb' => $thumbpath.'/'.$filename,
                     'type' => User::imageGallery,
                     'parent_id' => Auth::id(),
                     'created_at' => date('Y-m-d H:i:s')

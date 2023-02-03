@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </script>
 
 <div class="form-group row" id="spec1_row">
-    <label for="spec1" class="col-md-12 col-form-label text-md-left">{{ __('Вид деятельности') }}</label>
+    <label for="spec1" class="col-md-12 col-form-label text-md-left mb-3">{{ __('Вид деятельности') }}</label>
     
     <div class="col-md-12">
         <select id="spec1" class="form-control" name="spec1" 
@@ -128,7 +128,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </div>
 
 <div class="form-group row" id="subspec1_row"style="display: none">
-    <label for="subspec1" class="col-md-12 col-form-label text-md-left">{{ __('Можно уточнить') }}</label>
+    <label for="subspec1" class="col-md-12 col-form-label text-md-left mt-4">{{ __('Уточнение') }}</label>
+    <span class="profile-small-hint">(можно выбрать несколько или вообще не уточнять)</span>
 
     <div class="col-md-12">
         
@@ -139,7 +140,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </div>    
 
 <div class="form-group row">
-    <label for="region" class="col-md-12 col-form-label text-md-left">{{ __('Регион работы') }} (можно выбрать несколько)</label>
+    <label for="region" class="col-md-12 col-form-label text-md-left">{{ __('Регион работы') }} </label>
+    <span class="profile-small-hint">(можно выбрать несколько)</span>
 
     <div class="col-md-12">        
         <select id="region" class="form-control" name="region[]" multiple>
@@ -152,7 +154,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </div>
 
 <div class="form-group row">
-    <label for="language" class="col-md-12 col-form-label text-md-left">{{ __('Языки') }} (можно выбрать несколько)</label>
+    <label for="language" class="col-md-12 col-form-label text-md-left">{{ __('Языки') }} </label>
+    <span class="profile-small-hint">(можно выбрать несколько)</span>
 
     <div class="col-md-12">        
         <select id="language" class="form-control" name="language[]" multiple>

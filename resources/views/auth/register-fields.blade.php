@@ -38,10 +38,11 @@
 </div>
 @endif
 
+<div class="password-fields-pair">
 @if (isset($password_required) && $password_required)
 <!-- Password required -->
 <div class="mt-4">
-	<x-form-input id="password" label="Пароль {{(Auth::user() && Auth::user()->id) ? '(оставьте пустым, если не хотите менять)' : ''}}" class="block mt-1 w-full"
+	<x-form-input id="password" label="Пароль" class="block mt-1 w-full"
 						 type="password"
 						 name="password"
 						 required autocomplete="new-password" />
@@ -54,10 +55,11 @@
 	name="password_confirmation" required
 	/>
 </div>
+{!! (Auth::user() && Auth::user()->id) ? '<span class="profile-small-hint">(оставьте пустым, если не хотите менять)</span>' : '' !!}
 @else
 <!-- Password optional -->
 <div class="mt-4">
-	<x-form-input id="password" label="Пароль {{(Auth::user() && Auth::user()->id) ? '(оставьте пустым, если не хотите менять)' : ''}}" class="block mt-1 w-full"
+	<x-form-input id="password" label="Пароль" class="block mt-1 w-full"
 						 type="password"
 						 name="password"
 						  autocomplete="new-password" />
@@ -70,5 +72,7 @@
 	name="password_confirmation"
 	/>
 </div>
+{!! (Auth::user() && Auth::user()->id) ? '<span class="profile-small-hint">(оставьте пустым, если не хотите менять)</span>' : '' !!}
 @endif
+</div>
 

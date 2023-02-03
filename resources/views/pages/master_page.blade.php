@@ -37,7 +37,8 @@
             $('.gallery').slick({
                 infinite: false,
                 dots: true,
-                speed: 500
+                speed: 500,
+                swipeToSlide: true
             })
         });
     </script>
@@ -106,7 +107,7 @@
                 <div class="gallery" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
                     @foreach ($gallery as $image)
                         <div class="gallery-image">
-                            <a href="{{ $image->src }}" data-lightbox="usergallery"><img src="{{ $image->src }}"
+                            <a href="{{ $image->src }}" data-lightbox="usergallery"><img src="{{ $image->thumb }}"
                                     alt="gallery image" /></a>
                         </div>
                     @endforeach

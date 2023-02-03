@@ -278,7 +278,7 @@ class User extends Authenticatable
             $user->join_date = date("d-m-Y", strtotime($user->created_at));
 
             $gallery = DB::table('users')
-                ->select('users.id as user_id', 'images.id as image_id', 'images.path as src')
+                ->select('users.id as user_id', 'images.id as image_id', 'images.path as src', 'images.thumb')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
                              $join->on('images.type', '=', DB::raw("2"));

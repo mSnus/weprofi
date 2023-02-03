@@ -75,8 +75,11 @@
 
                             @include('auth.register-fields', ['password_required' => false])
 
-                            <div class="mt-2">
-                                Отметьте на карте, где вы находитесь (по желанию):
+                            <div class="mt-4 col-form-label">Карта</div>
+
+                            <div class="mt-2 profile-important-hint">
+                                Вы можете отметить своё местоположение на карте. <br>
+                                Покажите карту и подвиньте метку на нужное место:
                             </div>
 
                             <div class="mt-2" id='mapToggler' {!! isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'!!}>
@@ -164,7 +167,7 @@
 
 
                                     <div class="form-group row mt-2">
-                                        <label for="tagline" class="col-md-12">Подробное описание</label>
+                                        <label for="tagline" class="col-md-12 mt-4">Подробное описание</label>
                                         <textarea id="content" name="content" label="Подробное описание" class="form-control block mt-1 w-full" type="text"
                                             style="height: 12rem;">{{ $user->content_raw ?? '' }}</textarea>
                                     </div>
@@ -175,12 +178,24 @@
                                             'Название услуги__100 sh/час'<br>
                                             <i>название услуги, два нижних подчеркивания, цена, sh</i>
                                         </div>
-                                        <textarea id="pricelist" name="pricelist" class="form-control block mt-1 w-full" type="text" style="height: 12rem;">{{ $user->pricelist_raw ?? '' }}</textarea>
+                                        <textarea id="pricelist" name="pricelist" class="form-control block mt-1 w-full" type="text" style="height: 8rem;">{{ $user->pricelist_raw ?? '' }}</textarea>
+                                    </div>
+
+                                    <div class="form-group row mt-4">
+                                        <label for="tagline" class="col-md-12 mt-4"><h2>Галерея работ</h2></label>
+                                        <div class="form-hint">Вы можете закачать до 10 файлов размером не более 10Мб</i>
+                                        </div>
+
+                                        <div class="gallery" id="gallery"></div>            
+
+                                        <div class="button-tertiary mt-3 mb-3 m-auto" onclick="selectAndUploadGallery('fileGallery')">
+                                            Выбрать и закачать файлы
+                                        </div>
                                     </div>
 
                                     <div class="form-group row mt-2">
                                         <label for="tagline" class="col-md-12">График работы</label>
-                                        <textarea id="timetable" name="timetable" class="form-control block mt-1 w-full" type="text" style="height: 12rem;">{{ $user->timetable ?? '' }}</textarea>
+                                        <textarea id="timetable" name="timetable" class="form-control block mt-1 w-full" type="text" style="height: 8rem;">{{ $user->timetable ?? '' }}</textarea>
                                     </div>
 
                                     <div id="profiButtons" class="button-block">
@@ -194,17 +209,7 @@
                                     </div>
                                 
 
-                                    <div class="form-group row mt-4">
-                                        <label for="tagline" class="col-md-12 mt-4"><h2>Галерея работ</h2></label>
-                                        <div class="form-hint">Вы можете закачать до 10 файлов размером не более 10Мб</i>
-                                        </div>
-
-                                        <div class="gallery" id="gallery"></div>            
-
-                                        <div class="button-tertiary mt-3 mb-3 m-auto" onclick="selectAndUploadGallery('fileGallery')">
-                                            Выбрать и закачать файлы
-                                        </div>
-                                    </div>
+                                    
 
                                 </div>
                             </div>
