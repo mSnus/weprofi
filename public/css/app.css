@@ -134,7 +134,7 @@ a:hover {
 
 button.primary,
 .button-primary {
-    min-width: 13rem;
+    min-width: 12rem;
     height: 3rem;
     background: #EBD2A2;
     padding: 14px 25px;
@@ -174,7 +174,7 @@ button.secondary,
 
 button.tertiary,
 .button-tertiary {
-    min-width: 13rem;
+    min-width: 12rem;
     height: 3rem;
     background: #A58D87;
     padding: 14px 25px;
@@ -191,7 +191,7 @@ button.tertiary,
 
 button.quartiary,
 .button-quartiary {
-    min-width: 13rem;
+    min-width: 12rem;
     height: 3rem;
     background: #FFFFFF;
     padding: 11px 25px 14px 25px;

@@ -45,7 +45,7 @@
 
     .button-block {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: center;
         row-gap: 1rem;
     }

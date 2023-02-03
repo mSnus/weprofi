@@ -14,10 +14,10 @@
                 <form method="POST" action="{{ route('login') }}" class="login-form">
                     @csrf
 
-                    <div class="form-group row">
+                    <div class="form-group row mb-0">
                         <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Телефон') }}</label>
                         <div class="profile-small-hint">в формате 53 456 7899, без 0 или +972</div>
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" value="{{ old('phone') }}" required autocomplete="phone"
                                 placeholder="Номер телефона" autofocus>
@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
                                 autocomplete="current-password">
