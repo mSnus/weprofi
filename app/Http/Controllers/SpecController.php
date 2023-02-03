@@ -57,11 +57,11 @@ class SpecController extends Controller
             $spec = Spec::where('id', $spec_id)->firstOrFail();
             $subspecs = $this->getNonEmptySubspecs($spec_id);
             //Spec::where('id', $spec_id)->firstOrFail();
-            // dd($spec->subspecs);
+            // dd($subspecs);
 
-            if ($subspec_id == 0) {
-                $subspecs = Subspec::where('spec_id', $spec_id);
-            }
+            // if ($subspec_id == 0) {
+            //     $subspecs = Subspec::where('spec_id', $spec_id);
+            // }
         }
 
         $region_options = array_merge(
@@ -70,7 +70,7 @@ class SpecController extends Controller
             // Macroregion::getOptions($request->region_id ?? '_israel'),
         );
 
-        return view('pages.profi_list', [
+        return view('pages.subspecs', [
             'spec_id' => $spec_id,
             'subspec_id' => $subspec_id,
             'region_id' => $request->region_id ?? '',
@@ -114,7 +114,7 @@ class SpecController extends Controller
     }
 
     public static function getNonEmptySubspecs($spec_id) {
-        $specs = DB::table('specs')
+        $subspecs = DB::table('specs')
         ->selectRaw('COUNT(distinct users.id) as user_count')
         ->selectRaw('subspecs.title as subspec_title')
         ->selectRaw('user_spec.subspec_id as id')
@@ -138,7 +138,7 @@ class SpecController extends Controller
         // }
 
         // dd($spe)
-        return (object)$specs;
+        return (object)$subspecs;
     }
 
 

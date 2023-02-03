@@ -46,18 +46,18 @@
             {{-- список категорий --}}
 
             @php
-                $subspec_count = count($spec->subspecs);
+                $subspec_count = count( (array) $subspecs);
             @endphp
             
             <div class="specs{{ ($subspec_count < 4 ? ' single-column' : '') }}">
 
                 @if ($subspec_count > 0)
-                    @foreach ($spec->subspecs as $subspec)
+                    @foreach ($subspecs as $subspec)
                         <div class="spec {{ $subspec->id == $subspec_id ? 'subspec-current' : ''}}">
                             <a 
                             href="#" 
                             onclick="goPath( event, {{$spec->id}}, {{$subspec->id}} )"
-                            >{{ $subspec->title }}</a>
+                            >{{ $subspec->subspec_title }}</a>
                         </div>
                     @endforeach
                 @endif

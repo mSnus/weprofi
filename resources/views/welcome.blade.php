@@ -3,6 +3,6 @@
 @section('title', 'WeProfi')
 
 @section('content')
-    @include('specs')
+    @include('pages.specs')
     @include('components.register')
 @endsection
