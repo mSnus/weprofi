@@ -6,13 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div>
-                <h1>{{ __('Register') }} пользователя</h1>
+                <h1>{{ __('Register') }}</h1>
 
                 <div class="form-register">
                     <form method="POST" action="{{ route('register') }}" id="formRegister">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row register-form-simple">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-8">
@@ -26,11 +26,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row register-form-simple">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Номер телефона') }}</label>
 
                             <div class="col-md-8">
-                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                                <input 
+                                    id="phone" 
+                                    type="phone" 
+                                    class="form-control @error('phone') is-invalid @enderror" 
+                                    name="phone" 
+                                    value="{{ Session::get('phone') ?? old('phone') }}"
+                                    required 
+                                    autocomplete="phone"
+                                >
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -40,11 +48,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row register-form-simple">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-8">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input 
+                                    id="password"
+                                    type="password" 
+                                    class="form-control @error('password') is-invalid @enderror" 
+                                    name="password" 
+                                    value="{{ Session::get('password') ?? '' }}"
+                                    required 
+                                    autocomplete="new-password"
+                                >
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +70,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row register-form-simple">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-8">
@@ -65,31 +81,34 @@
                         <input type="hidden" name="usertype" id="usertype" value="{{ App\Models\User::typeClient }}">
 
                         <div class="form-group row mb-0 register-form-simple">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-2">
                                 
                                 <button type="submit" class="primary">
-                                    {{ __('Register') }} 
+                                    {{ __('Register') }} пользователя 
                                 </button>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-8">
-                                <h2>Вы профессионал?</h2>
-                            </div>
-                            <div class="col-md-10 price-warning">
-                                {{ Setting::get('text_free_period') }}
+                            <div class="col-md-8 mt-4">
+                                <h2 class="mb-0">Вы профессионал?</h2>
                             </div>
                         </div>
 
-                        @include('auth.professional-fields')
+                        <div class="professional-form">    
+                            <div class="col-md-10 price-warning">
+                                {{ Setting::get('text_free_period') }}
+                            </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                
-                                <button type="button" class="tertiary m-auto" onclick="registerProfi()">
-                                    Создать&nbsp;профиль
-                                </button>
+                            @include('auth.professional-fields')
+                            
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8">
+                            
+                                    <button type="button" class="button-primary m-auto" onclick="registerProfi()">
+                                        Регистрироваться&nbsp;как&nbsp;профи
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

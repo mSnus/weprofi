@@ -45,14 +45,30 @@ class UserCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
 
-        CRUD::column('phone2');
-
         $this->crud->addColumn(
             [
                 'name'  => 'usertype',
                 'label' => 'Тип',
                 'type'  => 'model_function',
                 'function_name' => 'getUserRoleStringAttribute',
+             ],
+        );
+
+        $this->crud->addColumn(
+            [
+                'name'  => 'own_views',
+                'label' => 'Заходов к себе',
+                'type'  => 'model_function',
+                'function_name' => 'getUserOwnProfileViews',
+             ],
+        );
+
+        $this->crud->addColumn(
+            [
+                'name'  => 'views',
+                'label' => 'Просмотров',
+                'type'  => 'model_function',
+                'function_name' => 'getUserViews',
              ],
         );
     }

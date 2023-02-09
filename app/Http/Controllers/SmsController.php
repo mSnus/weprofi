@@ -12,7 +12,7 @@ class SmsController extends Controller
     //
     public function show(Request $request)
     {
-        return view('admin.sms');
+        return (backpack_user()) ? view('admin.sms') : abort(403, 'Admins only');
     }
 
     public function realSendSms($smsText, $phone){
@@ -23,7 +23,7 @@ class SmsController extends Controller
         'Token='.'0XF41E6695CE6FF93F8C4BEEB302A47E3BF538E03FBB237051FA9C6C479E81110B982BD66B6DC9A6223ECCD5E06804F208'.
         '&UnsubscribeText='.'Unsubscribe'.
         '&CanUnsubscribe='.'false'.
-        '&Mobiles='."972".$phone.
+        '&Mobiles='.$phone.
         '&Id='.'5449005'.
         '&Name='.'invite'.
         '&FromName='.'WeProfi'.

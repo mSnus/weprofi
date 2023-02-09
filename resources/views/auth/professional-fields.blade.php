@@ -11,7 +11,7 @@
     
     $languages = ['ru' => 'Русский', 'en' => 'Английский', 'il' => 'Иврит', 'ar' => 'Арабский'];
 
-    $specs = \App\Models\Spec::get()->all();
+    $specs = \App\Models\Spec::orderBy('ordering')->orderBy('title')->get()->all();
     $subspecs = \App\Models\Subspec::get()->all();
     $subspecs_arr = [];
     

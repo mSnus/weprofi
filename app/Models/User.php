@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 include_once(base_path().'/app/helpers.php');
 
@@ -44,6 +45,7 @@ class User extends Authenticatable
         'pricelist',
         'location',
         'region',
+		'timetable',
 
 		'is_show_map',
 		'is_whatsapp',
@@ -227,6 +229,52 @@ class User extends Authenticatable
         return $value;
     }
 
+
+	public static function formatPricelist($pricelistRaw){
+		$pricelist = strip_tags($pricelistRaw);
+            
+			
+		$pricelistArr = array_filter(preg_split('~[\r\n]~', $pricelist));
+
+		foreach ($pricelistArr as $key => $line) {
+			$pricelistArr[$key] = preg_replace(
+				'~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims', 
+				'<div class="price-block">
+					<div class="price-text">$1</div>
+					<div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>                        
+				</div>', 
+				$pricelistArr[$key]);                
+		}
+
+		$pricelist = join("\n", $pricelistArr);
+
+
+		return $pricelist;
+	}
+
+
+	public static function formatTimetable($timetableRaw){
+		$timetable = strip_tags($timetableRaw);
+            
+			
+		$timetableArr = array_filter(preg_split('~[\r\n]~', $timetable));
+
+		foreach ($timetableArr as $key => $line) {
+			$timetableArr[$key] = preg_replace(
+				'~^(.*)(\.{4}|_{2})([^\r\n\t]*)$~Uims', 
+				'<div class="timetable-block">
+					<div class="timetable-text">$1</div>
+					<div class="timetable-value">$3</div>
+				</div>', 
+				$timetableArr[$key]);                
+		}
+
+		$timetable = join("\n", $timetableArr);
+
+
+		return ($timetable);
+	}
+
 	public static function getData($user_id)
     {
         $user = null;
@@ -253,27 +301,14 @@ class User extends Authenticatable
 			$user->content_raw = strip_tags($user->content);
             $user->content = processText(strip_tags($user->content));
 
-			$user->timetable = processText(strip_tags($user->timetable));
-			$user->pricelist = strip_tags($user->pricelist);
-            
+			// $user->timetable = processText(strip_tags($user->timetable));
+			$user->timetable_raw = $user->timetable;
+			$user->timetable = self::formatTimetable($user->timetable);
 			
-            $pricelist = array_filter(preg_split('~[\r\n]~', $user->pricelist));
-
-            foreach ($pricelist as $key => $line) {
-                $pricelist[$key] = preg_replace(
-                    '~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims', 
-                    '<div class="price-block">
-                        <div class="price-text">$1</div>
-                        <div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>                        
-                    </div>', 
-                    $pricelist[$key]);                
-            }
-
 			$user->pricelist_raw = $user->pricelist;
+            $user->pricelist = self::formatPricelist($user->pricelist);
 
-            $user->pricelist = join("\n", $pricelist);
-
-			$user->timetable = trim($user->timetable);
+			
 
             $user->join_date = date("d-m-Y", strtotime($user->created_at));
 
@@ -315,4 +350,23 @@ class User extends Authenticatable
             'skills' => $skills_list
         ];
     }
+
+	public function getUserOwnProfileViews(){
+		$views = \App\Models\UserStats::select('own_profile_visits')->where('user_id', $this->id)->get()->first();
+		return $views->own_profile_visits ?? 0;
+	}
+
+	public function getUserViews(){
+		$views = \App\Models\UserViews::selectRaw('sum(view_count) as view_count')->where('target_id', $this->id)->groupBy('target_id')->get()->first();
+		return $views->view_count ?? 0;
+	}
+	public function getUserViewsBy($viewer_id){
+		$views = \App\Models\UserViews::selectRaw('sum(view_count) as view_count')
+			->where('target_id', $this->id)
+			->where('source_id', $viewer_id)
+			->groupBy('target_id')
+			->get()
+			->first();
+		return $views->view_count ?? 0;
+	}
 }

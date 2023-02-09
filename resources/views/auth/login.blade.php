@@ -16,7 +16,6 @@
 
                     <div class="form-group row mb-0">
                         <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Телефон') }}</label>
-                        <div class="profile-small-hint">в формате 53 456 7899, без 0 или +972</div>
                         <div class="col-md-12">
                             <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" value="{{ old('phone') }}" required autocomplete="phone"
@@ -63,7 +62,7 @@
                                 {{ __('Login') }}
                             </button>
 
-                            <button type="button" class="button-tertiary" onclick="window.location.href='/register'">
+                            <button type="button" class="button-tertiary" onclick="goRegister()">
                                 {{ __('Register') }}
                             </button>
 

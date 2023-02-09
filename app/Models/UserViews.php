@@ -17,6 +17,7 @@ class UserViews extends Model
     protected $fillable = [
         'source_id',
         'target_id',
+        'view_count'
     ];
 
     /**
@@ -28,6 +29,7 @@ class UserViews extends Model
         'id' => 'integer',
         'source_id' => 'integer',
         'target_id' => 'integer',
+        'view_count' => 'integer'
     ];
 
     public function source()

@@ -11,8 +11,6 @@ async function refreshAvatar() {
     let images = await axios.get('/profile.getavatar');
     let avatar = $('#avatar');
 
-    console.log('avatar>>', images);
-
     displayLoading('avatar');
     let imageSrc = images?.data[0]?.thumb ?? '/img/avatar.png';
 

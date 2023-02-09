@@ -3,6 +3,7 @@
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SpecController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,14 @@ Route::get('/profile', function () {
     }
 });
 
+Route::get('/contact', function () {
+        return view('contactus');
+});
+
+Route::post('/contact/send', [App\Http\Controllers\ContactsController::class, 'send']);
+
+Route::get('/stats.view/{source_id}/{target_id}', [StatsController::class, 'updateViews']);
+
 
 Auth::routes();
 
@@ -79,3 +88,4 @@ Route::resource('city', App\Http\Controllers\CityController::class)->only('index
 
 
 Route::post('/feedback/{id}', [UserController::class, 'sendFeedback']);
+Route::post('/quickregister', [UserController::class, 'quickRegister']);

@@ -55,10 +55,6 @@
                                 accept="image/png, image/jpeg">
                     </div>
 
-                    <script>
-                        window._csrf_token = '{{ csrf_token() }}';                       
-                    </script>
-
                     <form action="/profile.gallery" class="d-flex flex-wrap" style="visibility: hidden" id="formGallery"
                         method="POST" enctype="multipart/form-data">
                         @csrf
@@ -75,46 +71,7 @@
 
                             @include('auth.register-fields', ['password_required' => false])
 
-                            <div class="mt-4 col-form-label">Карта</div>
-
-                            <div class="mt-2 profile-important-hint">
-                                Вы можете отметить своё местоположение на карте. <br>
-                                Покажите карту и подвиньте метку на нужное место:
-                            </div>
-
-                            <div class="mt-2" id='mapToggler' {!! isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'!!}>
-                                <input id="location" label="Где вы находитесь? Отметьте на карте" type="hidden"
-                                    name="location" :value="old('location')" />
-
-                                @php
-                                    $mapbox = ['no_autocenter' => true, 'height' => '100%'];
-                                    
-                                    $location = $user->location;
-                                    
-                                    if ($location != '') {
-                                        $lng = substr($location, 0, strpos($location, ','));
-                                        $lat = substr($location, strpos($location, ',') + 1);
-                                        $mapbox['lng'] = $lng;
-                                        $mapbox['lat'] = $lat;
-                                    }
-                                    
-                                @endphp
-
-                                @include('mapbox', $mapbox)
-                            </div>
-
-                            <div class="mt-2 mb-4 form-checks">
-                                <input 
-                                    type="checkbox" 
-                                    name="is_show_map" 
-                                    id="isShowMap"
-                                    class="form-check-input" 
-                                    value="1" 
-                                    {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
-                                    onclick="if (this.checked) {$('#mapToggler').show(); window.$maps[0].resize();} else {$('#mapToggler').hide()}"
-                                >
-                                <label for="is_show_map">показывать карту</label>
-                            </div>
+                            
 
                             <input type="hidden" name="usertype" id="usertype" value="{{ $user->usertype }}">
 
@@ -144,6 +101,9 @@
 
                                             $('#profiButton').hide();
                                             $('#profiFields').show('slow');
+                                            if(typeof(window.$maps) !== 'undefined') {
+                                                window.$maps[0].resize();
+                                            }
                                             // $('#userButtons').hide();
                                         }
                                     </script>
@@ -188,14 +148,67 @@
 
                                         <div class="gallery" id="gallery"></div>            
 
-                                        <div class="button-tertiary mt-3 mb-3 m-auto" onclick="selectAndUploadGallery('fileGallery')">
+                                        <div class="button-secondary mt-3 mb-4 m-auto" onclick="selectAndUploadGallery('fileGallery')">
                                             Выбрать и закачать файлы
                                         </div>
                                     </div>
 
+
+
                                     <div class="form-group row mt-2">
                                         <label for="tagline" class="col-md-12">График работы</label>
-                                        <textarea id="timetable" name="timetable" class="form-control block mt-1 w-full" type="text" style="height: 8rem;">{{ $user->timetable ?? '' }}</textarea>
+                                        <div class="form-hint">Для красивого оформления графика пишите по шаблону:<br>
+                                            'Понедельник__11:00-19:00'<br>
+                                            <i>день, два нижних подчеркивания, время</i>
+                                        </div>
+                                        <textarea 
+                                            id="timetable" 
+                                            name="timetable" 
+                                            class="form-control block mt-1 w-full" 
+                                            type="text" 
+                                            style="height: 8rem;"
+                                        >{{ $user->timetable_raw ?? '' }}</textarea>
+                                    </div>
+
+                                    <div class="mt-4 col-form-label">Карта</div>
+
+                                    <div class="mt-2 profile-important-hint">
+                                        Вы можете отметить своё местоположение на карте. <br>
+                                        Покажите карту и подвиньте метку на нужное место:
+                                    </div>
+
+                                    <div class="mt-2" id='mapToggler' {!! isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'!!}>
+                                        <input id="location" label="Где вы находитесь? Отметьте на карте" type="hidden"
+                                            name="location" :value="old('location')" />
+
+                                        @php
+                                            $mapbox = ['no_autocenter' => true, 'height' => '100%'];
+                                            
+                                            $location = $user->location;
+                                            
+                                            if ($location != '') {
+                                                $lng = substr($location, 0, strpos($location, ','));
+                                                $lat = substr($location, strpos($location, ',') + 1);
+                                                $mapbox['lng'] = $lng;
+                                                $mapbox['lat'] = $lat;
+                                            }
+                                            
+                                        @endphp
+
+                                        @include('mapbox', $mapbox)
+                                    </div>
+
+                                    <div class="mt-2 mb-4 form-checks">
+                                        <input 
+                                            type="checkbox" 
+                                            name="is_show_map" 
+                                            id="isShowMap"
+                                            class="form-check-input" 
+                                            value="1" 
+                                            {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
+                                            onclick="if (this.checked) {$('#mapToggler').show(); window.$maps[0].resize();} else {$('#mapToggler').hide()}"
+                                        >
+                                        <label for="is_show_map">показывать карту</label>
                                     </div>
 
                                     <div id="profiButtons" class="button-block">

@@ -38,7 +38,11 @@
                 infinite: false,
                 dots: true,
                 speed: 500,
-                swipeToSlide: true
+                swipeToSlide: true,
+                mobileFirst: true,
+                respondTo: 'min',
+                variableWidth: true,
+                slidesToShow:1,
             })
         });
     </script>
@@ -68,37 +72,47 @@
 
     <div class="d-block text-center">
         <div class="user page">
-            <h1 class="mb-0">{{ $user->name }}</h1>
 
-            <div class="tagline page mt-0 mb-3">{{ join(', ', $city_list) }}</div>
-
-            <div class="avatar" 
-                style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
-            >
-            </div>
-            
-            @if ($user->rating_count > 3)
-            <div class="rating page">
-                @for ($i = 1; $i <= $user->rating; $i++)
-                    <img src="/img/star.svg" alt="star">
-                @endfor
-            </div>    
-            @endif
-        
-            <div class="tagline page">{{ $user->tagline ?? 'профи' }}</div>
-            <div class="joindate">с нами с {{ $user->join_date }}</div>
-            @if (!empty($skills))
-                <div class="skills">
-                    {{ $skills }}
+            <div class="main-user-data">
+                <div class="avatar" 
+                    style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
+                >
                 </div>
-            @endif
+
+                <div class="user-data">                  
+                    <h1 class="mb-0">{{ $user->name }}</h1>
+
+                    <div class="tagline page mt-2 mb-2">{{ join(', ', $city_list) }}</div>
+                    
+                    
+                    @if ($user->rating_count > 3)
+                        <div class="rating page">
+                            @for ($i = 1; $i <= $user->rating; $i++)
+                                <img src="/img/star.svg" alt="star">
+                            @endfor
+                        </div>
+                    @endif
+                    
+                    @if  (isset($tagline) && !empty($tagline))
+                        <div class="tagline page">{{ $user->tagline }}</div>
+                    @endif
+                    
+                    @if (isset($skills) && !empty($skills))
+                        <div class="skills">
+                            {{ $skills }}
+                        </div>
+                    @endif
+
+                    <div class="joindate">с нами с {{ $user->join_date }}</div>                    
+                </div>
+            </div>
 
             <div class="description">{!! $user->content !!}</div>
 
             <div class="pricelist">{!! $user->pricelist !!}</div>
 
             @if (!empty($user->timetable))
-                <div class="h4">График работы:</div>
+                <div class="h4 mt-4">График работы:</div>
                 <div class="timetable">{!! $user->timetable !!}</div>    
             @endif
             
@@ -151,7 +165,12 @@
         <div class="button-primary" onclick="showContact()">Посмотреть&nbsp;контакт</div>
     </div>
 
-    @if ($user->id != Auth::id())
+    @php
+        $numViews =  (Auth::id()) ? \App\Models\User::where('id', $user->id)->first()->getUserViewsBy(Auth::id()) : 0;
+        $hasViewedThisProfile = $numViews > 0;
+    @endphp
+
+    @if ($user->id != Auth::id() && $hasViewedThisProfile)
         <div class="profi-feedback" id="feedback">
             <div class="button-tertiary" onclick="showFeedback()">Оставить отзыв</div>
         </div>    
@@ -185,6 +204,11 @@
 
     <script>
         function showContact(){
+            //update view stats
+            @auth
+            axios.get('/stats.view/{{ Auth::id() }}/{{ $user->id }}');
+            @endauth
+
             let div = document.getElementById('contact');
             div.innerHTML = `
             <div class="col-md-10 tell-about-us-warning">
@@ -192,7 +216,7 @@
             </div>
 
             <div class="contact-phone"  onclick="callPhone('{{ $user->phone }}')">
-                0{{ $user->phone }}
+                {{ beautifyPhone($user->phone) }}
             </div>
 
             <div class="button-primary" onclick="callPhone('{{ $user->phone }}')">
@@ -211,7 +235,7 @@
             
                 <div class="contact-phone"  onclick="callPhone('{{ $user->phone2 }}')">
                     <img src="/img/phone.svg" width="24" height="24">
-                    {{ $user->phone2 }}
+                    {{ beautifyPhone($user->phone2) }}
                 </div>                    
 
                 <div class="button-primary" onclick="callPhone('{{ $user->phone2 }}')">Позвонить</div>
@@ -234,25 +258,11 @@
         function tryWhatsapp(phone) {
             let waPhone = phone.replace('[^0-9\+]','');
             
-            if (phone.substring(0,3) !== '972') {
-                if (phone.substring(0,1) === '0'){
-                    waPhone = phone.substring(1);
-                }
-                waPhone = "972" + waPhone;
-            } 
-            
             window.open('https://api.whatsapp.com/send?phone='+waPhone, '_blank');
         }
 
         function tryTelegram(phone) {
             let tgPhone = phone.replace('[^0-9\+]','');
-            
-            if (phone.substring(0,3) !== '972') {
-                if (phone.substring(0,1) === '0'){
-                    tgPhone = phone.substring(1);
-                }
-                tgPhone = "972" + tgPhone;
-            } 
             
             window.open('https://t.me/+'+tgPhone, '_blank');
         }

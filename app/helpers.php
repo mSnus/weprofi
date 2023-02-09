@@ -1,13 +1,23 @@
 <?php
 
 
+/**
+ * Очищает телефон от всех символов, кроме цифр.
+ * Если телефон начинается с 5 и содержит 9 цифр, он считается израильским мобильным, к нему приписываем 972
+ * Если телефон начинается с 0, он считается израильским, у него убираем 0 и приписываем 972
+ * В базе все телефоны хранятся как есть с кодом страны, т.е. 972534381234, 79250421234,
+ * при отправке просто подставляем + в начале, если надо
+ * 
+ * @param mixed $phone
+ * @return array|null|string
+ */
 function parsePhone($phone) {
     $phone = preg_replace('~[^0-9]~', '', $phone);
 
-    if (substr($phone, 0, 3) == '972') {
-        $phone = substr($phone, 3);
+    if (substr($phone, 0, 1) == '5' && strlen($phone) == 9) {
+        $phone = "972" . $phone;
     } else if (substr($phone, 0, 1) == 0) {
-        $phone = substr($phone, 1);
+        $phone = "972".substr($phone, 1);
     }
 
     return $phone;
@@ -16,7 +26,20 @@ function parsePhone($phone) {
 function beautifyPhone($phone) {
     $phone = parsePhone($phone);
 
-    $phone = '0' . substr($phone, 0, 2).' '.substr($phone, 2,3).' '.substr($phone, 5);
+	$len = strlen($phone);
+    	
+    if ($len > 7) {
+    	
+    	$phone = substr($phone, 0, $len - 7).' '.substr($phone, $len - 7,3).' '.substr($phone, $len - 4);
+    	
+		if ($len == 12) {
+			$phone = substr($phone, 0, 3).' '.substr($phone, 3);
+		} else if ($len == 12) {
+			$phone = substr($phone, 0, 2).' '.substr($phone, 3);
+		} 
+    }
+    
+    $phone = '+' . $phone; 
     
     return $phone;
 }

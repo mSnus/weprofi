@@ -152,12 +152,22 @@ class UserController extends Controller
     }
 
     function removeImage(Request $request){
-        $image = DB::table('images')->where('type', '=', 2)->where('parent_id', '=', 51)->where('id', '=', $request->id);
+        $image = DB::table('images')->where('type', '=', 2)->where('parent_id', '=', Auth::id())->where('id', '=', $request->id);
 
-        if ($image) {
-            unlink(public_path().$image->get()->first()->path);
-            $image->delete();
-            return response('ok', 200);
+        $first_image = $image->get()->first();
+        if ($first_image) {
+            $path_image = public_path() . $first_image->path;
+            $path_thumb = str_replace('gallery', 'thumb', $path_image);
+
+            try {
+                unlink($path_image);
+                unlink($path_thumb);
+            } catch (\Exception $e) {
+                Log::error('Error unlinking ' . $path_image . ' or ' . $path_thumb);
+            }finally {
+                $image->delete();
+                return response('ok', 200);
+            }
         } else {
             return response('error: image not found', 201);
         }       
@@ -265,5 +275,11 @@ class UserController extends Controller
             $this->recalculateRating($target_id);
         }
         return redirect('/user/'.$target_id);
+    }
+
+    function quickRegister(Request $request){
+        $request->session()->flash('phone', $request->login ?? '');
+        $request->session()->flash('password', $request->password ?? '');
+        return redirect('/register');
     }
 }

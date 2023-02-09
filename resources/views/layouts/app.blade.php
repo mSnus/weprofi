@@ -35,6 +35,10 @@
     <link href="{{ asset('css/app-boot.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app-mobile.css') }}" rel="stylesheet">
+
+    <script>
+        window._csrf_token = '{{ csrf_token() }}';                       
+    </script>
 </head>
 
 <body>
@@ -152,9 +156,10 @@
 
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
 
-            <div>
+            <div class="footer-copy">
                 &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"  alt="Logo"></a>
             </div>
+            <div class="footer-links"><a href="/contact">Обратная связь</a></div>
         </footer>
     </div>
 </body>
