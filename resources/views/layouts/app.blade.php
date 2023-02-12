@@ -160,6 +160,9 @@
                 &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"  alt="Logo"></a>
             </div>
             <div class="footer-links"><a href="/contact">Обратная связь</a></div>
+            @php
+                $stat = App\Http\Controllers\StatsController::updateSimpleUtm();   
+            @endphp
         </footer>
     </div>
 </body>
