@@ -28,3 +28,4 @@ mix.copy('resources/js/uploads.js', 'public/js');
 mix.copy('resources/js/gallery.js', 'public/js');
 mix.copy('resources/js/path.js', 'public/js');
 mix.copy('resources/js/login_form.js', 'public/js');
+mix.copy('resources/js/bootstrap.bundle.min.js', 'public/js');

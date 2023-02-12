@@ -287,11 +287,11 @@ button.quartiary,
 }
 
 .professional-form {
-    background-color: #f9f8f5;
-    padding: 0px 16px 16px 16px;
-    border: solid 1px #ddcccc;
-    border-radius: 16px;
-    margin-top: 2rem;
+    margin-top: 1rem;
+}
+
+#formRegisterProfi h2{
+    margin-top: 0;
 }
 
 .reset-result {

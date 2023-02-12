@@ -163,5 +163,6 @@
     "/js/uploads.js": "/js/uploads.js",
     "/js/gallery.js": "/js/gallery.js",
     "/js/path.js": "/js/path.js",
-    "/js/login_form.js": "/js/login_form.js"
+    "/js/login_form.js": "/js/login_form.js",
+    "/js/bootstrap.bundle.min.js": "/js/bootstrap.bundle.min.js"
 }
