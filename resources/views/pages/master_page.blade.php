@@ -99,7 +99,7 @@
                     
                     @if (isset($skills) && !empty($skills))
                         <div class="skills">
-                            {{ $skills }}
+                            {!! $skills !!}
                         </div>
                     @endif
 

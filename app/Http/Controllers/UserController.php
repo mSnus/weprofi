@@ -32,7 +32,8 @@ class UserController extends Controller
             'user' => $data['user'],
             'gallery' => $data['gallery'],
             'skills' => $data['skills'],
-            'feedback' => $feedback]);
+            'feedback' => $feedback
+        ]);
     }
 
 

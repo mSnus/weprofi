@@ -725,6 +725,12 @@ select.form-control[multiple] {
     padding: 8px;
     background-color: #f0ece9;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.user .skills a {
+    color: #666666;
+    text-decoration: none;
 }
 
 .user .price-text {

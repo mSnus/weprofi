@@ -323,7 +323,12 @@ class User extends Authenticatable
                 ->get();
 
             $skills = DB::table('users')
-                ->select('users.id as user_id', 'specs.title as spec_title', 'subspecs.title as subspec_title')
+                ->select('users.id as user_id', 
+				'specs.title as spec_title', 
+				'subspecs.title as subspec_title',
+				'user_spec.spec_id', 
+				'user_spec.subspec_id'
+				)
                 ->leftJoin('user_spec', function($join) {
                              $join->on('user_spec.user_id', '=', 'users.id');
                          })
@@ -337,7 +342,9 @@ class User extends Authenticatable
                 ->get();    
             
             foreach ($skills as $skill) {
-                $skills_list .= $skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').', ';
+                $skills_list .= "<a href='/spec/".$skill->spec_id."/".$skill->subspec_id."/'>".
+					$skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').
+					'</a>, ';
             }
 
             $skills_list = mb_substr($skills_list, 0, mb_strlen($skills_list) - 2);
