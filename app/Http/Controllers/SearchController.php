@@ -73,6 +73,7 @@ class SearchController extends Controller
         ->select(
           'users.name',
           'users.rating',
+          'users.rating_count',
           'users.id as user_id',
           'images.path as avatar',
           'users.content',

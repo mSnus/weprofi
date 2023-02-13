@@ -27,7 +27,7 @@ class SpecController extends Controller
 
         if ($spec_id > 0) {
             $persons = DB::table('users')
-                ->select('users.name', 'users.rating', 'users.id as user_id', 'images.path as avatar', 'users.tagline')
+                ->select('users.name', 'users.rating', 'users.rating_count', 'users.id as user_id', 'images.path as avatar', 'users.tagline')
                 ->leftJoin('user_spec', 'user_spec.user_id', '=', 'users.id')
                 ->leftJoin('images', function ($join) {
                     $join->on('images.parent_id', '=', 'users.id');

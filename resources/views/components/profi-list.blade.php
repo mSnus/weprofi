@@ -31,11 +31,15 @@
             >
             </div>
             <div class="title">{{ $person->name }}</div>
-            <div class="rating">
-                @for ($i = 1; $i <= $person->rating; $i++)
-                    <img src="/img/star.svg" alt="star">
-                @endfor
-            </div>
+            
+            @if ($person->rating_count > 3)
+                <div class="rating">
+                    @for ($i = 1; $i <= $person->rating; $i++)
+                        <img src="/img/star.svg" alt="star">
+                    @endfor
+                </div>    
+            @endif
+            
             <div class="tagline">{{ $tagline }}</div>
         </div>
     @endforeach
