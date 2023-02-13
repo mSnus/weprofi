@@ -4,9 +4,11 @@
 
 @section('content')
     @auth
-        $auth_id = Auth::id();
-        $auth_user = Auth::user()->name;
-        $auth_phone = Auth::user()->phone;
+        @php
+            $auth_id = Auth::id();
+            $auth_name = Auth::user()->name;
+            $auth_phone = Auth::user()->phone;
+        @endphp
     @endauth
     <script>
         document.addEventListener("DOMContentLoaded", ()=>{
