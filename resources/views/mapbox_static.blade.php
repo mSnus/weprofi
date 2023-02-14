@@ -63,7 +63,7 @@
                             'name_en'
                         ]);
 
-                        console.log("Map obj_{{ $mapbox['id'] }} loaded.", self);
+                        // console.log("Map obj_{{ $mapbox['id'] }} loaded.", self);
                         
                     });
                 },

@@ -13,11 +13,11 @@
                 <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                       <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" 
-                      aria-controls="user" aria-selected="true">Ищу профи</button>
+                      aria-controls="user" aria-selected="true">Я ищу профи</button>
                     </li>
                     <li class="nav-item" role="presentation">
                       <button class="nav-link" id="profi-tab" data-bs-toggle="tab" data-bs-target="#profi" type="button" role="tab" 
-                      aria-controls="profi" aria-selected="false">Профессионалы</button>
+                      aria-controls="profi" aria-selected="false">Я профи</button>
                     </li>
                   </ul>
 

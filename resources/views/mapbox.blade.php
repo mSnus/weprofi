@@ -94,9 +94,9 @@
 			  var {{ isset($mapbox['id']) ? $mapbox['id'] : 'map' }} = loadMap(startLng, startLat);
 			  var map_id = eval({!! isset($mapbox['id']) ? "'".$mapbox['id']."'" : "'map'" !!});
 
-			  map_id.on('mouseup', function() {
-					console.log('A mouseup event has occurred.');
-			  });
+			//   map_id.on('mouseup', function() {
+			// 		console.log('A mouseup event has occurred.');
+			//   });
 
 			  map_id.on('load', function() {
 
@@ -105,7 +105,7 @@
 							  accessToken: mapboxgl.accessToken,
 							  mapboxgl: mapboxgl,
 							  enableEventLogging: false,
-							  countries: 'RU',
+							  countries: 'IL',
 							  language: "ru_RU",
 							  fuzzyMatch: true,
 						 })
