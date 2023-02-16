@@ -24,4 +24,6 @@ Route::group([
     Route::crud('city', 'CityCrudController');
     Route::crud('spec', 'SpecCrudController');
     Route::crud('subspec', 'SubspecCrudController');
+
+    Route::get('/admin/stats', [\App\Http\Controllers\StatsController::class, 'index']);
 }); // this should be the absolute last line of this file

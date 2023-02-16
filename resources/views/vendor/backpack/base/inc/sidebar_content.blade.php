@@ -6,3 +6,4 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('city') }}"><i class="nav-icon la la-th-list"></i> Города</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('spec') }}"><i class="nav-icon la la-th-list"></i> Категории</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('subspec') }}"><i class="nav-icon la la-th-list"></i> Подкатегории</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('/admin/stats') }}"><i class="nav-icon la la-th-list"></i> Статистика</a></li>

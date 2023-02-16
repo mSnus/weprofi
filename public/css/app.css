@@ -107,6 +107,31 @@ a:hover {
 
 /* регистрация */
 
+.nav-pills .nav-link {
+  border-radius: 0;
+  border: none;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.nav-pills {
+  border-bottom: solid 4px #3490dc;
+}
+
+.nav-pills:first-child {
+  border-radius: 12px 0px 0px 0px;
+}
+
+.nav-pills:last-child {
+  border-radius: 0px 12px 0px 0px;
+}
+
+
+.nav-tabs .nav-link.active {
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
 .register-block {
     margin: 4rem auto 2rem auto;
     display: flex;
@@ -195,7 +220,9 @@ button.quartiary,
     min-width: 12rem;
     height: 3rem;
     background: #FFFFFF;
-    padding: 11px 8px 14px 8px;
+    padding: 14px 8px 14px 8px;
+    min-height: -moz-min-content;
+    min-height: min-content;
     border-radius: 40px;
     color: #A58D87;
     font-size: 1rem;
@@ -327,7 +354,7 @@ button.quartiary,
 
 .form-group label,
 .col-form-label {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #96877d;
     display: flex;
     justify-content: center;
@@ -477,11 +504,11 @@ select.form-control {
     border-radius: 12px;
 }
 
-/* 
+/*
 .select2-container,
 .select2 .selection,
 .select2-selection {
-    background-color: #EBECEB; 
+    background-color: #EBECEB;
     border: none;
 }
 
@@ -844,7 +871,7 @@ select.form-control[multiple] {
 
 .gallery img {
     max-width: 240px;
-    
+
     max-height: 165px;
     padding: 4px;
 }
@@ -970,7 +997,7 @@ select.form-control[multiple] {
 }
 
 .profile-navigation__section a:hover {
-    color:  #92AAB4;   
+    color:  #92AAB4;
 }
 
 
@@ -1001,6 +1028,8 @@ select.form-control[multiple] {
 .password-fields-pair {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 
 .password-fields-pair .mt-4 {
@@ -1171,6 +1200,7 @@ div#map_id {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    font-size: 1rem;
 }
 
 .footer-links {

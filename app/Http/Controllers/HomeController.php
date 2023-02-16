@@ -37,4 +37,15 @@ class HomeController extends Controller
 					throw new \Exception("No home for usertype ".$role." exists", 1);
 			}
     }
+
+    public function viewFeedbackPage(){
+      $role = Auth::user()->usertype;
+			switch($role) {
+				case User::typeClient:
+        			return Redirect::to('/');
+				default:
+          return view('masters_feedback');
+			}
+
+    }
 }

@@ -68,6 +68,8 @@ Route::get('logout', function ()
 })->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/feedbacks', [App\Http\Controllers\HomeController::class, 'viewFeedbackPage'])->name('feedbacks');
+
 
 //Set Telegram webhook
 //NOTE: do it only once!

@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserStats;
 use Illuminate\Http\Request;
+use App\Models\SimpleUtm;
 
 class StatsController extends Controller
 {
+    public function index(){
+      $utmStats = SimpleUtm::all();
+      $userStats = UserStats::select('users.name', 'users.phone', 'user_stats.own_profile_visits')
+      ->leftJoin('users', 'user_id', '=', 'users.id')
+      ->whereNotNull('phone')
+      ->orderBy('phone')
+      ->get();
+
+      return view('admin.stats')->with('utmStats', $utmStats)->with('userStats', $userStats);
+    }
     public function updateViews(Request $request) {
         $stats = \App\Models\UserViews::firstOrNew(['source_id' => $request->source_id, 'target_id' => $request->target_id]);
         $stats->view_count = $stats->view_count + 1;

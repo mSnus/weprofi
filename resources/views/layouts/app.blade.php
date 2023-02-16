@@ -37,7 +37,7 @@
     <link href="{{ asset('css/app-mobile.css') }}" rel="stylesheet">
 
     <script>
-        window._csrf_token = '{{ csrf_token() }}';                       
+        window._csrf_token = '{{ csrf_token() }}';
     </script>
 </head>
 
@@ -65,14 +65,14 @@
                 @endauth
             </div>
         @endauth
-        
-        
+
+
         <div class="top-logo">
             <a href="{{ url('/') }}">
                 <img src="/img/logo-simple.svg" alt="Logo">
             </a>
         </div>
-        {{--         
+        {{--
         <div class="head-wrapper">
             <nav class="navbar navbar-expand-md navbar-dark">
                 <div class="container">
@@ -136,17 +136,19 @@
 
         <main class="py-4">
             <div class="container d-block text-center">
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+
                 @yield('content')
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+
 
 
 
@@ -157,11 +159,11 @@
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
 
             <div class="footer-copy">
-                &copy; 2022-{{ date('Y') }} <a href='/'><img src="/img/logo.svg" width="220" class="mr-4 mb-2"  alt="Logo"></a>
+                &copy; 2022-{{ date('Y') }} <a href='/' class="mb-2"><img src="/img/logo-simple.svg" width="160" class="mr-4 mb-2"  alt="Logo"></a>
             </div>
             <div class="footer-links"><a href="/contact">Обратная связь</a></div>
             @php
-                $stat = App\Http\Controllers\StatsController::updateSimpleUtm();   
+                $stat = App\Http\Controllers\StatsController::updateSimpleUtm();
             @endphp
         </footer>
     </div>

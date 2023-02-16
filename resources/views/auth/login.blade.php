@@ -58,13 +58,13 @@
 
                     <div class="form-group row mb-0 d-flex">
                         <div class="button-block col-md-8 d-flex" style="column-gap: 1rem;">
-                            <button type="submit" class="button-primary">
+                            <button type="submit" class="button-primary mt-2">
                                 {{ __('Login') }}
                             </button>
 
-                            <button type="button" class="button-tertiary" onclick="goRegister()">
-                                {{ __('Register') }}
-                            </button>
+
+
+
 
                             @if (request()->has('return'))
                                 <input type="hidden" name="return" value="{{ request()->return }}">
@@ -77,11 +77,13 @@
                             @endif --}}
                         </div>
 
-                        <div class="col-md-12 d-block mt-4 button-quartiary button-reset">
-                            <div class="password-reset" onclick="resetPasswordInSms(event)">
+                        <div class="col-md-12 d-block mt-4">
+                            <div class=" button-quartiary button-reset password-reset" onclick="resetPasswordInSms(event)">
                                 Отправить ссылку для входа по SMS
                            </div>
                         </div>
+
+                        <div class="col-md-12 d-block mt-4 already-registered" onclick="goRegister()"> {{__('Register')}}</div>
 
                         <div class="reset-result"></div>
                     </div>

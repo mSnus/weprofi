@@ -99,47 +99,52 @@
     input[type="password"].form-control,
     select.form-control,
     textarea.form-control {
-		font-size: 1.2rem;
-	}
+        font-size: 1.2rem;
+    }
 
     .footer {
         font-size: 1rem;
     }
 
-    .footer img{
-        width:100px;
+    .footer img {
+        width: 100px;
     }
 
     .gallery-item {
         position: relative;
-      }
+    }
 
     .button-delete {
         position: absolute;
         right: 12px;
         bottom: 12px;
-        filter: drop-shadow( 4px 4px 3px rgba(0, 0, 0, .7));
+        filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, .7));
         cursor: pointer;
     }
 
-    .register-form-simple > div {
+    .register-form-simple>div {
         display: flex;
         justify-content: center;
-      }
+    }
 
-      .profile-navigation {
+    .register-form-simple label {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .profile-navigation {
         font-size: 1.2rem;
         line-height: 1.1;
-      }
+    }
 
-      .user .description {
+    .user .description {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-      }
+    }
 
-      .slick-dotted.slick-slider {
+    .slick-dotted.slick-slider {
         max-width: 92vw;
         width: 100%;
-      }
+    }
 }
 

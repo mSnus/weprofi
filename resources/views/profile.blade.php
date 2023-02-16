@@ -47,7 +47,7 @@
                         <h1>Основные данные:</h1>
                     @endif
 
-                    
+
 
                     <div class="w-100">
                             <div class="avatar-container" id="avatar"></div>
@@ -62,7 +62,7 @@
                             accept="image/png, image/jpeg" multiple>
 
                     </form>
-                    
+
 
                     <div class="card-body d-flex flex-nowrap profile-body">
                         <x-form :action="'/profile.update/' . $user->id" class=" d-flex flex-wrap w-100 mb-4 mr-4 form-with-map form-profile">
@@ -71,7 +71,7 @@
 
                             @include('auth.register-fields', ['password_required' => false])
 
-                            
+
 
                             <input type="hidden" name="usertype" id="usertype" value="{{ $user->usertype }}">
 
@@ -80,11 +80,6 @@
                                     <x-form-submit class="ml-4 button-primary mr-4">
                                         Сохранить
                                     </x-form-submit>
-
-                                    <button type="button" class="secondary"
-                                        onclick="window.location.href='/logout'; return false;">
-                                        Выйти
-                                    </button>
                                 </div>
                             @endif
 
@@ -146,7 +141,7 @@
                                         <div class="form-hint">Вы можете закачать до 10 файлов размером не более 10Мб</i>
                                         </div>
 
-                                        <div class="gallery" id="gallery"></div>            
+                                        <div class="gallery" id="gallery"></div>
 
                                         <div class="button-secondary mt-3 mb-4 m-auto" onclick="selectAndUploadGallery('fileGallery')">
                                             Выбрать и закачать файлы
@@ -161,11 +156,11 @@
                                             'Понедельник__11:00-19:00'<br>
                                             <i>день, два нижних подчеркивания, время</i>
                                         </div>
-                                        <textarea 
-                                            id="timetable" 
-                                            name="timetable" 
-                                            class="form-control block mt-1 w-full" 
-                                            type="text" 
+                                        <textarea
+                                            id="timetable"
+                                            name="timetable"
+                                            class="form-control block mt-1 w-full"
+                                            type="text"
                                             style="height: 8rem;"
                                         >{{ $user->timetable_raw ?? '' }}</textarea>
                                     </div>
@@ -183,28 +178,28 @@
 
                                         @php
                                             $mapbox = ['no_autocenter' => true, 'height' => '100%'];
-                                            
+
                                             $location = $user->location;
-                                            
+
                                             if ($location != '') {
                                                 $lng = substr($location, 0, strpos($location, ','));
                                                 $lat = substr($location, strpos($location, ',') + 1);
                                                 $mapbox['lng'] = $lng;
                                                 $mapbox['lat'] = $lat;
                                             }
-                                            
+
                                         @endphp
 
                                         @include('mapbox', $mapbox)
                                     </div>
 
                                     <div class="mt-2 mb-4 form-checks">
-                                        <input 
-                                            type="checkbox" 
-                                            name="is_show_map" 
+                                        <input
+                                            type="checkbox"
+                                            name="is_show_map"
                                             id="isShowMap"
-                                            class="form-check-input" 
-                                            value="1" 
+                                            class="form-check-input"
+                                            value="1"
                                             {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
                                             onclick="if (this.checked) {$('#mapToggler').show(); window.$maps[0].resize();} else {$('#mapToggler').hide()}"
                                         >
@@ -220,9 +215,9 @@
                                             Отмена
                                         </button>
                                     </div>
-                                
 
-                                    
+
+
 
                                 </div>
                             </div>

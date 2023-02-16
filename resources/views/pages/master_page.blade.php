@@ -74,17 +74,17 @@
         <div class="user page">
 
             <div class="main-user-data">
-                <div class="avatar" 
+                <div class="avatar"
                     style="background-image: url({{ $user->avatar ?? '/img/avatar.png' }})"
                 >
                 </div>
 
-                <div class="user-data">                  
-                    <h1 class="mb-0">{{ $user->name }}</h1>
+                <div class="user-data">
+                    <h1 class="mb-0 mt-0">{{ $user->name }}</h1>
 
                     <div class="tagline page mt-2 mb-2">{{ join(', ', $city_list) }}</div>
-                    
-                    
+
+
                     @if ($user->rating_count > 3)
                         <div class="rating page">
                             @for ($i = 1; $i <= $user->rating; $i++)
@@ -92,18 +92,18 @@
                             @endfor
                         </div>
                     @endif
-                    
-                    @if  (isset($tagline) && !empty($tagline))
+
+                    @if  (isset($user->tagline) && !empty($user->tagline))
                         <div class="tagline page">{{ $user->tagline }}</div>
                     @endif
-                    
+
                     @if (isset($skills) && !empty($skills))
                         <div class="skills">
                             {!! $skills !!}
                         </div>
                     @endif
 
-                    <div class="joindate">с нами с {{ $user->join_date }}</div>                    
+                    <div class="joindate">с нами с {{ $user->join_date }}</div>
                 </div>
             </div>
 
@@ -113,9 +113,9 @@
 
             @if (!empty($user->timetable))
                 <div class="h4 mt-4">График работы:</div>
-                <div class="timetable">{!! $user->timetable !!}</div>    
+                <div class="timetable">{!! $user->timetable !!}</div>
             @endif
-            
+
 
             @if (!is_null($gallery) && count($gallery) > 0)
                 <div class="gallery" data-slick='{"slidesToShow": 3, "slidesToScroll": 1}'>
@@ -130,9 +130,9 @@
 
             @php
                 $mapbox = ['no_autocenter' => true, 'height' => '100%'];
-                
+
                 $location = $user->location;
-                
+
                 if ($location != '') {
                     $lng = substr($location, 0, strpos($location, ','));
                     $lat = substr($location, strpos($location, ',') + 1);
@@ -141,10 +141,10 @@
                 }
 
                 $mapbox['id'] = 'map_' . $user->id;
-                
+
             @endphp
 
-            @if (isset($user->is_show_map) && ($user->is_show_map == 1)) 
+            @if (isset($user->is_show_map) && ($user->is_show_map == 1))
                 @include('mapbox_static', $mapbox)
             @endif
         </div>
@@ -173,9 +173,9 @@
     @if ($user->id != Auth::id() && $hasViewedThisProfile)
         <div class="profi-feedback" id="feedback">
             <div class="button-tertiary" onclick="showFeedback()">Оставить отзыв</div>
-        </div>    
+        </div>
     @endif
-    
+
 
     <div class="profi-feedback__form" style="display: none;">
         <form id="feedbackForm" class="form-group" action="/feedback/{{ $user_id }}" method="POST">
@@ -183,8 +183,8 @@
 
             <div class="feedback-stars" id="feedbackStars">
                 @for ($i = 1; $i <= 5; $i++)
-                    @php 
-                        $src = ($i <= $feedback->value) ? '/img/star.svg' : '/img/star_off.svg'; 
+                    @php
+                        $src = ($i <= $feedback->value) ? '/img/star.svg' : '/img/star_off.svg';
                     @endphp
 
                     <img src="{{ $src }}" width="32" alt="star" id="feedbackStar{{ $i }}" onclick="setRating({{ $i }})">
@@ -223,28 +223,28 @@
                 Позвонить
             </div>
 
-            @if (isset($user->is_whatsapp) && ($user->is_whatsapp == 1)) 
+            @if (isset($user->is_whatsapp) && ($user->is_whatsapp == 1))
                 <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone }}')">WhatsApp</div>
             @endif
 
-            @if (isset($user->is_telegram) && ($user->is_telegram == 1)) 
+            @if (isset($user->is_telegram) && ($user->is_telegram == 1))
                 <div class="button-telegram" onclick="tryTelegram('{{ $user->phone }}')">Telegram</div>
             @endif
-            
-            @if (isset($user->phone2) && !empty($user->phone2)) 
-            
+
+            @if (isset($user->phone2) && !empty($user->phone2))
+
                 <div class="contact-phone"  onclick="callPhone('{{ $user->phone2 }}')">
                     <img src="/img/phone.svg" width="24" height="24">
                     {{ beautifyPhone($user->phone2) }}
-                </div>                    
+                </div>
 
                 <div class="button-primary" onclick="callPhone('{{ $user->phone2 }}')">Позвонить</div>
 
-                @if (isset($user->is_whatsapp2) && ($user->is_whatsapp2 == 1)) 
+                @if (isset($user->is_whatsapp2) && ($user->is_whatsapp2 == 1))
                     <div class="button-whatsapp" onclick="tryWhatsapp('{{ $user->phone2 }}')">WhatsApp</div>
                 @endif
-                
-                @if (isset($user->is_telegram2) && ($user->is_telegram2 == 1)) 
+
+                @if (isset($user->is_telegram2) && ($user->is_telegram2 == 1))
                     <div class="button-telegram" onclick="tryTelegram('{{ $user->phone2 }}')">Telegram</div>
                 @endif
             @endif
@@ -257,13 +257,13 @@
 
         function tryWhatsapp(phone) {
             let waPhone = phone.replace('[^0-9\+]','');
-            
+
             window.open('https://api.whatsapp.com/send?phone='+waPhone, '_blank');
         }
 
         function tryTelegram(phone) {
             let tgPhone = phone.replace('[^0-9\+]','');
-            
+
             window.open('https://t.me/+'+tgPhone, '_blank');
         }
 

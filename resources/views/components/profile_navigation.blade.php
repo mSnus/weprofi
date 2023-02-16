@@ -1,7 +1,7 @@
 @php
     $menupoints = [
         'main' => (object)['title' => 'Основные данные', 'link' => '/profile'],
-        'feedback' =>  (object)['title' => 'Отзывы', 'link' => '/home'],
+        'feedback' =>  (object)['title' => 'Отзывы', 'link' => '/feedbacks'],
     ];
 @endphp
 
@@ -16,7 +16,7 @@
         <div class="profile-navigation__section">
             <a href="{{ $menupoint->link}}">{{ $menupoint->title}}</a>
         </div>
-    @endif    
+    @endif
 
 @endforeach
 
