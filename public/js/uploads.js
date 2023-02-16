@@ -1,8 +1,8 @@
 
 function uploadAvatar(){
-   const fileRef = document.getElementById('fileAvatar'); 
+   const fileRef = document.getElementById('fileAvatar');
 
-   fileRef.value = "";   
+   fileRef.value = "";
 
     $('#fileAvatar').trigger('click');
 
@@ -27,13 +27,13 @@ function uploadAvatar(){
                     refreshAvatar();
                 }
             )
-        } 
+        }
     }
 }
 
 function selectAndUploadGallery(fileRefSlug){
-    const fileRef = document.getElementById(fileRefSlug);    
-    fileRef.value = "";                    
+    const fileRef = document.getElementById(fileRefSlug);
+    fileRef.value = "";
 
     fileRef.onchange = function () {
         if(fileRef.files !== undefined && fileRef.files.length > 0) {
@@ -52,13 +52,14 @@ function selectAndUploadGallery(fileRefSlug){
                 '_token': window._csrf_token,
                 }
             }).then(
-                ()=>{
+              (result) => {
+                    console.log('uploads:selectAndUploadGallery>>>', result);
                     refreshGallery();
                 }
             )
         }
     }
-    
+
     $('#fileGallery').trigger('click');
 }
 

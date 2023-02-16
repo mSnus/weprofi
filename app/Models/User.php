@@ -36,7 +36,7 @@ class User extends Authenticatable
 		'phone',
 		'password',
 		'usertype',
-		
+
 		'phone2',
         'language',
         'tagline',
@@ -116,7 +116,7 @@ class User extends Authenticatable
 				return  $this->moderator();
 
 			case SELF::typeAdmin:
-				return  $this->admin();				
+				return  $this->admin();
 
 			default:
 				abort(403, 'ERROR: user "'.$this->name.'" with role of type "'.$this->usertype.'" not implemented.');
@@ -190,7 +190,7 @@ class User extends Authenticatable
 		$arrSpecs = array_map(function($el) {return $el->spec_id;}, $specs);
 		// $arrSpecs = explode(',', $this->spec_id);
 		return $arrSpecs;
-				
+
 	}
 
 	public function subspecs($spec_id = 0)
@@ -207,7 +207,7 @@ class User extends Authenticatable
 					->get()
 					->toArray();
 		$arrSubspecs = [];
-		
+
 		foreach ($subspecs as $subspec) {
 			$arrSubspecs[$subspec->spec_id][] = $subspec->subspec_id;
 		}
@@ -232,18 +232,18 @@ class User extends Authenticatable
 
 	public static function formatPricelist($pricelistRaw){
 		$pricelist = strip_tags($pricelistRaw);
-            
-			
+
+
 		$pricelistArr = array_filter(preg_split('~[\r\n]~', $pricelist));
 
 		foreach ($pricelistArr as $key => $line) {
 			$pricelistArr[$key] = preg_replace(
-				'~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims', 
+				'~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims',
 				'<div class="price-block">
 					<div class="price-text">$1</div>
-					<div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>                        
-				</div>', 
-				$pricelistArr[$key]);                
+					<div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>
+				</div>',
+				$pricelistArr[$key]);
 		}
 
 		$pricelist = join("\n", $pricelistArr);
@@ -255,18 +255,18 @@ class User extends Authenticatable
 
 	public static function formatTimetable($timetableRaw){
 		$timetable = strip_tags($timetableRaw);
-            
-			
+
+
 		$timetableArr = array_filter(preg_split('~[\r\n]~', $timetable));
 
 		foreach ($timetableArr as $key => $line) {
 			$timetableArr[$key] = preg_replace(
-				'~^(.*)(\.{4}|_{2})([^\r\n\t]*)$~Uims', 
+				'~^(.*)(\.{4}|_{2})([^\r\n\t]*)$~Uims',
 				'<div class="timetable-block">
 					<div class="timetable-text">$1</div>
 					<div class="timetable-value">$3</div>
-				</div>', 
-				$timetableArr[$key]);                
+				</div>',
+				$timetableArr[$key]);
 		}
 
 		$timetable = join("\n", $timetableArr);
@@ -280,16 +280,16 @@ class User extends Authenticatable
         $user = null;
         $gallery = null;
         $skills = null;
-        $skills_list = "";        
+        $skills_list = "";
 
         if ($user_id) {
             $user_id = intval($user_id);
             $user = DB::table('users')
-                ->select('users.name', 'users.phone', 'users.phone2', 'users.id as user_id', 
-						'users.location', 'users.region', 'users.id', 'users.usertype', 
+                ->select('users.name', 'users.phone', 'users.phone2', 'users.id as user_id',
+						'users.location', 'users.region', 'users.id', 'users.usertype',
 						'users.rating', 'users.rating_count', 'users.tagline',
 						'is_show_map', 'is_whatsapp', 'is_whatsapp2', 'is_telegram', 'is_telegram2',
-                        'images.path as avatar', 'users.created_at', 
+                        'images.path as avatar', 'users.created_at',
                         'users.tagline', 'users.content', 'users.pricelist', 'users.timetable')
                 ->leftJoin('images', function($join) {
                              $join->on('images.parent_id', '=', 'users.id');
@@ -298,17 +298,24 @@ class User extends Authenticatable
                 ->where('users.id', $user_id)
                 ->first();
 
+               if (!$user) return [
+                  'user_id' => $user_id,
+                  'user' => "Пользователь с ID {$user_id} не найден",
+                  'gallery' => [],
+                  'skills' =>[]
+              ];
+
 			$user->content_raw = strip_tags($user->content);
             $user->content = processText(strip_tags($user->content));
 
 			// $user->timetable = processText(strip_tags($user->timetable));
 			$user->timetable_raw = $user->timetable;
 			$user->timetable = self::formatTimetable($user->timetable);
-			
+
 			$user->pricelist_raw = $user->pricelist;
             $user->pricelist = self::formatPricelist($user->pricelist);
 
-			
+
 
             $user->join_date = date("d-m-Y", strtotime($user->created_at));
 
@@ -323,10 +330,10 @@ class User extends Authenticatable
                 ->get();
 
             $skills = DB::table('users')
-                ->select('users.id as user_id', 
-				'specs.title as spec_title', 
+                ->select('users.id as user_id',
+				'specs.title as spec_title',
 				'subspecs.title as subspec_title',
-				'user_spec.spec_id', 
+				'user_spec.spec_id',
 				'user_spec.subspec_id'
 				)
                 ->leftJoin('user_spec', function($join) {
@@ -337,10 +344,10 @@ class User extends Authenticatable
                         })
                 ->leftJoin('subspecs', function($join) {
                             $join->on('user_spec.subspec_id', '=', 'subspecs.id');
-                        })                        
+                        })
                 ->where('users.id', $user_id)
-                ->get();    
-            
+                ->get();
+
             foreach ($skills as $skill) {
                 $skills_list .= "<a href='/spec/".$skill->spec_id."/".$skill->subspec_id."/'>".
 					$skill->spec_title . ($skill->subspec_title ? ' ('.$skill->subspec_title.')' : '').

@@ -54,7 +54,7 @@ class UserController extends Controller
 
 			$user->location = $request->location;
 			$user->usertype = ($request->usertype == User::typeMaster) ? User::typeMaster : User::typeClient;
-            
+
             $request->region = $request->region ?? ['_israel'];
             $request->language = $request->language ?? ['ru'];
 
@@ -86,7 +86,7 @@ class UserController extends Controller
                     ];
                 }
                 DB::table('user_spec')->insert($spec_data);
-                
+
                 // $subspecs = '0';
                 // if (isset($request->subspec1) && is_array($request->subspec1) && !in_array(0, $request->subspec1)) {
                 //     $subspecs = join(',', $request->subspec1);
@@ -171,7 +171,7 @@ class UserController extends Controller
             }
         } else {
             return response('error: image not found', 201);
-        }       
+        }
     }
 
     function getGallery(Request $request){
@@ -181,7 +181,7 @@ class UserController extends Controller
             ->get()
             ->all();
 
-        return response()->json($images);       
+        return response()->json($images);
     }
 
     function getAvatar(Request $request){
@@ -191,7 +191,7 @@ class UserController extends Controller
             ->get()
             ->all();
 
-        return response()->json($images);       
+        return response()->json($images);
     }
 
     function uploadGallery(Request $request){
@@ -199,13 +199,22 @@ class UserController extends Controller
         $subpath = "/img/gallery";
         $thumbpath = "/img/thumb";
 
+        Log::error(var_export($request->file('files'), true));
+
         $files_count = 0;
-        
+        $errors = [];
+
         if ($request->hasFile('files')) {
 
             $files = $request->file('files');
 
             foreach ($files as $file) {
+                if (isset($file->error) && $file->error == 1) {
+                  $errors[] = $file->originalName;
+                  continue;
+                  // return response()->json(["error" => $file->originalName]);
+                }
+
                 $files_count++;
                 $name = $file->getClientOriginalName();
                 $image_ext = $file->getClientOriginalExtension();
@@ -213,8 +222,8 @@ class UserController extends Controller
                 $filename = 'myimage_' . md5(date("Y-m-d_H:i:s_u") . rand(100, 999) . Auth::id()) . '.' . $image_ext;
                 $path = public_path() . $subpath;
                 $thumb = public_path() . $thumbpath;
-                // $storedAs = $file->move($path, $filename);   
-                
+                // $storedAs = $file->move($path, $filename);
+
                 Image::make($file)->resize(1600, 960, function ($constraint) {
                     $constraint->upsize();
                     $constraint->aspectRatio();
@@ -236,7 +245,7 @@ class UserController extends Controller
 
         }
 
-        return response()->json('file count: '.$files_count);
+        return response()->json(['count' => $files_count, 'errors' => $errors]);
     }
 
     private function recalculateRating($user_id){
@@ -263,11 +272,11 @@ class UserController extends Controller
             DB::table('user_feedback')
                 ->updateOrInsert(
                 [
-                    'source_id' => $source_id, 
+                    'source_id' => $source_id,
                     'target_id' => $target_id
                 ],
                 [
-                    'content' => $content, 
+                    'content' => $content,
                     'value' => $value,
                     'updated_at' => date('Y-m-d H:i:s')
                 ]
