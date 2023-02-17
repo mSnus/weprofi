@@ -8,7 +8,7 @@
 
 @section('content')
 
-{{-- 
+{{--
     uses:
         $spec_id
         $subspec_id
@@ -33,12 +33,12 @@
 
             @php
              $h1_link = (isset($subspec_id) && $subspec_id  > 0) ? '/spec/'.$spec_id.'/0/' : '/';
-             $h1_pre = ((isset($spec_id) && $spec_id  > 0) || (isset($subspec_id) && $subspec_id  > 0)) 
-                            ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back" alt="back">' 
+             $h1_pre = ((isset($spec_id) && $spec_id  > 0) || (isset($subspec_id) && $subspec_id  > 0))
+                            ? '<img src=/img/left.svg width="16" height="16" class="cat-header__back" alt="back">'
                             : '';
             @endphp
 
-            <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }}</h1>
+            <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }} <img src="/img/icons/{{$spec->icon}}" class="subspec-icon"></h1>
 
             @include('components.search', ['spec' => $spec_id ?? 0, 'subspec' => $subspec_id ?? 0])
 
@@ -48,14 +48,14 @@
             @php
                 $subspec_count = count( (array) $subspecs);
             @endphp
-            
+
             <div class="specs{{ ($subspec_count < 4 ? ' single-column' : '') }}">
 
                 @if ($subspec_count > 0)
                     @foreach ($subspecs as $subspec)
                         <div class="spec {{ $subspec->id == $subspec_id ? 'subspec-current' : ''}}">
-                            <a 
-                            href="#" 
+                            <a
+                            href="#"
                             onclick="goPath( event, {{$spec->id}}, {{$subspec->id}} )"
                             >{{ $subspec->subspec_title }}</a>
                         </div>
@@ -68,7 +68,7 @@
                 @include('components.profi-list', $persons)
             @else
                 <div class="empty-result">
-                    Тут пока никого нет.                    
+                    Тут пока никого нет.
                 </div>
                 <div class="empty-result__text">{{ Setting::get('text_empty_category') }}</div>
             @endif

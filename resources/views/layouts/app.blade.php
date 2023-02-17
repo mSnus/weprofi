@@ -67,9 +67,9 @@
         @endauth
 
 
-        <div class="top-logo">
+        <div class="top-logo mt-4">
             <a href="{{ url('/') }}">
-                <img src="/img/logo-simple.svg" alt="Logo">
+                <img src="/img/logo3-full.svg" alt="Logo">
             </a>
         </div>
         {{--
@@ -159,7 +159,7 @@
         <footer class="footer d-flex justify-content-center w-100 align-items-center">
 
             <div class="footer-copy">
-                &copy; 2022-{{ date('Y') }} <a href='/' class="mb-2"><img src="/img/logo-simple.svg" width="160" class="mr-4 mb-2"  alt="Logo"></a>
+                &copy; 2022-{{ date('Y') }} <a href='/' class="mt-1"><img src="/img/logo3-base.svg" width="160" class="mr-4 mb-2"  alt="Logo"></a>
             </div>
             <div class="footer-links"><a href="/contact">Обратная связь</a></div>
             @php

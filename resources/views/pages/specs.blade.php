@@ -24,6 +24,7 @@
         <div class="specs">
             @foreach ($specs as $spec)
                 <div class="spec">
+                    <img src="/img/icons/{{ $spec->icon }}" class="spec-icon">
                     <a href="/spec/{{ $spec->id }}/0/">{{ $spec->title }}</a>
                 </div>
             @endforeach

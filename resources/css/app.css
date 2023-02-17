@@ -1,10 +1,7 @@
-/* шрифты */
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
-
 /* Шапка на главной */
 
 body {
+    font-family: Nunito, Arial, Helvetica, sans-serif;
     background-color: #fff !important;
     font-display: swap;
     font-size: 1.1rem;
@@ -108,28 +105,28 @@ a:hover {
 /* регистрация */
 
 .nav-pills .nav-link {
-  border-radius: 0;
-  border: none;
-  padding-left: 2rem;
-  padding-right: 2rem;
+    border-radius: 0;
+    border: none;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .nav-pills {
-  border-bottom: solid 4px #3490dc;
+    border-bottom: solid 4px #3490dc;
 }
 
 .nav-pills:first-child {
-  border-radius: 12px 0px 0px 0px;
+    border-radius: 12px 0px 0px 0px;
 }
 
 .nav-pills:last-child {
-  border-radius: 0px 12px 0px 0px;
+    border-radius: 0px 12px 0px 0px;
 }
 
 
 .nav-tabs .nav-link.active {
-  background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .register-block {
@@ -175,7 +172,7 @@ button.primary,
 }
 
 .button-primary svg {
-    fill:#6C5B52;
+    fill: #6C5B52;
     max-width: 24px;
     max-height: 16px;
 }
@@ -316,7 +313,7 @@ button.quartiary,
     margin-top: 1rem;
 }
 
-#formRegisterProfi h2{
+#formRegisterProfi h2 {
     margin-top: 0;
 }
 
@@ -380,6 +377,15 @@ h1,
     color: #96877d;
     margin-top: 2rem;
     margin-bottom: 1rem;
+
+    background-clip: text;
+
+
+
+    background: -webkit-linear-gradient(52deg, rgba(194,101,96,1) 0%, rgba(179,115,121,1) 15%, rgba(145,124,139,1) 50%, rgba(121,129,148,1) 85%, rgba(107,132,152,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 .cat-header {
@@ -402,7 +408,8 @@ h2,
     margin-bottom: 1rem;
 }
 
-h4, .h4 {
+h4,
+.h4 {
     font-size: 1.3rem;
     font-weight: bold;
     color: #6C5B52;
@@ -410,9 +417,9 @@ h4, .h4 {
 
 .price-warning,
 .tell-about-us-warning {
-	line-height: 1.2;
-	color: #bca579;
-	font-size: 1.2rem;
+    line-height: 1.2;
+    color: #bca579;
+    font-size: 1.2rem;
 
     margin-left: auto;
     margin-right: auto;
@@ -421,7 +428,8 @@ h4, .h4 {
 }
 
 .search {
-    background: #EBECEB;
+    background: rgb(246, 232, 231);
+    background: linear-gradient(52deg, rgba(246, 232, 231, 1) 0%, rgba(244, 234, 235, 1) 20%, rgba(239, 235, 238, 1) 50%, rgba(235, 236, 239, 1) 80%, rgba(233, 237, 240, 1) 100%);
     border-radius: 40px;
     padding: 12px 20px;
     margin-bottom: 1rem;
@@ -430,7 +438,7 @@ h4, .h4 {
     align-items: center;
 }
 
-.search-clear img{
+.search-clear img {
     opacity: 0.1;
     width: 24px;
     height: 24px;
@@ -438,7 +446,7 @@ h4, .h4 {
 }
 
 .search input[type="text"] {
-    background: #EBECEB;
+    background: transparent;
     border: none;
     font-weight: 400;
     font-size: 1rem;
@@ -448,7 +456,7 @@ h4, .h4 {
     padding: .5rem;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered{
+.select2-container--default .select2-selection--single .select2-selection__rendered {
     font-weight: bold;
     background: #42a5f5;
     background-color: #42a5f5;
@@ -457,7 +465,7 @@ h4, .h4 {
     padding-top: 4px;
 }
 
-.formSearch .select2-container--default .select2-selection--single{
+.formSearch .select2-container--default .select2-selection--single {
     background: #ffffff;
     background-color: #ffffff;
 }
@@ -561,10 +569,25 @@ select.form-control[multiple] {
     font-size: 1rem;
     line-height: 200%;
     color: #0E5168;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.specs .spec-icon {
+  height: 2rem;
 }
 
 .specs .subspec {
     margin-left: 1rem;
+}
+
+.subspec-icon {
+  height: 2.5rem;
+  margin-left: -0.5rem;
+  opacity: .3;
 }
 
 .specs .spec.subspec-current {
@@ -773,6 +796,7 @@ select.form-control[multiple] {
     display: flex;
     gap: 1rem;
 }
+
 .main-user-data h1,
 .main-user-data .skills {
     word-break: break-word;
@@ -842,6 +866,7 @@ select.form-control[multiple] {
     max-width: 86vw;
     margin: 0 auto;
 }
+
 /* Галерея */
 
 .gallery {
@@ -987,7 +1012,7 @@ select.form-control[multiple] {
 }
 
 .profile-navigation__section a:hover {
-    color:  #92AAB4;
+    color: #92AAB4;
 }
 
 
@@ -1100,7 +1125,7 @@ select.form-control[multiple] {
     flex-wrap: wrap;
 }
 
-.form-checks > div {
+.form-checks>div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1166,7 +1191,7 @@ div#map_id {
 }
 
 .mapbox-container {
-    width: min(560px,90vw);
+    width: min(560px, 90vw);
     text-align: center;
     margin: 0 auto;
     position: relative;
@@ -1242,4 +1267,4 @@ div#map_id {
 .slick-dotted.slick-slider {
     max-width: 65vw;
     width: 100%;
-  }
+}

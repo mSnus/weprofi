@@ -17,7 +17,7 @@ class Spec extends Model
      */
     protected $fillable = [
         'title',
-        'content',
+        'icon',
         'synonims',
         'ordering',
     ];
