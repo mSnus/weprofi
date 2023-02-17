@@ -38,7 +38,7 @@
                             : '';
             @endphp
 
-            <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }} <img src="/img/icons/{{$spec->icon}}" class="subspec-icon"></h1>
+            <h1 class="cat-header" onclick="window.location.href='{{ $h1_link }}'">{!! $h1_pre !!}&nbsp;{{ $spec->title }}</h1>
 
             @include('components.search', ['spec' => $spec_id ?? 0, 'subspec' => $subspec_id ?? 0])
 

@@ -390,6 +390,10 @@ h1,
 
 .cat-header {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .cat-header__back {
