@@ -47,9 +47,12 @@
                       <th>Последння дата захода</th>
                     </tr>
                   @foreach ($utmStats as $stat)
+                  @php
+                    $target = str_replace('&fbclid', ' &fbclid', $stat->target_id);
+                  @endphp
                       <tr>
                         <td>{{$stat->source_id}}</td>
-                        <td>{{$stat->target_id}}</td>
+                        <td>{{$target}}</td>
                         <td class="text-center">{{ ($stat->visit_count)}}</td>
                         <td>{{ ($stat->updated_at)}}</td>
                       </tr>
@@ -69,7 +72,7 @@
               </tr>
             @foreach ($userStats as $stat)
                 <tr>
-                  <td>{{$stat->name}}</td>
+                  <td><a href="/user/{{ $stat->id }}" target="_blank">{{$stat->name}}</a></td>
                   <td>{{$stat->phone}}</td>
                   <td class="text-center">{{ ($stat->own_profile_visits)}}</td>
                 </tr>

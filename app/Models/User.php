@@ -238,10 +238,10 @@ class User extends Authenticatable
 
 		foreach ($pricelistArr as $key => $line) {
 			$pricelistArr[$key] = preg_replace(
-				'~^(.*)(\.{4}|_{2})(\d+)\s?sh([^\r\n\t]*)$~Uims',
+				'~^(.*)(\.{4}|_{2})(\d+)\s?(sh|₪)([^\r\n\t]*)$~Uims',
 				'<div class="price-block">
 					<div class="price-text">$1</div>
-					<div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$4</span></div>
+					<div class="price-value">$3&nbsp;&#8362 <span class="price-extra">$5</span></div>
 				</div>',
 				$pricelistArr[$key]);
 		}
@@ -368,6 +368,11 @@ class User extends Authenticatable
 	public function getUserOwnProfileViews(){
 		$views = \App\Models\UserStats::select('own_profile_visits')->where('user_id', $this->id)->get()->first();
 		return $views->own_profile_visits ?? 0;
+	}
+
+  public function getUserInviteLink(){
+		return '<a href="'.url('https://weprofi.co.il/invite/'.$this->id.'/'.$this->invite_token).'" target="_blank">link</a>';
+		// return '<b a="b">/invite'.$this->id.'/'.$this->invite_token.'/</b>';
 	}
 
 	public function getUserViews(){

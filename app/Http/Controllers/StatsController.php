@@ -10,7 +10,7 @@ class StatsController extends Controller
 {
     public function index(){
       $utmStats = SimpleUtm::all();
-      $userStats = UserStats::select('users.name', 'users.phone', 'user_stats.own_profile_visits')
+      $userStats = UserStats::select('users.id', 'users.name', 'users.phone', 'user_stats.own_profile_visits')
       ->leftJoin('users', 'user_id', '=', 'users.id')
       ->whereNotNull('phone')
       ->orderBy('phone')

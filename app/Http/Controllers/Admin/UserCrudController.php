@@ -24,7 +24,7 @@ class UserCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -36,7 +36,7 @@ class UserCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -71,11 +71,22 @@ class UserCrudController extends CrudController
                 'function_name' => 'getUserViews',
              ],
         );
+
+        $this->crud->addColumn(
+          [
+              'name'  => 'links',
+              'label' => 'Инвайт',
+              'type'  => 'model_function',
+              'function_name' => 'getUserInviteLink',
+              'escaped' => false,
+              'limit' => -1,
+           ],
+      );
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -100,14 +111,14 @@ class UserCrudController extends CrudController
         $myip = '80.244.28.131';
 
         $this->crud->addField([
-         
+
                 'label' => "Статус",
                 'type' => 'select_from_array',
                 'name' => 'status',
                 'default'     => 'active',
                 'allows_null' => false,
                 'options' => ['active' => 'active', 'disabled' => 'disabled']
-         
+
         ]);
 
         if (getenv('REMOTE_ADDR') != $myip) {
@@ -132,27 +143,27 @@ class UserCrudController extends CrudController
 
         // CRUD::field('avatar')->type('number');
         $this->crud->addField([
-         
+
             'label' => "Тип",
             'type' => 'select_from_array',
             'name' => 'usertype',
             'default'     => User::typeMaster,
             'allows_null' => false,
             'options' => [User::typeClient => 'пользователь', User::typeMaster => 'профи']
-     
+
     ]);
-       
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
@@ -179,7 +190,7 @@ class UserCrudController extends CrudController
                             'subspec_id' => $subspec
                         ];
                     }
-                } else {      
+                } else {
                     $spec_data = [
                         'user_id' => $user->id,
                         'spec_id' => $request->spec_id,
@@ -190,7 +201,7 @@ class UserCrudController extends CrudController
         }
 
         $response = $this->traitUpdate();
-        
+
         return $response;
     }
 }
