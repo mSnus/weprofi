@@ -84,6 +84,7 @@ class SearchController extends Controller
           $join->on('images.type', '=', DB::raw("1"));
         })
         ->where('users.status', 'active')
+        ->where('users.usertype', User::typeMaster)
         ->whereRaw($searchPersons)
         ->distinct()
         ->limit(50)
@@ -92,7 +93,7 @@ class SearchController extends Controller
       $searchSpecs = $this->buildSearchString($arrTerms, ['specs.title', 'subspecs.title', 'specs.synonims', 'subspecs.synonims']);
 
       $specs = DB::table('specs')
-        ->select('specs.id', 'specs.title', 
+        ->select('specs.id', 'specs.title',
         'subspecs.id as subspec_id', 'subspecs.title as subspec_title', )
         ->leftJoin('subspecs', function ($join) {
           $join->on('subspecs.spec_id', '=', 'specs.id');

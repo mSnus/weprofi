@@ -1,11 +1,16 @@
 <div class="mapbox-container">
 
-    <div 
-        id='{{ $mapbox['id'] }}' 
-        style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '100%' }}; 
-              height: {{ isset($mapbox['width']) ? $mapbox['height'] : '100%' }}; 
+    <div
+        id='{{ $mapbox['id'] }}'
+        style='width: {{ isset($mapbox['width']) ? $mapbox['width'] : '100%' }};
+              height: {{ isset($mapbox['width']) ? $mapbox['height'] : '100%' }};
               margin-top: 20px;'
     ></div>
+
+    @if (isset($mapbox['lng']) && isset($mapbox['lat']))
+    <a href="https://www.waze.com/ul?ll={{ $mapbox['lat'] }}%2C{{ $mapbox['lng'] }}&navigate=yes&zoom=17"><img src="/img/waze.png" width="32"></a>
+    @endif
+
 
     <pre id="coordinates" class="coordinates"></pre>
 
@@ -14,7 +19,7 @@
             mapboxgl.accessToken = 'pk.eyJ1IjoibXNudXMiLCJhIjoiY2xjcDR6aXl6MW1ucjNucnlla2QxMDlxNyJ9.TkJDK4vDlvyO62e_OVbJ3A';
 
             var defaultLng = 35.074002;
-		    var defaultLat = 32.930288;
+		        var defaultLat = 32.930288;
             var noAutocenter = {{ isset($mapbox['no_autocenter']) && $mapbox['no_autocenter'] == true ? 'true' : 'false' }};
 
             var obj_{{ $mapbox['id'] }} = {
@@ -64,7 +69,7 @@
                         ]);
 
                         // console.log("Map obj_{{ $mapbox['id'] }} loaded.", self);
-                        
+
                     });
                 },
 

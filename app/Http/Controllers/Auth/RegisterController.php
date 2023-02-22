@@ -91,6 +91,7 @@ class RegisterController extends Controller
             'status' => 'active',
             'spec_id' => $spec_id,
             'subspec_id' => $subspecs,
+            'is_show_map' => 0,
             'invite_token' => strtolower(\Str::random(10)),
         ]);
 
@@ -101,15 +102,15 @@ class RegisterController extends Controller
 
                 foreach ($data['subspec1'] as $subspec1) {
                     $spec_data[] = [
-                        'user_id' => $user->id, 
-                        'spec_id' => $data['spec1'], 
+                        'user_id' => $user->id,
+                        'spec_id' => $data['spec1'],
                         'subspec_id' => $subspec1
                     ];
                 }
             } else {
                 $spec_data[] = [
-                        'user_id' => $user->id, 
-                        'spec_id' => $data['spec1'], 
+                        'user_id' => $user->id,
+                        'spec_id' => $data['spec1'],
                         'subspec_id' =>  0
                     ];
             }

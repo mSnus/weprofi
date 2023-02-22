@@ -76,6 +76,7 @@
                                                 type="password"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password"
+                                                placeholder="английские буквы и цифры"
                                                 value="{{ Session::get('password') ?? '' }}"
                                                 required
                                                 autocomplete="new-password"
