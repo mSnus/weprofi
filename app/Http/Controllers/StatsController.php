@@ -9,7 +9,12 @@ use App\Models\SimpleUtm;
 class StatsController extends Controller
 {
     public function index(){
-      $utmStats = SimpleUtm::all();
+      $utmStats = SimpleUtm::select('source_id', 'target_id')
+      ->selectRaw('MAX(updated_at) as updated_at')
+      ->selectRaw('SUM(visit_count) as visit_count')
+      ->groupBy('source_id', 'target_id')
+      ->get();
+
       $userStats = UserStats::select('users.id', 'users.name', 'users.phone', 'user_stats.own_profile_visits')
       ->leftJoin('users', 'user_id', '=', 'users.id')
       ->whereNotNull('phone')
@@ -27,7 +32,8 @@ class StatsController extends Controller
     public static function updateSimpleUtm() {
         $utm_source = \Request::query('utm_source');
         if (isset($utm_source)) {
-            $stats = \App\Models\SimpleUtm::firstOrNew(['source_id' => $utm_source, 'target_id' => \Request::getRequestUri()]);
+            $target_id = preg_replace('~\&fbclid\=[^&]*~', '', \Request::getRequestUri());
+            $stats = \App\Models\SimpleUtm::firstOrNew(['source_id' => $utm_source, 'target_id' => $target_id]);
             $stats->visit_count = $stats->visit_count + 1;
             $stats->save();
         }
