@@ -38,13 +38,14 @@ class User extends Authenticatable
 		'usertype',
 
 		'phone2',
-        'language',
-        'tagline',
-        'content',
-        'rating',
-        'pricelist',
-        'location',
-        'region',
+    'phone_raw',
+    'language',
+    'tagline',
+    'content',
+    'rating',
+    'pricelist',
+    'location',
+    'region',
 		'timetable',
 
 		'is_show_map',
@@ -56,10 +57,10 @@ class User extends Authenticatable
 		'status',
 		'invite_token',
 
-        'spec_id',
-        'subspec_id',
+    'spec_id',
+    'subspec_id',
 
-        'avatar',
+    'avatar',
 
 	];
 

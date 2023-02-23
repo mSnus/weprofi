@@ -35,7 +35,18 @@
                                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                         <div class="col-md-8">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                            <input
+                                            id="name"
+                                            type="text"
+                                            class="form-control
+                                            @error('name') is-invalid @enderror"
+                                            name="name"
+                                            value="{{ old('name') }}"
+                                            required
+                                            autocomplete="name"
+                                            autofocus
+                                            placeholder="как к вам обращаться"
+                                            >
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -55,6 +66,7 @@
                                                 class="form-control @error('phone') is-invalid @enderror"
                                                 name="phone"
                                                 value="{{ Session::get('phone') ?? old('phone') }}"
+                                                placeholder="номер с кодом страны (972, 38, 7...)"
                                                 required
                                                 autocomplete="phone"
                                             >
@@ -94,7 +106,15 @@
                                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Повторить&nbsp;пароль</label>
 
                                         <div class="col-md-8">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            <input
+                                            id="password-confirm"
+                                            type="password"
+                                            class="form-control"
+                                            name="password_confirmation"
+                                            required
+                                            autocomplete="new-password"
+                                            placeholder="чтобы не ошибиться при наборе"
+                                            >
                                         </div>
                                     </div>
 
@@ -127,7 +147,9 @@
                                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                             <div class="col-md-8">
-                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                                                placeholder="так, как будет показано в каталоге"
+                                                >
 
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
@@ -149,6 +171,7 @@
                                                     value="{{ Session::get('phone') ?? old('phone') }}"
                                                     required
                                                     autocomplete="phone"
+                                                    placeholder="номер с кодом страны (972, 38, 7...)"
                                                 >
 
                                                 @error('phone')
@@ -171,6 +194,7 @@
                                                     value="{{ Session::get('password') ?? '' }}"
                                                     required
                                                     autocomplete="new-password"
+                                                    placeholder="английские буквы и цифры"
                                                 >
 
                                                 @error('password')
@@ -185,7 +209,8 @@
                                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Повторить&nbsp;пароль</label>
 
                                             <div class="col-md-8">
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"
+                                                placeholder="чтобы не ошибиться при наборе">
                                             </div>
                                         </div>
 
