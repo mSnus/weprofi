@@ -128,8 +128,8 @@
     }
 
     .register-form-simple label {
-        justify-content: center;
-        margin-bottom: 0.5rem;
+        justify-content: right;
+        /* margin-bottom: 0.5rem; */
     }
 
     .profile-navigation {

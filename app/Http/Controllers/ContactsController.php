@@ -10,16 +10,17 @@ class ContactsController extends Controller
 {
     public function send(Request $request) {
         $request->validate([
-            'phone' => 'required|string',
-            'message' => 'required|string',
+            'phone' => 'required|string|min:9',
+            'email' => 'required|string|email',
+            'message' => 'required|string|min:10',
         ]);
 
 
         $to      = 'support@weprofi.co.il';
-        $subject = "WeProfi: {$request->user} ({$request->phone})";
+        $subject = "WeProfi: {$request->user} ".($request->user_id ? "(#{$request->user_id})" : '')." ({$request->phone})";
         $message = $request->message;
-        $headers = 'From: WeProfi <support@weprofi.co.il>' . "\r\n" .
-            'Reply-To: support@weprofi.co.il' . "\r\n" .
+        $headers = 'From: WeProfi <'.($request->email ?? 'support@weprofi.co.il').'>' . "\r\n" .
+            'Reply-To: '.($request->email ?? 'support@weprofi.co.il') . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);

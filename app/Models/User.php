@@ -39,6 +39,7 @@ class User extends Authenticatable
 
 		'phone2',
     'phone_raw',
+    'email',
     'language',
     'tagline',
     'content',
@@ -46,16 +47,16 @@ class User extends Authenticatable
     'pricelist',
     'location',
     'region',
-		'timetable',
+	'timetable',
 
-		'is_show_map',
-		'is_whatsapp',
-		'is_whatsapp2',
-		'is_telegram',
-		'is_telegram2',
+	'is_show_map',
+	'is_whatsapp',
+	'is_whatsapp2',
+	'is_telegram',
+	'is_telegram2',
 
-		'status',
-		'invite_token',
+	'status',
+	'invite_token',
 
     'spec_id',
     'subspec_id',

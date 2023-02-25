@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 <div class="form-group row" id="subspec1_row"style="display: none">
     <label for="subspec1" class="col-md-12 col-form-label text-md-left mt-4">{{ __('Уточнение') }}</label>
-    <span class="profile-small-hint">(можно выбрать несколько или вообще не уточнять)</span>
+    <span class="profile-small-hint">(можно выбрать несколько)</span>
 
     <div class="col-md-12">
 

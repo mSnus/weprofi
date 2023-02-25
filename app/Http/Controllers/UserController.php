@@ -51,6 +51,7 @@ class UserController extends Controller
 
 			$user->name = $request->name;
 			$user->phone  = parsePhone($request->phone);
+            $user->email  = $request->email;
 
 			$user->location = $request->location;
 			$user->usertype = ($request->usertype == User::typeMaster) ? User::typeMaster : User::typeClient;

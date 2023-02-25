@@ -172,7 +172,11 @@
                                         Покажите карту и подвиньте метку на нужное место:
                                     </div>
 
-                                    <div class="mt-2" id='mapToggler' {!! isset($user->is_show_map) && ($user->is_show_map==1) ? '' : 'style="display:none;"'!!}>
+                                    @php
+                                        $isShowMap = isset($user->is_show_map) && ($user->is_show_map==1);
+                                    @endphp
+
+                                    <div class="mt-2" id='mapToggler' {!! ($isShowMap) ? '' : 'style="display:none;"'!!}>
                                         <input id="location" label="Где вы находитесь? Отметьте на карте" type="hidden"
                                             name="location" :value="old('location')" />
 
@@ -193,6 +197,23 @@
                                         @include('mapbox', $mapbox)
                                     </div>
 
+                                    <div class="mt-2" id='mapOff' {!! (!$isShowMap) ? 'style="display:block;"' : 'style="display:none;"' !!}>
+                                        <img src="/img/map-disabled.png">
+                                    </div>
+
+                                    <script>
+                                        function toggleMap(isEnabled){
+                                            if (isEnabled) {
+                                                $('#mapToggler').show(); 
+                                                $('#mapOff').hide(); 
+                                                window.$maps[0].resize();
+                                            } else {
+                                                $('#mapToggler').hide()
+                                                $('#mapOff').show(); 
+                                            }
+                                        }
+                                    </script>
+
                                     <div class="mt-2 mb-4 form-checks">
                                         <input
                                             type="checkbox"
@@ -201,7 +222,7 @@
                                             class="form-check-input"
                                             value="1"
                                             {{ isset($user->is_show_map) && ($user->is_show_map==1) ? ' checked' : ''}}
-                                            onclick="if (this.checked) {$('#mapToggler').show(); window.$maps[0].resize();} else {$('#mapToggler').hide()}"
+                                            onclick="toggleMap(this.checked)"
                                         >
                                         <label for="is_show_map">показывать карту</label>
                                     </div>

@@ -8,6 +8,7 @@
             $auth_id = Auth::id();
             $auth_name = Auth::user()->name;
             $auth_phone = Auth::user()->phone;
+            $auth_email = Auth::user()->email;
         @endphp
     @endauth
     <script>
@@ -33,17 +34,22 @@
 
             <div class="form-group row">  
                 <label for="phone">От кого</label>
-                <input type="text" class="form-control" name="user" id="user" value="{{ $auth_name ?? ''}}">
+                <input type="text" class="form-control" name="user" id="user" value="{{ old('user') ?? $auth_name ?? ''}}">
+            </div>
+
+            <div class="form-group row">  
+                <label for="email">Email для обратной связи</label>
+                <input type="text" class="form-control" name="email" id="email" value="{{ old('email') ?? $auth_email ?? ''}}">
             </div>
 
             <div class="form-group row">  
                 <label for="phone">Телефон</label>
-                <input type="text" class="form-control" name="phone" id="phone" value="{{ $auth_phone ?? ''}}">
+                <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone') ?? $auth_phone ?? ''}}">
             </div>
 
             <div class="form-group row">
-                <label for="phone">Сообщение</label>
-                <textarea name="message"  class="form-control" id="message" cols="30" rows="10"></textarea>
+                <label for="message">Сообщение</label>
+                <textarea name="message"  class="form-control" id="message" cols="30" rows="10">{{ old('message') }}</textarea>
             </div>
             <div class="form-group row">
                 <button class="button-primary" type="submit">Отправить</button>

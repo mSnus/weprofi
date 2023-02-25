@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 include_once(base_path().'/app/helpers.php');
@@ -52,13 +53,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $data['phone_raw'] = $data['phone'];
         $data['phone'] = parsePhone($data['phone']);
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:50'],
             'phone' => ['required', 'string', 'min:9','max:13', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'email' => ['required', 'email'],
         ]);
     }
 
@@ -72,6 +73,8 @@ class RegisterController extends Controller
     {
         $phone = parsePhone($data['phone']);
 
+        Log::error(var_export($data, true));
+
         $spec_id = '0';
         $subspecs = '0';
 
@@ -84,7 +87,8 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => trim($data['name']),
             'phone' => $phone,
-            'phone_raw' => $data['phone_raw'],
+            'phone_raw' => $data['phone'],
+            'email' => $data['email'],
             'password' => $data['password'],
             'usertype' => $data['usertype']  == User::typeMaster ? User::typeMaster : User::typeClient,
             'rating' => 0,

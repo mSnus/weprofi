@@ -8,6 +8,11 @@
 	<x-form-input id="phone" label="Телефон" class="block mt-1 w-full" type="phone" name="phone" :value="(is_object(Auth::user()) && Auth::user()->id) ? Auth::user()->phone : old('phone')" required />
 </div>
 
+<!-- Email -->
+<div class="mt-4">
+	<x-form-input id="email" label="E-mail" class="block mt-1 w-full" type="text" name="email" :value="(is_object(Auth::user()) && Auth::user()->id) ? Auth::user()->email : old('email')" required />
+</div>
+
 @if (isset($isMaster) && $isMaster) 
 <div class="mt-0 mb-4 form-checks">
 	<div>на этом номере</div>

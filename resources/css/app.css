@@ -129,6 +129,10 @@ a:hover {
     border-color: #dee2e6 #dee2e6 #fff;
 }
 
+.nav {
+    justify-content: center;
+}
+
 .register-block {
     margin: 4rem auto 2rem auto;
     display: flex;
@@ -279,7 +283,7 @@ button.quartiary,
 
 .login-form .row label {
     padding-left: 5px;
-    justify-content: left;
+    justify-content: center;
     width: 100px;
 }
 
@@ -1200,6 +1204,15 @@ div#map_id {
     margin: 0 auto;
     position: relative;
     height: 420px;
+}
+
+.map-routes {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: -2rem;
+  margin-top: 3rem;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Футер */
