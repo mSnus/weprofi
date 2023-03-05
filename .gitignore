@@ -42,3 +42,4 @@ storage/logs/laravel.log
 storage/debugbar/
 storage/framework/
 public/img/**
+.httpauth
