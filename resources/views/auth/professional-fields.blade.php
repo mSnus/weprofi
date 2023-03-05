@@ -63,8 +63,8 @@ function showSubspecs(select, spec){
 
 document.addEventListener("DOMContentLoaded", ()=>{
     //загрузить подкатегории соответствующий первому в списке категорий
-    const spec1 = document.getElementById('spec1');
-    showSubspecs('subspec1', spec1.options[spec1.selectedIndex].value)
+    // const spec1 = document.getElementById('spec1');
+    // showSubspecs('subspec1', spec1.options[spec1.selectedIndex].value)
 
     //делаем нормальные  списки
     $('#spec1').select2({
@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         <select id="spec1" class="form-control" name="spec1"
                 onchange="showSubspecs('subspec1', this.options[this.selectedIndex].value)"
         >
+            <option></option>
             @foreach ($specs as $spec)
                 <option value="{{ $spec->id }}">{{ $spec->title }}</option>
             @endforeach
