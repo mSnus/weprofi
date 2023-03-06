@@ -108,18 +108,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
             @foreach ($specs as $spec)
                 <option value="{{ $spec->id }}">{{ $spec->title }}</option>
             @endforeach
-
-
-            @foreach ($specs as $spec)
-                @if (in_array($spec->id, $user_specs))
-                    <script>
-                        document.addEventListener("DOMContentLoaded", ()=>{
-                          $('#spec1').val({{ $spec->id }}).trigger('change');
-                        });
-                    </script>
-                @endif
-            @endforeach
         </select>
+        @php
+            $presetValueScript = '';
+            foreach ($specs as $spec){
+                if (in_array($spec->id, $user_specs)){
+                    $presetValueScript = "<script>
+                        /* set default category to ".$spec->name." */
+                        document.addEventListener('DOMContentLoaded', ()=>{
+                            $('#spec1').val(".$spec->id.").trigger('change');
+                        });
+                    </script>";
+
+                    break;
+                }
+            }
+            
+        @endphp
+            {!! $presetValueScript !!}
     </div>
 
 {{--
@@ -131,7 +137,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 <div class="form-group row" id="subspec1_row"style="display: none">
     <label for="subspec1" class="col-md-12 col-form-label text-md-left mt-4">{{ __('Уточнение') }}</label>
-    <span class="profile-small-hint">(можно выбрать несколько)</span>
+    <span class="profile-small-hint">выберите один или несколько видов</span>
 
     <div class="col-md-12">
 

@@ -3,14 +3,14 @@
 	<x-form-input id="name" label="Как вас зовут" class="block mt-1 w-full" type="text" name="name" :value="(Auth::user() && Auth::user()->id) ? Auth::user()->name : old('name')" required autofocus />
 </div>
 
-<!-- Телефон -->
-<div class="mt-4">
-	<x-form-input id="phone" label="Телефон" class="block mt-1 w-full" type="phone" name="phone" :value="(is_object(Auth::user()) && Auth::user()->id) ? Auth::user()->phone : old('phone')" required />
-</div>
-
 <!-- Email -->
 <div class="mt-4">
 	<x-form-input id="email" label="E-mail" class="block mt-1 w-full" type="text" name="email" :value="(is_object(Auth::user()) && Auth::user()->id) ? Auth::user()->email : old('email')" required />
+</div>
+
+<!-- Телефон -->
+<div class="mt-4">
+	<x-form-input id="phone" label="Телефон" class="block mt-1 w-full" type="phone" name="phone" :value="(is_object(Auth::user()) && Auth::user()->id) ? Auth::user()->phone : old('phone')" required />
 </div>
 
 @if (isset($isMaster) && $isMaster) 
